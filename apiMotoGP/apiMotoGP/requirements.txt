@@ -2,3 +2,4 @@ django == 2.1.2
 requests
 html5lib
 beautifulsoup4
+mongoengine
