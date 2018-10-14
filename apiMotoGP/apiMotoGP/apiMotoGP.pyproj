@@ -30,9 +30,11 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="apiMotoGP\serializers.py" />
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\tests.py" />
+    <Compile Include="app\urls.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\webScraping\scraping.py" />
     <Compile Include="app\__init__.py" />
