@@ -85,7 +85,7 @@ DATABASES = {
 import mongoengine
  
 mongoengine.connect(
-    db="tools",
+    db="motoGP_db",
     host="localhost"
 )
 
