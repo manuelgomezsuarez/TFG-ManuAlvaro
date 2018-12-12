@@ -28,6 +28,7 @@ class Campeonatos(Document):
     pais = fields.StringField(required=False)
     puntos = fields.StringField(required=False)
 
+
 class Documentacion(Document):
     temporada = fields.StringField(required=False)
     categoria = fields.StringField(required=False)
