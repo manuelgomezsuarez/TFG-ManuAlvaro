@@ -6,7 +6,6 @@ import django_filters.rest_framework
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-
 class PosicionCarreraViewSet(meviewsets.ModelViewSet):
     serializer_class = PosicionCarreraSerializer
     def get_kwargs_for_filtering(self):

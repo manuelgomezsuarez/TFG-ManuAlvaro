@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
 ]
 
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

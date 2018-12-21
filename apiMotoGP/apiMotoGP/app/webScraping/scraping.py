@@ -124,7 +124,6 @@ for something in soup0.select("select#season > option"):
 
                 collection2.insert_one({"temporada":ano,"categoria":categoriasUnicas[cont],'pos':pos,'piloto':piloto,'moto':moto,'pais':pais,'puntos':puntos})
 
-
             cont=cont+1
        
 
