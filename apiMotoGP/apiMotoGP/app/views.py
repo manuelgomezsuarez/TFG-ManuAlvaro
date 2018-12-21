@@ -1,22 +1,21 @@
 from django.shortcuts import render
 from rest_framework_mongoengine import viewsets as meviewsets
 from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer
-from app.models import  Carreras, Campeonatos, Documentacion
+from app.models import  Carreras, Campeonatos
 import django_filters.rest_framework
 from app.filters import CampeonatoFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
 class PosicionCarreraViewSet(meviewsets.ModelViewSet):
     serializer_class = PosicionCarreraSerializer
-    my_filter_fields = ('piloto', 'num','temporada','categoria','abreviatura','titulo','lugar','fecha','pos','puntos','pais','equipo','moto') # specify the fields on which you want to filter
-    #filter_backends = (filters.OrderingFilter,)
-    #ordering_fields = ('username', 'email')
     def get_kwargs_for_filtering(self):
         filtering_kwargs = {} 
-        for field in  self.my_filter_fields: # iterate over the filter fields
-            field_value = self.request.query_params.get(field) # get the value of a field from request query parameter
-            if field_value: 
-                filtering_kwargs[field+ '__icontains'] = field_value
+        my_filter_fields = ('piloto', 'num','temporada','categoria','abreviatura','titulo','lugar','fecha','pos','puntos','pais','equipo','moto')
+        for field in  self.request.query_params: # iterate over the filter fields
+            if field.split("__")[0] in my_filter_fields:
+                field_value = self.request.query_params.get(field) # get the value of a field from request query parameter
+                if field_value: 
+                    filtering_kwargs[field] = field_value
         return filtering_kwargs 
 
     def get_queryset(self):
@@ -78,4 +77,3 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
             queryset = queryset.filter(fecha=fechaUrl)
 
         return queryset
-    
