@@ -3,7 +3,7 @@ from rest_framework_mongoengine import viewsets as meviewsets
 from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer
 from app.models import  Carreras, Campeonatos
 import django_filters.rest_framework
-from app.filters import CampeonatoFilter
+
 from django_filters.rest_framework import DjangoFilterBackend
 
 class PosicionCarreraViewSet(meviewsets.ModelViewSet):
@@ -29,23 +29,35 @@ class PosicionCarreraViewSet(meviewsets.ModelViewSet):
 
 
 class PosicionCampeonatoViewSet(meviewsets.ModelViewSet):
-    serializer_class = PosicionCampeonatoSerializer
-    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    filter_fields=('piloto',)
+    serializer_class = PosicionDocumentacionSerializer
+
     def get_queryset(self):
-        queryset=Campeonatos.objects.all()
-        return [i for i in queryset]
+        queryset=Documentacion.objects.all()
+        temporadaUrl= self.request.query_params.get('temporada', None)
+        if temporadaUrl is not None:
+            queryset = queryset.filter(temporada=temporadaUrl)
 
-    
-    #filter_backends = (filters.OrderingFilter,)
-    #ordering_fields = ('username', 'email')
-    #def get_queryset(self):
-    #    queryset = Carreras.objects.all() 
-    #    filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
-    #    return queryset
+        categoriaUrl = self.request.query_params.get('categoria', None)
+        if categoriaUrl is not None:
+            queryset = queryset.filter(categoria=categoriaUrl)
 
+        abreviaturaUrl = self.request.query_params.get('abreviatura', None)
+        if abreviaturaUrl is not None:
+            queryset = queryset.filter(abreviatura=abreviaturaUrl)
 
+        tituloUrl = self.request.query_params.get('titulo', None)
+        if tituloUrl is not None:
+            queryset = queryset.filter(titulo=tituloUrl)
 
+        lugarUrl = self.request.query_params.get('lugar', None)
+        if lugarUrl is not None:
+            queryset = queryset.filter(lugar=lugarUrl)
+
+        fechaUrl = self.request.query_params.get('fecha', None)
+        if lugarUrl is not None:
+            queryset = queryset.filter(fecha=fechaUrl)
+
+        return queryset
 
 class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
     serializer_class = PosicionDocumentacionSerializer
