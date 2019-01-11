@@ -82,23 +82,36 @@ for something in soup0.select("select#season > option"):
                                 #Aquí deberiamos comprobar que existen entradas en la tabla.
                                 tds=tr.select("td")
                             
-                                try:
-                                    pos=tds[0].text 
-                                    puntos=tds[1].text
-                                    numero=tds[2].text
+                                try:    
                                     piloto=tds[3].text
                                     pais=tds[4].text
                                     equipo=tds[5].text  
                                     moto=tds[6].text  
-                                    kmh=tds[7].text 
-                                    tiempoDiferencia=tds[8].text 
-                                    collection.insert_one({"temporada":ano,"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
+                                    tiempoDiferencia=tds[8].text
+                                    try:
+                                        pos=int(tds[0].text)                                        
+                                    except:
+                                        pos=0
+                                    try:
+                                        puntos=int(tds[1].text)
+                                    except:
+                                        puntos=0
+                                    try:
+                                        numero=int(tds[2].text)
+                                    except:
+                                        numero=0
+                                    try:
+                                        kmh=float(tds[7].text)
+                                    except:
+                                        kmh=0 
+
+                                    collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
                                     
                                     
                                 except:
                                     pass
                        
-                        diccionarioDocumentacion={"temporada":ano,"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento,"documentacion":arrayPDF}
+                        diccionarioDocumentacion={"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento,"documentacion":arrayPDF}
                         collection3.insert_one(diccionarioDocumentacion)
 
           
@@ -115,13 +128,21 @@ for something in soup0.select("select#season > option"):
             for tr in tablaCampeonato.select("tr")[1:]:
                 #Aquí deberiamos comprobar que existen entradas en la tabla.
                 tds=tr.select("td")   
-                pos=tds[0].text 
+                
                 piloto=tds[1].text
                 moto=tds[2].text  
                 pais=tds[3].text
-                puntos=tds[4].text
+                
+                try:
+                    pos=int(tds[0].text)                                        
+                except:
+                    pos=0
+                try:
+                    puntos=int(tds[4].text)
+                except:
+                    puntos=0
 
-                collection2.insert_one({"temporada":ano,"categoria":categoriasUnicas[cont],'pos':pos,'piloto':piloto,'moto':moto,'pais':pais,'puntos':puntos})
+                collection2.insert_one({"temporada":int(ano),"categoria":categoriasUnicas[cont],'pos':pos,'piloto':piloto,'moto':moto,'pais':pais,'puntos':puntos})
 
             cont=cont+1
        
