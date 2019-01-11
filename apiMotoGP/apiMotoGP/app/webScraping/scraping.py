@@ -115,7 +115,6 @@ for something in soup0.select("select#season > option"):
             for tr in tablaCampeonato.select("tr")[1:]:
                 #Aquí deberiamos comprobar que existen entradas en la tabla.
                 tds=tr.select("td")   
-        
                 pos=tds[0].text 
                 piloto=tds[1].text
                 moto=tds[2].text  
