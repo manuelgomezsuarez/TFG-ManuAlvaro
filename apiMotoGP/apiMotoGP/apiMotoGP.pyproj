@@ -40,6 +40,7 @@
     <Compile Include="app\urls.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\webScraping\scraping.py" />
+    <Compile Include="app\webScraping\test_scraping.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="manage.py" />
