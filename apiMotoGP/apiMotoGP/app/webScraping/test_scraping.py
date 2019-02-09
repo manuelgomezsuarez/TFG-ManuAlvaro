@@ -18,9 +18,9 @@ db = conn.motoGP_db
 collectionCarreras = db.carreras
 
 
-primero=db.campeonatos.find({"categoria":'MotoGP'}, {"puntos":1, "piloto":1,'_id':0}).sort("puntos",DESCENDING).collation({'locale':'es','numericOrdering':True})[0]
+primero=db.campeonatos.find({"categoria":'500cc'}, {"puntos":1, "piloto":1,'_id':0}).sort("puntos",DESCENDING).collation({'locale':'es','numericOrdering':True})[0]
 
-quinto= db.campeonatos.find({"categoria":'MotoGP'}, {"puntos":1, "piloto":1,'_id':0}).sort("puntos",DESCENDING).collation({'locale':'es','numericOrdering':True})[5]
+quinto= db.campeonatos.find({"categoria":'500cc'}, {"puntos":1, "piloto":1,'_id':0}).sort("puntos",DESCENDING).collation({'locale':'es','numericOrdering':True})[5]
 
 primer_piloto=(primero["piloto"])
 primer_puntos=int(primero["puntos"])

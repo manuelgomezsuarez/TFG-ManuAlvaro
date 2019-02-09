@@ -15,7 +15,7 @@
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
-    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserUrl>http://localhost:60214/api/</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>apiMotoGP.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>
@@ -39,6 +39,8 @@
     <Compile Include="app\tests.py" />
     <Compile Include="app\urls.py" />
     <Compile Include="app\views.py" />
+    <Compile Include="app\webScraping\scraping Paralelo Polls.py" />
+    <Compile Include="app\webScraping\scraping Paralelo.py" />
     <Compile Include="app\webScraping\scraping.py" />
     <Compile Include="app\webScraping\test_scraping.py" />
     <Compile Include="app\__init__.py" />

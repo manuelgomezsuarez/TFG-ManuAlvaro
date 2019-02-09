@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient 
-
+import time
 
 try: 
     conn = MongoClient() 
@@ -17,17 +17,19 @@ db.documentacion.drop()
 collection = db.carreras 
 collection2= db.campeonatos
 collection3= db.documentacion
-
+anosParaScraping=[1940,1950,1951,1952]
 
 
 
 
 doc= requests.get("http://www.motogp.com/es/Results+Statistics/").text
 soup0=BeautifulSoup(doc,'html5lib')
+
+
 for something in soup0.select("select#season > option"):
     ano=something.get("value")
-    if int(ano) == 2017:
-        #break
+    if int(ano) in anosParaScraping:
+    
         categoriasUnicas=[]
         docAno=requests.get("http://www.motogp.com/es/Results+Statistics/"+str(ano)).text
         soup = BeautifulSoup(docAno,'html5lib')
@@ -145,7 +147,8 @@ for something in soup0.select("select#season > option"):
                 collection2.insert_one({"temporada":int(ano),"categoria":categoriasUnicas[cont],'pos':pos,'piloto':piloto,'moto':moto,'pais':pais,'puntos':puntos})
 
             cont=cont+1
-       
+
+print('Ha tardado {} segundos en realizar el scraping'.format(time.time() - starttime))
 
 
 
