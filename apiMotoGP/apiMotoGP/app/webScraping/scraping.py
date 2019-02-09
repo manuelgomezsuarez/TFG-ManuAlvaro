@@ -146,7 +146,3 @@ for something in soup0.select("select#season > option"):
 
             cont=cont+1
        
-
-
-
-

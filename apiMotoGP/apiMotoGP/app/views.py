@@ -3,8 +3,17 @@ from rest_framework_mongoengine import viewsets as meviewsets
 from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer
 from app.models import  Carreras, Campeonatos,Documentacion
 import django_filters.rest_framework
-
 from django_filters.rest_framework import DjangoFilterBackend
+from django.http import HttpResponse
+from django.template import loader
+from rest_framework import filters
+
+def index(request):
+    template = loader.get_template('app/index.html')
+    context = {
+      
+    }
+    return HttpResponse(template.render(context,request))
 
 class PosicionCarreraViewSet(meviewsets.ModelViewSet):
     serializer_class = PosicionCarreraSerializer
@@ -24,6 +33,7 @@ class PosicionCarreraViewSet(meviewsets.ModelViewSet):
         if filtering_kwargs:
             queryset = Carreras.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
         return queryset
+    http_method_names = ['get']
 
 
 
@@ -47,7 +57,7 @@ class PosicionCampeonatoViewSet(meviewsets.ModelViewSet):
         if filtering_kwargs:
             queryset = Campeonatos.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
         return queryset
-
+    http_method_names = ['get']
 
 
 class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
@@ -69,3 +79,4 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
         if filtering_kwargs:
             queryset = Documentacion.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
         return queryset
+    http_method_names = ['get']

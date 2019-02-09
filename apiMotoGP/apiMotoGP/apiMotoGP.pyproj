@@ -15,7 +15,7 @@
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
-    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserUrl>http://localhost:44541</WebBrowserUrl>
     <LaunchProvider>Django launcher</LaunchProvider>
     <DjangoSettingsModule>apiMotoGP.settings</DjangoSettingsModule>
     <OutputPath>.</OutputPath>
@@ -60,9 +60,11 @@
     <Folder Include="app\templates\" />
     <Folder Include="app\templates\app\" />
     <Folder Include="apiMotoGP\" />
+    <Folder Include="app\templates\rest_framework\" />
     <Folder Include="app\webScraping\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\rest_framework\base.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />
