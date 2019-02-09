@@ -3,13 +3,12 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient 
 import multiprocessing
 import time
-from functools import partial
-from contextlib import contextmanager
 
 
 
 
-def multiprocessingScraping(ano,collection3,collection2):
+def multiprocessingScraping(arguments):
+    print(arguments[0])
     categoriasUnicas=[]
     docAno=requests.get("http://www.motogp.com/es/Results+Statistics/"+str(ano)).text
     soup = BeautifulSoup(docAno,'html5lib')
@@ -129,13 +128,9 @@ def multiprocessingScraping(ano,collection3,collection2):
         cont=cont+1
 
 
-@contextmanager
-def poolcontext(*args, **kwargs):
-    pool = multiprocessing.Pool(*args, **kwargs)
-    yield pool
-    pool.terminate()
 
-def main():
+if __name__ == '__main__':
+    print("Number of cpu : ", multiprocessing.cpu_count())
     try: 
         conn = MongoClient() 
         print("Connected successfully!!!") 
@@ -149,21 +144,23 @@ def main():
     db.campeonatos.drop()
     db.documentacion.drop()
     collection = db.carreras 
-    collection2= db.campeonatos
-    collection3= db.documentacion
+    collection2 = db.campeonatos
+    collection3 = db.documentacion
     doc= requests.get("http://www.motogp.com/es/Results+Statistics/").text
     soup0=BeautifulSoup(doc,'html5lib')
     starttime = time.time()
     procesos = []
-
-    iterable=[1949,1950,1951]
-    pool = multiprocessing.Pool()
-    with poolcontext(processes=4) as poll:
-        results=pool.map(partial(multiprocessingScraping(1949,collection3=collection3,collection2=collection2,collection=collection)), iterable)
-   
-
-if __name__ == "__main__":
-    main()
+    
+    
+    print("comprobacion paralela")
+    for ano in range(1949,1954):     
+        fuck=[ano,collection,collection2,collection3]
+        proceso = multiprocessing.Process(target=multiprocessingScraping, args=(fuck,))
+        procesos.append(proceso)
+        proceso.start()
+        
+    for proceso in procesos:
+        proceso.join()
         
     print('That took {} seconds'.format(time.time() - starttime))
 
