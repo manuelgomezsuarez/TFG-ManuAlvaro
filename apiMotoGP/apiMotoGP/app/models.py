@@ -3,6 +3,7 @@ from mongoengine import Document, EmbeddedDocument, fields
 
 
 class Carreras(Document):
+    id=fields.ObjectId
     temporada = fields.IntField(required=False)
     categoria = fields.StringField(required=False)
     abreviatura = fields.StringField(required=False)
@@ -20,6 +21,7 @@ class Carreras(Document):
     diferencia = fields.StringField(required=False)
 
 class Campeonatos(Document):
+    id=fields.ObjectId
     temporada = fields.IntField(required=False)
     categoria = fields.StringField(required=False)
     pos = fields.IntField(required=False)
@@ -29,6 +31,7 @@ class Campeonatos(Document):
     puntos = fields.IntField(required=False)
 
 class Documentacion(Document):
+    id=fields.ObjectId
     temporada = fields.IntField(required=False)
     categoria = fields.StringField(required=False)
     abreviatura = fields.StringField(required=False)

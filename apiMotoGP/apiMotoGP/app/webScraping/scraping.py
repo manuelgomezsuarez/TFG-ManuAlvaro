@@ -150,6 +150,3 @@ for something in soup0.select("select#season > option"):
 
 print('Ha tardado {} segundos en realizar el scraping'.format(time.time() - starttime))
 
-
-
-
