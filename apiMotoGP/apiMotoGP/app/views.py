@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from rest_framework_mongoengine import viewsets as meviewsets
-from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer
+from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer,DistintosSerializer    
 from app.models import  Carreras, Campeonatos,Documentacion
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
 from django.http import HttpResponse
 from django.template import loader
 from rest_framework import filters
+from rest_framework.utils.urls import remove_query_param, replace_query_param
+from rest_framework.pagination import PageNumberPagination
+
+
 
 def index(request):
     template = loader.get_template('app/index.html')
@@ -79,4 +83,17 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
         if filtering_kwargs:
             queryset = Documentacion.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
         return queryset
+    http_method_names = ['get']
+
+class DistintosViewSet(meviewsets.ModelViewSet):
+    serializer_class = DistintosSerializer
+    def get_queryset(self):
+        queryset = Carreras.objects.distinct("temporada")
+        arrayQuerySet=[]
+        DictDistintos={}
+        for q in queryset:
+            DictDistintos=({"temporada":q})
+            arrayQuerySet.append(DictDistintos)
+        print(queryset)
+        return arrayQuerySet
     http_method_names = ['get']

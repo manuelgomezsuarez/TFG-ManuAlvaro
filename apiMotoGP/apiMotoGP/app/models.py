@@ -39,6 +39,10 @@ class Documentacion(Document):
     lugar = fields.StringField(required=False)
     fecha = fields.StringField(required=False)
     documentacion = fields.ListField()
+
+class distintos(Document):
+    id=fields.ObjectId
+    temporada = fields.IntField(required=False)
     
    
     

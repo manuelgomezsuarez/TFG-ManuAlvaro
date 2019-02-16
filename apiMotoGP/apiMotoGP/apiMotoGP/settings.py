@@ -49,6 +49,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
 
 }
+
+
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
