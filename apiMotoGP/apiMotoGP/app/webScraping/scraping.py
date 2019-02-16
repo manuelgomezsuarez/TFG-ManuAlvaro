@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient 
 import time
 
+starttime = time.time()
 try: 
     conn = MongoClient() 
     print("Connected successfully!!!") 
@@ -17,7 +18,7 @@ db.documentacion.drop()
 collection = db.carreras 
 collection2= db.campeonatos
 collection3= db.documentacion
-anosParaScraping=[1940,1950,1951,1952]
+anosParaScraping=[2014]
 
 
 
@@ -74,10 +75,12 @@ for something in soup0.select("select#season > option"):
                                 if ("pdf" in str(test)):                             
                                   arrayPDF.append(test.get("href"))
 
-                        sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
-                        sitioEvento=sitioYFecha.split(",",1)[0]  
-                        fechaEvento=sitioYFecha.split(",",1)[1]
-                        
+                        try:
+                            sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
+                            sitioEvento=sitioYFecha.split(",",1)[0]  
+                            fechaEvento=sitioYFecha.split(",",1)[1]
+                        except:
+                            fechaEvento=""
                         
                         for tablaCarrera in soup4.select("table.width100.marginbot10.fonts12"):
                             for tr in tablaCarrera.select("tr")[1:]:

@@ -52,9 +52,12 @@ def multiprocessingScraping(ano):
                             if ("pdf" in str(test)):                             
                                 arrayPDF.append(test.get("href"))
 
-                    sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
-                    sitioEvento=sitioYFecha.split(",",1)[0]  
-                    fechaEvento=sitioYFecha.split(",",1)[1]
+                    try:
+                        sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
+                        sitioEvento=sitioYFecha.split(",",1)[0]  
+                        fechaEvento=sitioYFecha.split(",",1)[1]
+                    except:
+                        fechaEvento=""
                         
                         
                     for tablaCarrera in soup4.select("table.width100.marginbot10.fonts12"):
@@ -127,19 +130,22 @@ def multiprocessingScraping(ano):
         cont=cont+1
 
 try: 
+    global conn 
     conn = MongoClient() 
-    print("Connected successfully!!!") 
+    print("Connected successfully on Process:"+ multiprocessing.current_process().name)
 except:   
     print("Could not connect to MongoDB")
 
 # database 
 
 db = conn.motoGP_db
-db.carreras.drop()
-db.campeonatos.drop()
-db.documentacion.drop()
+global collection 
 collection = db.carreras 
+
+global collection2
 collection2= db.campeonatos
+
+global collection3
 collection3= db.documentacion
 doc= requests.get("http://www.motogp.com/es/Results+Statistics/").text
 soup0=BeautifulSoup(doc,'html5lib')
@@ -149,7 +155,10 @@ procesos = []
 
 if __name__ == '__main__':
     print("comprobacion paralela")
-    for ano in range(1949,1960):       
+    db.carreras.drop()
+    db.campeonatos.drop()
+    db.documentacion.drop()
+    for ano in range(1949,2017):       
         proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
         procesos.append(proceso)
         proceso.start()
