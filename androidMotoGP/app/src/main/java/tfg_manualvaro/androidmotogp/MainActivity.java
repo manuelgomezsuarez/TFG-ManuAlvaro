@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView texto1= (TextView)findViewById(R.id.texto1);
         texto1.setText(busqueda);
+        texto1.setVisibility(View.VISIBLE);
 
     }
 }
