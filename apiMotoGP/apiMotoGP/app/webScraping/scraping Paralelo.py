@@ -158,7 +158,7 @@ if __name__ == '__main__':
     db.carreras.drop()
     db.campeonatos.drop()
     db.documentacion.drop()
-    for ano in range(1949,2017):       
+    for ano in range(1949,2018):       
         proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
         procesos.append(proceso)
         proceso.start()

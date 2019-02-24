@@ -37,6 +37,7 @@ class PosicionCarreraViewSet(meviewsets.ModelViewSet):
         distinctUrl= self.request.query_params.get('distinct', None)
         if distinctUrl is not None:
             queryset = Carreras.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            queryset.sort()
             arrayQuerySet=[]
             DictDistintos={}
             for q in queryset:
@@ -73,12 +74,12 @@ class PosicionCampeonatoViewSet(meviewsets.ModelViewSet):
         distinctUrl= self.request.query_params.get('distinct', None)
         if distinctUrl is not None:
             queryset = Campeonatos.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            queryset.sort()
             arrayQuerySet=[]
             DictDistintos={}
             for q in queryset:
                 DictDistintos=({distinctUrl:q})
                 arrayQuerySet.append(DictDistintos)
-            print(queryset)
             return arrayQuerySet
         else:
             if filtering_kwargs:
@@ -106,6 +107,7 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
         distinctUrl= self.request.query_params.get('distinct', None)
         if distinctUrl is not None:
             queryset = Documentacion.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            queryset.sort()
             arrayQuerySet=[]
             DictDistintos={}
             for q in queryset:

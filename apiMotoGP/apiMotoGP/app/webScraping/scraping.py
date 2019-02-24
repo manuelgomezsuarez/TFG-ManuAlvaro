@@ -18,7 +18,7 @@ db.documentacion.drop()
 collection = db.carreras 
 collection2= db.campeonatos
 collection3= db.documentacion
-anosParaScraping=[2014,1980]
+anosParaScraping=[1980]
 
 
 
