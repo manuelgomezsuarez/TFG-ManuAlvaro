@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework_mongoengine import viewsets as meviewsets
-from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer, PosicionDocumentacionSerializer,DistintosSerializer    
+from apiMotoGP.serializers import PosicionCarreraSerializer, PosicionCampeonatoSerializer,PosicionDocumentacionSerializer    
 from app.models import  Carreras, Campeonatos,Documentacion
 import django_filters.rest_framework
 from django_filters.rest_framework import DjangoFilterBackend
@@ -34,9 +34,21 @@ class PosicionCarreraViewSet(meviewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Carreras.objects.all() 
         filtering_kwargs = self.get_kwargs_for_filtering() # get the fields with values for filtering 
-        if filtering_kwargs:
-            queryset = Carreras.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
-        return queryset
+        distinctUrl= self.request.query_params.get('distinct', None)
+        if distinctUrl is not None:
+            queryset = Carreras.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            arrayQuerySet=[]
+            DictDistintos={}
+            for q in queryset:
+                DictDistintos=({distinctUrl:q})
+                arrayQuerySet.append(DictDistintos)
+            print(queryset)
+            return arrayQuerySet
+        else:
+            if filtering_kwargs:
+                queryset = Carreras.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
+                print(queryset)
+            return queryset
     http_method_names = ['get']
 
 
@@ -58,9 +70,20 @@ class PosicionCampeonatoViewSet(meviewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Campeonatos.objects.all() 
         filtering_kwargs = self.get_kwargs_for_filtering() # get the fields with values for filtering 
-        if filtering_kwargs:
-            queryset = Campeonatos.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
-        return queryset
+        distinctUrl= self.request.query_params.get('distinct', None)
+        if distinctUrl is not None:
+            queryset = Campeonatos.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            arrayQuerySet=[]
+            DictDistintos={}
+            for q in queryset:
+                DictDistintos=({distinctUrl:q})
+                arrayQuerySet.append(DictDistintos)
+            print(queryset)
+            return arrayQuerySet
+        else:
+            if filtering_kwargs:
+                queryset = Campeonatos.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
+            return queryset
     http_method_names = ['get']
 
 
@@ -80,20 +103,18 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Documentacion.objects.all() 
         filtering_kwargs = self.get_kwargs_for_filtering() # get the fields with values for filtering 
-        if filtering_kwargs:
-            queryset = Documentacion.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
-        return queryset
-    http_method_names = ['get']
-
-class DistintosViewSet(meviewsets.ModelViewSet):
-    serializer_class = DistintosSerializer
-    def get_queryset(self):
-        queryset = Carreras.objects.distinct("temporada")
-        arrayQuerySet=[]
-        DictDistintos={}
-        for q in queryset:
-            DictDistintos=({"temporada":q})
-            arrayQuerySet.append(DictDistintos)
-        print(queryset)
-        return arrayQuerySet
+        distinctUrl= self.request.query_params.get('distinct', None)
+        if distinctUrl is not None:
+            queryset = Documentacion.objects.filter(**filtering_kwargs).distinct(distinctUrl) # filter the queryset based on
+            arrayQuerySet=[]
+            DictDistintos={}
+            for q in queryset:
+                DictDistintos=({distinctUrl:q})
+                arrayQuerySet.append(DictDistintos)
+            print(queryset)
+            return arrayQuerySet
+        else:
+            if filtering_kwargs:
+                queryset = Documentacion.objects.filter(**filtering_kwargs) # filter the queryset based on 'filtering_kwargs'
+            return queryset
     http_method_names = ['get']
