@@ -8,7 +8,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import tfg_manualvaro.androidmotogp.adapter.EmployeeAdapter;
+import tfg_manualvaro.androidmotogp.adapter.TemporadaAdapter;
 import tfg_manualvaro.androidmotogp.models.EmployeeDetails;
+import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
 import org.json.JSONArray;
@@ -19,30 +21,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String KEY_SUCCESS = "success";
-    private static final String KEY_DATA = "data";
-    private static final String KEY_EMPLOYEE_ID = "employee_id";
-    private static final String KEY_NAME = "name";
-    private static final String KEY_DOB = "dob";
-    private static final String KEY_DESIGNATION = "designation";
-    private static final String KEY_CONTACT_NUMBER = "contact_number";
-    private static final String KEY_EMAIL = "email";
-    private static final String KEY_SALARY = "salary";
-    private String url = "http://api.androiddeft.com/json/employee.php";
+    private static final String KEY_SUCCESS = "count";
+    private static final String KEY_DATA = "results";
+    private static final String KEY_TEMPORADA = "temporada";
+
+    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/?distinct=temporada&format=json";
     private ProgressDialog pDialog;
     private int success;
-    private EmployeeAdapter adapter;
+    private TemporadaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Call the AsyncTask
-        new FetchEmployeeDetails().execute();
+        new FetchTemporada().execute();
 
     }
 
-    private class FetchEmployeeDetails extends AsyncTask<String, String, String> {
+    private class FetchTemporada extends AsyncTask<String, String, String> {
         JSONObject response;
         @Override
         protected void onPreExecute() {
@@ -72,26 +69,21 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
 
-                    ListView listView =(ListView)findViewById(R.id.employeeList);
+                    ListView listView =(ListView)findViewById(R.id.temporadaList);
                     if (success == 1) {
                         try {
-                            JSONArray employeeArray =  response.getJSONArray(KEY_DATA);
-                            List<EmployeeDetails> employeeList = new ArrayList<>();
+                            System.out.println(KEY_DATA);
+                            JSONArray temporadasJSONArray =  response.getJSONArray(KEY_DATA);
+                            List<Temporada> temporadasList = new ArrayList<>();
                             //Populate the EmployeeDetails list from response
-                            for (int i = 0; i<employeeArray.length();i++){
-                                EmployeeDetails employeeDetails = new EmployeeDetails();
-                                JSONObject employeeObj = employeeArray.getJSONObject(i);
-                                employeeDetails.setEmployeeId(employeeObj.getInt(KEY_EMPLOYEE_ID));
-                                employeeDetails.setName(employeeObj.getString(KEY_NAME));
-                                employeeDetails.setDob(employeeObj.getString(KEY_DOB));
-                                employeeDetails.setDesignation(employeeObj.getString(KEY_DESIGNATION));
-                                employeeDetails.setContactNumber(employeeObj.getString(KEY_CONTACT_NUMBER));
-                                employeeDetails.setEmail(employeeObj.getString(KEY_EMAIL));
-                                employeeDetails.setSalary(employeeObj.getString(KEY_SALARY));
-                                employeeList.add(employeeDetails);
+                            for (int i = 0; i<temporadasJSONArray.length();i++){
+                                Temporada temporada = new Temporada();
+                                JSONObject temporadaJSON = temporadasJSONArray.getJSONObject(i);
+                                temporada.setTemporada(temporadaJSON.getInt(KEY_TEMPORADA));
+                                temporadasList.add(temporada);
                             }
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
-                            adapter = new EmployeeAdapter(employeeList,getApplicationContext());
+                            adapter = new TemporadaAdapter(temporadasList,getApplicationContext());
                             listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
