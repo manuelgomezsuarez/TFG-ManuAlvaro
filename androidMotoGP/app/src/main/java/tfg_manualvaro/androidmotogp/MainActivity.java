@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity{
             runOnUiThread(new Runnable() {
                 public void run() {
 
-                    ListView listView =(ListView)findViewById(R.id.temporadaList);
+                    ListView listView =(ListView)findViewById(R.id.objectList);
                     if (success >0) {
                         try {
                             System.out.println(KEY_DATA);
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity{
             runOnUiThread(new Runnable() {
                 public void run() {
 
-                    ListView listView =(ListView)findViewById(R.id.temporadaList);
+                    ListView listView =(ListView)findViewById(R.id.objectList);
                     if (success >0) {
                         try {
                             System.out.println(KEY_DATA);
@@ -229,8 +229,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public static void changeToCategoriaActivity(){
+    public static void changeToCategoriaActivity(Temporada temporada){
         Intent intent = new Intent(mContext, MainActivityCategoria.class);
+        intent.putExtra("Temporada",temporada);
         mContext.startActivity(intent);
     }
 

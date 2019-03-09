@@ -13,8 +13,6 @@
         android:padding="10dp"
         android:textColor="@android:color/holo_blue_light"
         android:textSize="18sp"
-        android:clickable="true"
-        android:onClick=""
         />
 
 

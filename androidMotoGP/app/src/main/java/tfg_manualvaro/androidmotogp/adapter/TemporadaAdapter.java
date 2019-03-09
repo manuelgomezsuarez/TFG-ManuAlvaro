@@ -47,7 +47,7 @@ public class TemporadaAdapter extends ArrayAdapter<Temporada> {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.temporada_row, null);
         }
-        Temporada temporada = dataSet.get(position);
+        final Temporada temporada = dataSet.get(position);
         if (temporada != null) {
             //Text View references
             TextView temporadaTextView = (TextView) v.findViewById(R.id.temporadaID);
@@ -61,13 +61,14 @@ public class TemporadaAdapter extends ArrayAdapter<Temporada> {
                         TextView tv= (TextView) viewIn.findViewById(R.id.temporadaID);
 
                         //alter text of textview widget
-                        tv.setText("Clickaste esto");
-                        MainActivity.changeToCategoriaActivity();
+
+
+                        MainActivity.changeToCategoriaActivity(temporada);
 
                         //assign the textview forecolor
                         tv.setTextColor(Color.RED);
                     } catch (Exception except) {
-                        Log.e("Errorr","Ooops Problemaaaas "+except.getMessage());
+                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
                     }
                 }
             });

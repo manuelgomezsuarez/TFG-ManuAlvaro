@@ -1,13 +1,13 @@
 package tfg_manualvaro.androidmotogp.models;
 
 public class Categoria {
-    private Integer categoria;
+    private String categoria;
 
-    public Integer getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Integer categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 

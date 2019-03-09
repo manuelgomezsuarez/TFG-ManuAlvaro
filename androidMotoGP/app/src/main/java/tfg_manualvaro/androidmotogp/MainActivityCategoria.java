@@ -1,6 +1,7 @@
 package tfg_manualvaro.androidmotogp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +18,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tfg_manualvaro.androidmotogp.adapter.TemporadaAdapter;
+import tfg_manualvaro.androidmotogp.adapter.CategoriaAdapter;
+import tfg_manualvaro.androidmotogp.models.Categoria;
 import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
 public class MainActivityCategoria extends AppCompatActivity{
     private static final String KEY_SUCCESS = "count";
     private static final String KEY_DATA = "results";
-    private static final String KEY_TEMPORADA = "temporada";
+    private static final String KEY_CATEGORIA = "categoria";
     private static final String KEY_NEXT = "next";
 
     private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
@@ -34,14 +36,18 @@ public class MainActivityCategoria extends AppCompatActivity{
     private int success;
     private String next;
     private Integer pagination=1;
-    private TemporadaAdapter adapter;
-    private JSONArray temporadasJSONArray=null;
+    private CategoriaAdapter adapter;
+    private JSONArray categoriasJSONArray=null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_categoria);
         //Call the AsyncTask
+
+
         new FetchCategoria().execute();
 
     }
@@ -65,15 +71,19 @@ public class MainActivityCategoria extends AppCompatActivity{
         @Override
         protected String doInBackground(String... params) {
             HttpJsonParser jsonParser = new HttpJsonParser();
+            Intent intent = getIntent();
+            Temporada temporadaRecuperada=intent.getParcelableExtra("Temporada");
+            Log.d("TemporadaRecuperada",temporadaRecuperada.getTemporada().toString());
             urlParams.put("format","json");
-            urlParams.put("distinct","temporada");
+            urlParams.put("temporada",temporadaRecuperada.getTemporada().toString());
+            urlParams.put("distinct","categoria");
             urlParams.put("page",pagination.toString());
 
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
             try {
                 success = response.getInt(KEY_SUCCESS);
                 next=response.getString(KEY_NEXT);
-                temporadasJSONArray =  response.getJSONArray(KEY_DATA);
+                categoriasJSONArray =  response.getJSONArray(KEY_DATA);
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
@@ -81,15 +91,15 @@ public class MainActivityCategoria extends AppCompatActivity{
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
                     Log.i("next",next);
-                    JSONArray temporadasJSONArrayNext =  response.getJSONArray(KEY_DATA);
+                    JSONArray categoriasJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
-                    for (int i = 0; i < temporadasJSONArrayNext.length(); i++) {
+                    for (int i = 0; i < categoriasJSONArrayNext.length(); i++) {
 
-                        JSONObject jsonObject = temporadasJSONArrayNext.getJSONObject(i);
-                        //temporadasJSONArray.put(jsonObject);
+                        JSONObject jsonObject = categoriasJSONArrayNext.getJSONObject(i);
+                        //categoriasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", temporadasJSONArray.toString());
+                Log.i("next", categoriasJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -102,20 +112,20 @@ public class MainActivityCategoria extends AppCompatActivity{
             runOnUiThread(new Runnable() {
                 public void run() {
 
-                    ListView listView =(ListView)findViewById(R.id.temporadaList);
+                    ListView listView =(ListView)findViewById(R.id.objectList);
                     if (success >0) {
                         try {
                             System.out.println(KEY_DATA);
-                            List<Temporada> temporadasList = new ArrayList<>();
+                            List<Categoria> categoriasList = new ArrayList<>();
                             //Populate the EmployeeDetails list from response
-                            for (int i = 0; i<temporadasJSONArray.length();i++){
-                                Temporada temporada = new Temporada();
-                                JSONObject temporadaJSON = temporadasJSONArray.getJSONObject(i);
-                                temporada.setTemporada(temporadaJSON.getInt(KEY_TEMPORADA));
-                                temporadasList.add(temporada);
+                            for (int i = 0; i<categoriasJSONArray.length();i++){
+                                Categoria categoria = new Categoria();
+                                JSONObject categoriaJSON = categoriasJSONArray.getJSONObject(i);
+                                categoria.setCategoria(categoriaJSON.getString(KEY_CATEGORIA));
+                                categoriasList.add(categoria);
                             }
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
-                            adapter = new TemporadaAdapter(temporadasList,getApplicationContext());
+                            adapter = new CategoriaAdapter(categoriasList,getApplicationContext());
                             listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
