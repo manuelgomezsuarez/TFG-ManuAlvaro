@@ -10,23 +10,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
 import tfg_manualvaro.androidmotogp.R;
 import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
-import tfg_manualvaro.androidmotogp.models.Carrera;
+import tfg_manualvaro.androidmotogp.models.CarreraModelo;
 import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
+import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
 
 
 /**
  * Created by Abhi on 03 Sep 2017 008.
  */
 
-public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> {
+public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
 
-    private CampeonatoModelo dataSet;
+    private CarreraModelo dataSet;
 
-    public PosicionCampeonatoAdapter(CampeonatoModelo dataSet, Context mContext) {
+    public PosicionCarreraAdapter(CarreraModelo dataSet, Context mContext) {
         super(mContext, R.layout.posicion_row, dataSet.getPosiciones());
         this.dataSet = dataSet;
     }
@@ -40,7 +39,7 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.posicion_row, null);
         }
-        final PosicionCampeonato pos = dataSet.getPosiciones().get(position);
+        final PosicionCarrera pos = dataSet.getPosiciones().get(position);
         if (pos != null) {
             //Text View references
             TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
@@ -49,9 +48,14 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
             //Updating the text views
             posicionTextView.setText(pos.getPosicion() +". "+
                      pos.getPiloto()+"\n"+
-                    "Moto: "+ pos.getMoto()+"\n"+
+                    "Puntos: "+ pos.getPuntos()+"\n"+
+                    "Num: "+ pos.getNumero()+"\n"+
                     "Pais: "+ pos.getPais()+"\n"+
-                    "Puntos: "+ pos.getPuntos()
+                    "Equipo: "+ pos.getEquipo()+"\n"+
+                    "Moto: "+ pos.getMoto()+"\n"+
+                    "KM/H: "+ pos.getKmh()+"\n"+
+                    "Diferencia: "+ pos.getDiferencia()
+
             );
             posicionTextView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 
 import tfg_manualvaro.androidmotogp.MainActivity;
+import tfg_manualvaro.androidmotogp.MainActivityCarrera;
 import tfg_manualvaro.androidmotogp.MainActivityCategoria;
 import tfg_manualvaro.androidmotogp.R;
 import tfg_manualvaro.androidmotogp.models.EmployeeDetails;
@@ -63,12 +64,12 @@ public class CarreraAdapter extends ArrayAdapter<Carrera> {
                         //alter text of textview widget
 
 
-                        //MainActivity.changeToCarreraActivity(carrera);
+                        MainActivityCarrera.changeToCarreraActivityDisplay(carrera);
 
                         //assign the textview forecolor
                         tv.setTextColor(Color.RED);
                     } catch (Exception except) {
-                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
+                        Log.e("Error","OH a ocurrido un error"+except.getMessage());
                     }
                 }
             });

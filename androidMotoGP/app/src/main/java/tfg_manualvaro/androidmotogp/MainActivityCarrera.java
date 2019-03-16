@@ -109,7 +109,7 @@ public class MainActivityCarrera extends AppCompatActivity{
                     for (int i = 0; i < carrerasJSONArrayNext.length(); i++) {
 
                         JSONObject jsonObject = carrerasJSONArrayNext.getJSONObject(i);
-                        //carrerasJSONArray.put(jsonObject);
+                        carrerasJSONArray.put(jsonObject);
                     }
                 }
                 Log.i("next", carrerasJSONArray.toString());
@@ -156,13 +156,15 @@ public class MainActivityCarrera extends AppCompatActivity{
         }
     }
 
-    public static void changeToSelectorActivity(Carrera carrera){
+    public static void changeToCarreraActivityDisplay(Carrera carrera){
         Log.i("print8", "vamos a cambiar a mainActivityCarreraDisplay");
         Log.i("print9", temporadaMainActivitySelector.getTemporada().toString());
         //Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
-        Intent intentMainActivityCarrera = new Intent(mContext, MainActivity.class);
+        Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
         intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivitySelector);
-        intentMainActivityCarrera.putExtra("CarreraString",categoriaMainActivitySelector);
+        intentMainActivityCarrera.putExtra("CategoriaString",categoriaMainActivitySelector);
+        intentMainActivityCarrera.putExtra("tituloString",carrera.getTitulo());
+
         mContext.startActivity(intentMainActivityCarrera);
     }
 
