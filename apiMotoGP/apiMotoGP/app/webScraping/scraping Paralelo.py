@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient 
 import multiprocessing
 import time
-
+import datetime
 
 
 
@@ -56,8 +56,10 @@ def multiprocessingScraping(ano):
                         sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
                         sitioEvento=sitioYFecha.split(",",1)[0]  
                         fechaEvento=sitioYFecha.split(",",1)[1]
+                        fecha_parsed=datetime.datetime.strptime(fechaEvento,' %A, %B %d, %Y')
                     except:
                         fechaEvento=""
+                        fecha_parsed=""
                         
                         
                     for tablaCarrera in soup4.select("table.width100.marginbot10.fonts12"):
@@ -88,7 +90,7 @@ def multiprocessingScraping(ano):
                                 except:
                                     kmh=0 
 
-                                collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
+                                collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fecha_parsed, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
                                     
                                     
                             except:

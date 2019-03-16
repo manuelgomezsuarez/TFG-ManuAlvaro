@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from pymongo import MongoClient 
 import time
-
+import datetime
 starttime = time.time()
 try: 
     conn = MongoClient() 
@@ -12,13 +12,13 @@ except:
 
 # database 
 db = conn.motoGP_db
-db.carreras.drop()
-db.campeonatos.drop()
-db.documentacion.drop()
+#db.carreras.drop()
+#db.campeonatos.drop()
+#db.documentacion.drop()
 collection = db.carreras 
 collection2= db.campeonatos
 collection3= db.documentacion
-anosParaScraping=[1980]
+anosParaScraping=[2018]
 
 
 
@@ -79,8 +79,10 @@ for something in soup0.select("select#season > option"):
                             sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
                             sitioEvento=sitioYFecha.split(",",1)[0]  
                             fechaEvento=sitioYFecha.split(",",1)[1]
+                            fecha_parsed=datetime.datetime.strptime(fechaEvento,' %A, %B %d, %Y')
                         except:
                             fechaEvento=""
+                            fecha_parsed=""
                         
                         for tablaCarrera in soup4.select("table.width100.marginbot10.fonts12"):
                             for tr in tablaCarrera.select("tr")[1:]:
@@ -110,7 +112,7 @@ for something in soup0.select("select#season > option"):
                                     except:
                                         kmh=0 
 
-                                    collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
+                                    collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fecha_parsed, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
                                     
                                     
                                 except:

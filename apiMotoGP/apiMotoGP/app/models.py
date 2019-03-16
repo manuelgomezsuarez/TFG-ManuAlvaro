@@ -1,5 +1,6 @@
 from mongoengine import Document, EmbeddedDocument, fields
- 
+import time
+from django.db.models import F
 
 
 class Carreras(Document):
@@ -9,7 +10,7 @@ class Carreras(Document):
     abreviatura = fields.StringField(required=False)
     titulo = fields.StringField(required=False)
     lugar = fields.StringField(required=False)
-    fecha = fields.StringField(required=False)
+    fecha = fields.DateTimeField(required=False)
     pos = fields.IntField(required=False)
     puntos = fields.IntField(required=False)
     num = fields.IntField(required=False)
@@ -19,6 +20,8 @@ class Carreras(Document):
     moto = fields.StringField(required=False)
     kmh = fields.FloatField(required=False)
     diferencia = fields.StringField(required=False)
+
+
 
 class Campeonatos(Document):
     id=fields.ObjectId
