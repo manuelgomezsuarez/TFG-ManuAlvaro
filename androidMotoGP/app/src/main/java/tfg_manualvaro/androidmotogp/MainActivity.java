@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity{
     private static final String KEY_NEXT = "next";
     private static Context mContext;
 
-    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    private String url = "http://10.0.2.2:44541/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
@@ -77,11 +78,13 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected String doInBackground(String... params) {
             HttpJsonParser jsonParser = new HttpJsonParser();
+
             urlParams.put("format","json");
             urlParams.put("distinct","temporada");
             urlParams.put("page",pagination.toString());
 
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
+            Log.i("print6", response.toString());
             try {
                 success = response.getInt(KEY_SUCCESS);
                 next=response.getString(KEY_NEXT);
@@ -230,9 +233,9 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public static void changeToCategoriaActivity(Temporada temporada){
-        Intent intent = new Intent(mContext, MainActivityCategoria.class);
-        intent.putExtra("Temporada",temporada);
-        mContext.startActivity(intent);
+        Intent intentMainActivity = new Intent(mContext, MainActivityCategoria.class);
+        intentMainActivity.putExtra("Temporada",temporada);
+        mContext.startActivity(intentMainActivity);
     }
 
 }

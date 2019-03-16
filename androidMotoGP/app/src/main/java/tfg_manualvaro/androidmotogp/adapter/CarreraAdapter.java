@@ -1,6 +1,7 @@
 package tfg_manualvaro.androidmotogp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -10,25 +11,30 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
 
 import tfg_manualvaro.androidmotogp.MainActivity;
 import tfg_manualvaro.androidmotogp.MainActivityCategoria;
 import tfg_manualvaro.androidmotogp.R;
-import tfg_manualvaro.androidmotogp.models.Categoria;
+import tfg_manualvaro.androidmotogp.models.EmployeeDetails;
+import tfg_manualvaro.androidmotogp.models.Carrera;
+
+import java.util.List;
+
+import static android.support.v4.content.ContextCompat.startActivity;
+import static butterknife.internal.Finder.ACTIVITY;
 
 
 /**
  * Created by Abhi on 03 Sep 2017 008.
  */
 
-public class CategoriaAdapter extends ArrayAdapter<Categoria> {
-    private static final String KEY_CATEGORIA = "Categoría: ";
+public class CarreraAdapter extends ArrayAdapter<Carrera> {
+    private static final String KEY_CARRERA = "Carrera: ";
 
-    private List<Categoria> dataSet;
+    private List<Carrera> dataSet;
 
-    public CategoriaAdapter(List<Categoria> dataSet, Context mContext) {
-        super(mContext, R.layout.categoria_row, dataSet);
+    public CarreraAdapter(List<Carrera> dataSet, Context mContext) {
+        super(mContext, R.layout.carrera_row, dataSet);
         this.dataSet = dataSet;
     }
 
@@ -39,26 +45,25 @@ public class CategoriaAdapter extends ArrayAdapter<Categoria> {
         View v = convertView;
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.categoria_row, null);
+            v = inflater.inflate(R.layout.carrera_row, null);
         }
-        final Categoria categoria = dataSet.get(position);
-        if (categoria != null) {
+        final Carrera carrera = dataSet.get(position);
+        if (carrera != null) {
             //Text View references
-            TextView categoriaTextView = (TextView) v.findViewById(R.id.categoriaID);
+            TextView carreraTextView = (TextView) v.findViewById(R.id.carreraID);
 
             //Updating the text views
-            categoriaTextView.setText(KEY_CATEGORIA+ categoria.getCategoria());
-            //Updating the text views
-
-            categoriaTextView.setOnClickListener(new View.OnClickListener() {
+            carreraTextView.setText(KEY_CARRERA + carrera.getTitulo());
+            carreraTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View viewIn) {
                     try {
-                        TextView tv= (TextView) viewIn.findViewById(R.id.categoriaID);
+                        TextView tv= (TextView) viewIn.findViewById(R.id.carreraID);
 
                         //alter text of textview widget
-                        MainActivityCategoria.changeToSelectorActivity(categoria);
 
+
+                        //MainActivity.changeToCarreraActivity(carrera);
 
                         //assign the textview forecolor
                         tv.setTextColor(Color.RED);
@@ -71,5 +76,8 @@ public class CategoriaAdapter extends ArrayAdapter<Categoria> {
         }
 
         return v;
+
+
     }
+
 }
