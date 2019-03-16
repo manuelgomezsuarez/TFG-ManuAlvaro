@@ -1,19 +1,20 @@
 package tfg_manualvaro.androidmotogp.models;
 import java.util.List;
 
-import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
-
-public class CampeonatoModelo {
+public class CarreraModelo {
 
     private String id;
     private Integer temporada;
     private String categoria;
-    private List<PosicionCampeonato> posiciones;
+    private String lugar;
+    private String titulo;
+    private String fecha;
+    private List<PosicionCarrera> posiciones;
 
 
     @Override
     public String toString() {
-        return "CampeonatoModelo{" +
+        return "CarreraModelo{" +
                 "id='" + id + '\'' +
                 ", temporada=" + temporada +
                 ", categoria='" + categoria + '\'' +
@@ -22,15 +23,19 @@ public class CampeonatoModelo {
     }
 
     public String getNombre(){
-        return "Campeonato de la temporada "+temporada+" y categoria "+ categoria;
+        return "Gran Premio de "+titulo;
     }
 
 
-    public CampeonatoModelo() {
+    public CarreraModelo() {
         this.id = id;
         this.temporada = temporada;
         this.categoria = categoria;
         this.posiciones = posiciones;
+        this.lugar=lugar;
+        this.fecha=fecha;
+        this.titulo=titulo;
+        this.lugar=lugar;
     }
 
     public String getId() {
@@ -57,11 +62,35 @@ public class CampeonatoModelo {
         this.categoria = categoria;
     }
 
-    public List<PosicionCampeonato> getPosiciones() {
+    public List<PosicionCarrera> getPosiciones() {
         return posiciones;
     }
 
-    public void setPosiciones(List<PosicionCampeonato> posiciones) {
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setPosiciones(List<PosicionCarrera> posiciones) {
         this.posiciones = posiciones;
     }
 

@@ -8,7 +8,7 @@
     android:paddingTop="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="8dp"
-    tools:context="tfg_manualvaro.androidmotogp.MainActivityCampeonatoDisplay">
+    tools:context="tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay">
 
     <TextView
         android:id="@+id/textoTemporada"
@@ -22,7 +22,26 @@
         android:layout_height="130dp"
         android:layout_alignParentTop="true"
         android:text="TextView" />
+    <TextView
+        android:id="@+id/textoLugar"
+        android:layout_width="334dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
 
+    <TextView
+        android:id="@+id/textoFecha"
+        android:layout_width="334dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textoTitulo"
+        android:layout_width="334dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:text="TextView" />
     <ListView
         android:id="@+id/objectList"
         android:layout_width="368dp"

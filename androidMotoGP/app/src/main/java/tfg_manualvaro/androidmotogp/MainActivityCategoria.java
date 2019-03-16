@@ -101,7 +101,7 @@ public class MainActivityCategoria extends AppCompatActivity{
                     for (int i = 0; i < categoriasJSONArrayNext.length(); i++) {
 
                         JSONObject jsonObject = categoriasJSONArrayNext.getJSONObject(i);
-                        //categoriasJSONArray.put(jsonObject);
+                        categoriasJSONArray.put(jsonObject);
                     }
                 }
                 Log.i("next", categoriasJSONArray.toString());
