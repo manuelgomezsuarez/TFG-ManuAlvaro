@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">androidMotoGP</string>
+    <string name="campeonato">CAMPEONATO</string>
+    <string name="todo">TODO</string>
 </resources>

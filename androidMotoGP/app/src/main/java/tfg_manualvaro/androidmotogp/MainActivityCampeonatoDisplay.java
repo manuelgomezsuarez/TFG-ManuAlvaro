@@ -138,7 +138,7 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                                 pos.setMoto(posicionJSON.getString("moto"));
                                 pos.setPais(posicionJSON.getString("pais"));
                                 pos.setPiloto(posicionJSON.getString("piloto"));
-                                pos.setPosicion(posicionJSON.getInt("posicion"));
+                                pos.setPosicion(posicionJSON.getInt("pos"));
                                 pos.setPuntos(posicionJSON.getInt("puntos"));
                                 posicionesList.add(pos);
                             }
