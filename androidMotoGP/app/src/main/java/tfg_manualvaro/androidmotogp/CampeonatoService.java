@@ -4,6 +4,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
 
 public interface CampeonatoService {
 

@@ -27,15 +27,15 @@ import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 public class MainActivityCarrera extends AppCompatActivity{
     private static final String KEY_SUCCESS = "count";
     private static final String KEY_DATA = "results";
-    private static final String KEY_CARRERA = "carrera";
+    private static final String KEY_CARRERA = "titulo";
     private static final String KEY_NEXT = "next";
     private static Context mContext;
     private static Temporada temporadaMainActivitySelector;
     private static String categoriaMainActivitySelector;
 
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    private String url = "http://10.0.2.2:44541/carrera/";
+    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
+    //private String url = "http://10.0.2.2:44541/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
@@ -57,8 +57,8 @@ public class MainActivityCarrera extends AppCompatActivity{
         Intent intentMainActivitySelector = getIntent();
         temporadaMainActivitySelector = intentMainActivitySelector.getParcelableExtra("Temporada");
         categoriaMainActivitySelector = intentMainActivitySelector.getStringExtra("CategoriaString");
-        Log.d("print16",temporadaMainActivitySelector.getTemporada().toString());
-        Log.d("print17",categoriaMainActivitySelector);
+        Log.i("print1666",temporadaMainActivitySelector.getTemporada().toString());
+        Log.i("print1777",categoriaMainActivitySelector);
         new FetchCarrera().execute();
 
     }

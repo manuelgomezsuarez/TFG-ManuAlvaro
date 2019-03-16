@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity{
     private static final String KEY_NEXT = "next";
     private static Context mContext;
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    private String url = "http://10.0.2.2:44541/campeonato/";
+    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    //private String url = "http://10.0.2.2:44541/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity{
                     for (int i = 0; i < temporadasJSONArrayNext.length(); i++) {
 
                         JSONObject jsonObject = temporadasJSONArrayNext.getJSONObject(i);
-                        //temporadasJSONArray.put(jsonObject);
+                        temporadasJSONArray.put(jsonObject);
                     }
                 }
                 Log.i("next", temporadasJSONArray.toString());

@@ -31,8 +31,8 @@ public class MainActivitySelector extends AppCompatActivity{
     private static final String KEY_CATEGORIA = "categoria";
     private static final String KEY_NEXT = "next";
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    private String url = "http://10.0.2.2:44541/campeonato/";
+    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    //private String url = "http://10.0.2.2:44541/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
@@ -79,13 +79,13 @@ public class MainActivitySelector extends AppCompatActivity{
     }
 
     public  void BuscarCampeonato(View view){
-        Log.i("print8", "vamos a cambiar a mainActivityCarrera");
+        Log.i("print8", "vamos a cambiar a mainActivityCampeonatoDisplay");
         Log.i("print9", temporadaMainActivityCategoria.getTemporada().toString());
         Log.i("print10", categoriaMainActivityCategoria);
-        Intent intentMainActivityCarrera = new Intent(mContext, MainActivity.class);
-        intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivityCategoria);
-        intentMainActivityCarrera.putExtra("CategoriaString",categoriaMainActivityCategoria);
-        mContext.startActivity(intentMainActivityCarrera);
+        Intent intentMainActivityCampeonato = new Intent(mContext, MainActivityCampeonatoDisplay.class);
+        intentMainActivityCampeonato.putExtra("Temporada",temporadaMainActivityCategoria);
+        intentMainActivityCampeonato.putExtra("CategoriaString",categoriaMainActivityCategoria);
+        mContext.startActivity(intentMainActivityCampeonato);
     }
 
 

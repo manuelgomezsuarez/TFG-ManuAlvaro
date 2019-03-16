@@ -1,6 +1,6 @@
-package tfg_manualvaro.androidmotogp;
+package tfg_manualvaro.androidmotogp.models;
 
-class PosicionCampeonato {
+public class PosicionCampeonato {
 
     private String piloto;
     private String pais;
@@ -19,13 +19,6 @@ class PosicionCampeonato {
                 '}';
     }
 
-    public PosicionCampeonato(String piloto, String pais, Integer puntos, String moto, Integer posicion) {
-        this.piloto = piloto;
-        this.pais = pais;
-        this.puntos = puntos;
-        this.moto = moto;
-        this.posicion = posicion;
-    }
 
 
 

@@ -1,5 +1,7 @@
-package tfg_manualvaro.androidmotogp;
+package tfg_manualvaro.androidmotogp.models;
 import java.util.List;
+
+import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 
 public class CampeonatoModelo {
 

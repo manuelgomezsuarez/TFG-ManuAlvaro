@@ -19,55 +19,62 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tfg_manualvaro.androidmotogp.adapter.CategoriaAdapter;
-import tfg_manualvaro.androidmotogp.models.Categoria;
+import tfg_manualvaro.androidmotogp.adapter.CarreraAdapter;
+import tfg_manualvaro.androidmotogp.adapter.PosicionCampeonatoAdapter;
+import tfg_manualvaro.androidmotogp.models.Carrera;
+import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
-public class MainActivityCategoria extends AppCompatActivity{
+public class MainActivityCampeonatoDisplay extends AppCompatActivity{
     private static final String KEY_SUCCESS = "count";
     private static final String KEY_DATA = "results";
-    private static final String KEY_CATEGORIA = "categoria";
+    private static final String KEY_CARRERA = "titulo";
     private static final String KEY_NEXT = "next";
     private static Context mContext;
-    private static Temporada temporadaMainActivity;
+    private static Temporada temporadaMainActivitySelector;
+    private static String categoriaMainActivitySelector;
 
 
     private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    //private String url = "http://10.0.2.2:44541/campeonato/";
+    //private String url = "http://10.0.2.2:44541/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
     private int success;
     private String next;
     private Integer pagination=1;
-    private CategoriaAdapter adapter;
-    private JSONArray categoriasJSONArray=null;
+    private PosicionCampeonatoAdapter adapter;
+    private JSONArray posicionesCampeonatoJSONArray=null;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("print13","hemos llegado el MainActivityCampeonatoDisplay");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_categoria);
+        setContentView(R.layout.activity_main_campeonato_display);
         //Call the AsyncTask
         mContext = this;
-        Intent intentMainActivity = getIntent();
-        temporadaMainActivity=intentMainActivity.getParcelableExtra("Temporada");
-        new FetchCategoria().execute();
+        Intent intentMainActivitySelector = getIntent();
+        temporadaMainActivitySelector = intentMainActivitySelector.getParcelableExtra("Temporada");
+        categoriaMainActivitySelector = intentMainActivitySelector.getStringExtra("CategoriaString");
+        Log.i("print16",temporadaMainActivitySelector.getTemporada().toString());
+        Log.i("print17",categoriaMainActivitySelector);
+        new FetchCampeonato().execute();
 
     }
 
 
 
 
-    private class FetchCategoria extends AsyncTask<String, String, String> {
+    private class FetchCampeonato extends AsyncTask<String, String, String> {
         JSONObject response;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             //Display progress bar
-            pDialog = new ProgressDialog(MainActivityCategoria.this);
+            pDialog = new ProgressDialog(MainActivityCampeonatoDisplay.this);
             pDialog.setMessage("Loading Data.. Please wait...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
@@ -78,17 +85,19 @@ public class MainActivityCategoria extends AppCompatActivity{
         protected String doInBackground(String... params) {
             HttpJsonParser jsonParser = new HttpJsonParser();
 
-            Log.d("print10",temporadaMainActivity.getTemporada().toString());
-            urlParams.put("format","json");
-            urlParams.put("temporada",temporadaMainActivity.getTemporada().toString());
-            urlParams.put("distinct","categoria");
-            urlParams.put("page",pagination.toString());
 
+            urlParams.put("format","json");
+            urlParams.put("temporada",temporadaMainActivitySelector.getTemporada().toString());
+            urlParams.put("categoria",categoriaMainActivitySelector);
+            urlParams.put("page",pagination.toString());
+            Log.i("print19",urlParams.toString());
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
+            Log.i("print18",response.toString());
+
             try {
                 success = response.getInt(KEY_SUCCESS);
                 next=response.getString(KEY_NEXT);
-                categoriasJSONArray =  response.getJSONArray(KEY_DATA);
+                posicionesCampeonatoJSONArray =  response.getJSONArray(KEY_DATA);
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
@@ -96,15 +105,15 @@ public class MainActivityCategoria extends AppCompatActivity{
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
                     Log.i("next",next);
-                    JSONArray categoriasJSONArrayNext =  response.getJSONArray(KEY_DATA);
+                    JSONArray posicionesCampeonatoJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
-                    for (int i = 0; i < categoriasJSONArrayNext.length(); i++) {
+                    for (int i = 0; i < posicionesCampeonatoJSONArrayNext.length(); i++) {
 
-                        JSONObject jsonObject = categoriasJSONArrayNext.getJSONObject(i);
-                        //categoriasJSONArray.put(jsonObject);
+                        JSONObject jsonObject = posicionesCampeonatoJSONArrayNext.getJSONObject(i);
+                        //carrerasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", categoriasJSONArray.toString());
+                Log.i("next", posicionesCampeonatoJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -121,16 +130,20 @@ public class MainActivityCategoria extends AppCompatActivity{
                     if (success >0) {
                         try {
                             System.out.println(KEY_DATA);
-                            List<Categoria> categoriasList = new ArrayList<>();
+                            List<PosicionCampeonato> posicionesList = new ArrayList<>();
                             //Populate the EmployeeDetails list from response
-                            for (int i = 0; i<categoriasJSONArray.length();i++){
-                                Categoria categoria = new Categoria();
-                                JSONObject categoriaJSON = categoriasJSONArray.getJSONObject(i);
-                                categoria.setCategoria(categoriaJSON.getString(KEY_CATEGORIA));
-                                categoriasList.add(categoria);
+                            for (int i = 0; i<posicionesCampeonatoJSONArray.length();i++){
+                                PosicionCampeonato pos = new PosicionCampeonato();
+                                JSONObject posicionJSON = posicionesCampeonatoJSONArray.getJSONObject(i);
+                                pos.setMoto(posicionJSON.getString("moto"));
+                                pos.setPais(posicionJSON.getString("pais"));
+                                pos.setPiloto(posicionJSON.getString("piloto"));
+                                pos.setPosicion(posicionJSON.getInt("posicion"));
+                                pos.setPuntos(posicionJSON.getInt("puntos"));
+                                posicionesList.add(pos);
                             }
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
-                            adapter = new CategoriaAdapter(categoriasList,getApplicationContext());
+                            adapter = new PosicionCampeonatoAdapter(posicionesList,getApplicationContext());
                             listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
@@ -138,7 +151,7 @@ public class MainActivityCategoria extends AppCompatActivity{
                         }
 
                     } else {
-                        Toast.makeText(MainActivityCategoria.this,
+                        Toast.makeText(MainActivityCampeonatoDisplay.this,
                                 "Some error occurred while loading data",
                                 Toast.LENGTH_LONG).show();
 
@@ -148,14 +161,5 @@ public class MainActivityCategoria extends AppCompatActivity{
         }
     }
 
-    public static void changeToSelectorActivity(Categoria categoria){
-        Log.i("print8", "vamos a cambiar a mainActivitySelector");
-        Log.i("print9", temporadaMainActivity.getTemporada().toString());
-        Temporada temporadaPrueba=new Temporada(temporadaMainActivity.getTemporada());
-        Intent intentMainActivityCategoria = new Intent(mContext, MainActivitySelector.class);
-        intentMainActivityCategoria.putExtra("Temporada",temporadaPrueba);
-        intentMainActivityCategoria.putExtra("CategoriaString",categoria.getCategoria());
-        mContext.startActivity(intentMainActivityCategoria);
-    }
 
 }
