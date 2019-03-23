@@ -92,7 +92,8 @@ DATABASES = {
 
 import mongoengine
  
-test=mongoengine.connect('motoGP_db', host='mongodb+srv://apiMotoGP:apiMotoGP@motogp-spbyv.mongodb.net/motoGP_db?retryWrites=true')
+test=mongoengine.connect('motoGP_db', host='mongodb+srv://apiMotoGP:apiMotoGP@motogp-spbyv.mongodb.net/motoGP_db?retryWrites=true',connectTimeoutMS=30000, socketTimeoutMS=None, socketKeepAlive=True, connect=False, maxPoolsize=1)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -133,3 +134,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+
+# Configure Django App for Heroku.
+import django_heroku
+django_heroku.settings(locals())
