@@ -3,12 +3,28 @@ from bs4 import BeautifulSoup
 from pymongo import MongoClient 
 import multiprocessing
 import time
+import datetime
 
 
 
+def multiprocessingScraping(ano):
+    try: 
+        global conn 
+        conn = MongoClient("mongodb+srv://apiMotoGP:apiMotoGP@motogp-spbyv.mongodb.net/test?retryWrites=true",connect=False)
+        print("Connected successfully on Process:"+ multiprocessing.current_process().name)
+    except:   
+        print("Could not connect to MongoDB")
+    # database 
 
-def multiprocessingScraping(arguments):
-    print(arguments[0])
+    db = conn.motoGP_db
+    global collection 
+    collection = db.carreras 
+
+    global collection2
+    collection2= db.campeonatos
+
+    global collection3
+    collection3= db.documentacion
     categoriasUnicas=[]
     docAno=requests.get("http://www.motogp.com/es/Results+Statistics/"+str(ano)).text
     soup = BeautifulSoup(docAno,'html5lib')
@@ -53,9 +69,14 @@ def multiprocessingScraping(arguments):
                             if ("pdf" in str(test)):                             
                                 arrayPDF.append(test.get("href"))
 
-                    sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
-                    sitioEvento=sitioYFecha.split(",",1)[0]  
-                    fechaEvento=sitioYFecha.split(",",1)[1]
+                    try:
+                        sitioYFecha=soup4.find('p',{"class":"padbot5"}).text
+                        sitioEvento=sitioYFecha.split(",",1)[0]  
+                        fechaEvento=sitioYFecha.split(",",1)[1]
+                        fecha_parsed=datetime.datetime.strptime(fechaEvento,' %A, %B %d, %Y')
+                    except:
+                        fechaEvento=""
+                        fecha_parsed=""
                         
                         
                     for tablaCarrera in soup4.select("table.width100.marginbot10.fonts12"):
@@ -86,7 +107,7 @@ def multiprocessingScraping(arguments):
                                 except:
                                     kmh=0 
 
-                                collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fechaEvento, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
+                                collection.insert_one({"temporada":int(ano),"categoria":categoria,"abreviatura":abreviaturaCarrera,"titulo":tituloCarrera,"lugar":sitioEvento,"fecha":fecha_parsed, 'pos':pos,'puntos':puntos,'num':numero,'piloto':piloto,'pais':pais,'equipo':equipo,'moto':moto,'kmh':kmh,'diferencia':tiempoDiferencia})
                                     
                                     
                             except:
@@ -127,40 +148,27 @@ def multiprocessingScraping(arguments):
 
         cont=cont+1
 
+    conn.close()
+
+
+doc= requests.get("http://www.motogp.com/es/Results+Statistics/").text
+soup0=BeautifulSoup(doc,'html5lib')
+starttime = time.time()
+procesos = []
 
 
 if __name__ == '__main__':
-    print("Number of cpu : ", multiprocessing.cpu_count())
-    try: 
-        conn = MongoClient() 
-        print("Connected successfully!!!") 
-    except:   
-        print("Could not connect to MongoDB")
-
-    # database 
-
-    db = conn.motoGP_db
-    db.carreras.drop()
-    db.campeonatos.drop()
-    db.documentacion.drop()
-    collection = db.carreras 
-    collection2 = db.campeonatos
-    collection3 = db.documentacion
-    doc= requests.get("http://www.motogp.com/es/Results+Statistics/").text
-    soup0=BeautifulSoup(doc,'html5lib')
-    starttime = time.time()
-    procesos = []
-    
-    
     print("comprobacion paralela")
-    for ano in range(1949,1954):     
-        fuck=[ano,collection,collection2,collection3]
-        proceso = multiprocessing.Process(target=multiprocessingScraping, args=(fuck,))
+
+    for ano in range(1949,2018):       
+        proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
         procesos.append(proceso)
         proceso.start()
         
     for proceso in procesos:
         proceso.join()
+
+
         
     print('That took {} seconds'.format(time.time() - starttime))
 

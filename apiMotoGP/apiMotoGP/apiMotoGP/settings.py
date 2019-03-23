@@ -92,11 +92,7 @@ DATABASES = {
 
 import mongoengine
  
-mongoengine.connect(
-    db="motoGP_db",
-    host="localhost"
-)
-
+test=mongoengine.connect('motoGP_db', host='mongodb+srv://apiMotoGP:apiMotoGP@motogp-spbyv.mongodb.net/motoGP_db?retryWrites=true')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

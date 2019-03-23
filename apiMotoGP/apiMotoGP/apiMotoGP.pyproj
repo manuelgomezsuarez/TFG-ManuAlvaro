@@ -39,7 +39,7 @@
     <Compile Include="app\tests.py" />
     <Compile Include="app\urls.py" />
     <Compile Include="app\views.py" />
-    <Compile Include="app\webScraping\scraping Paralelo Polls.py" />
+    <Compile Include="app\webScraping\scraping Paralelo Atlas.py" />
     <Compile Include="app\webScraping\scraping Paralelo.py" />
     <Compile Include="app\webScraping\scraping.py" />
     <Compile Include="app\webScraping\test_scraping.py" />

@@ -4,11 +4,10 @@ from pymongo import MongoClient
 import time
 import datetime
 starttime = time.time()
-try: 
-    conn = MongoClient() 
-    print("Connected successfully!!!") 
-except:   
-    print("Could not connect to MongoDB")
+
+conn = MongoClient("mongodb+srv://apiMotoGP:apiMotoGP@motogp-spbyv.mongodb.net/test?retryWrites=true")
+print("Connected successfully!!!") 
+
 
 # database 
 db = conn.motoGP_db
@@ -18,7 +17,7 @@ db = conn.motoGP_db
 collection = db.carreras 
 collection2= db.campeonatos
 collection3= db.documentacion
-anosParaScraping=[2018]
+anosParaScraping=[1951]
 
 
 
