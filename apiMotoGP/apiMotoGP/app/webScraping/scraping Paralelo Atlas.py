@@ -160,13 +160,28 @@ procesos = []
 if __name__ == '__main__':
     print("comprobacion paralela")
 
-    for ano in range(1949,2018):       
+
+    fechaPrimera=1949
+    fechaUltima=2019
+
+    for ano in range(fechaPrimera,fechaPrimera+35):
         proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
         procesos.append(proceso)
         proceso.start()
-        
+
     for proceso in procesos:
         proceso.join()
+
+    #repetimos el bucle porque la pagina donde tenemos desplegado mongo tiene capada el número de conexiones con la base de datos a los usuarios gratuitos
+    #es necesario cerrar la conexion y reabrirla
+    for ano in range(fechaPrimera+35,fechaUltima):       
+        proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
+        procesos.append(proceso)
+        proceso.start()
+
+    for proceso in procesos:
+        proceso.join()
+
 
 
         
