@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +41,8 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
     private static String categoriaMainActivitySelector;
 
 
-    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    //private String url = "http://10.0.2.2:44541/carrera/";
+    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;
@@ -155,6 +158,7 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCampeonatoAdapter(campeonato,getApplicationContext());
                             listView.setAdapter(adapter);
+                            Utility.setListViewHeightBasedOnChildren(listView);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -168,6 +172,29 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                     }
                 }
             });
+        }
+    }
+
+    public static class Utility {
+        public static void setListViewHeightBasedOnChildren(ListView listView) {
+            ListAdapter listAdapter = listView.getAdapter();
+            if (listAdapter == null) {
+                // pre-condition
+                return;
+            }
+
+            int totalHeight = 0;
+            int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+            listView.requestLayout();
         }
     }
 

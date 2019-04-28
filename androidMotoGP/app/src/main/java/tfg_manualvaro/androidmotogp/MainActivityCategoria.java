@@ -33,8 +33,8 @@ public class MainActivityCategoria extends AppCompatActivity{
     private static Temporada temporadaMainActivity;
 
 
-    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
-    //private String url = "http://10.0.2.2:44541/campeonato/";
+    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
+    private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;

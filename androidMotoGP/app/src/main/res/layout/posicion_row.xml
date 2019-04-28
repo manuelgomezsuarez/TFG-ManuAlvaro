@@ -2,18 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/css_background"
+    android:background="#1f2325"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/posicionID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="serif"
-        android:padding="10dp"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="18sp"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/clasificacionID"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#e5e5e5"
+            android:text="clasificacionID" />
+
+        <TextView
+            android:id="@+id/pilotoID"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#e5e5e5"
+            android:textStyle="bold"
+            android:text="pilotoID" />
+
+        <TextView
+            android:id="@+id/motoID"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#e5e5e5"
+            android:text="motoID" />
+
+        <TextView
+            android:id="@+id/paisID"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:textColor="#e5e5e5"
+            android:text="paisID" />
+
+        <TextView
+            android:id="@+id/puntosID"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#e5e5e5"
+            android:text="puntosID" />
+        <!--
+        <TextView
+            android:id="@+id/posicionID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:padding="10dp"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="18sp" />
+         -->
+    </LinearLayout>
 
 
 </LinearLayout>

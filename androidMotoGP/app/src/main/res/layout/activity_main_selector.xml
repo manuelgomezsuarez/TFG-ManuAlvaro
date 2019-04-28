@@ -1,33 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_selector"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#161712"
     android:paddingLeft="8dp"
     android:paddingTop="8dp"
     android:paddingRight="8dp"
     android:paddingBottom="8dp"
+
     tools:context="tfg_manualvaro.androidmotogp.MainActivitySelector">
 
 
-    <Button
-        android:id="@+id/carreraButton"
+    <ImageView
+        android:id="@+id/imageView10"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
-        android:onClick="BuscarCarreras"
-        android:text="Carreras" />
+        android:layout_height="234dp"
+        app:srcCompat="@drawable/background" />
 
-    <Button
-        android:id="@+id/campeonatoButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="179dp"
-        android:onClick="BuscarCampeonato"
-        android:text="Campeonato" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/carreraButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:onClick="BuscarCarreras"
+                android:text="Carreras" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="top|center"
+            android:orientation="vertical"
+            android:paddingTop="40dp">
+
+            <Button
+                android:id="@+id/campeonatoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:onClick="BuscarCampeonato"
+                android:text="Campeonato" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </RelativeLayout>

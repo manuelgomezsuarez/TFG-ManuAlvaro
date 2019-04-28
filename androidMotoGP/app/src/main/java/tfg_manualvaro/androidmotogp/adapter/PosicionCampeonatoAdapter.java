@@ -43,10 +43,27 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
         final PosicionCampeonato pos = dataSet.getPosiciones().get(position);
         if (pos != null) {
             //Text View references
-            TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
+            //TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
+            TextView clasificacionID = (TextView) v.findViewById(R.id.clasificacionID);
+            TextView pilotoID = (TextView) v.findViewById(R.id.pilotoID);
+            TextView motoID = (TextView) v.findViewById(R.id.motoID);
+            TextView paisID = (TextView) v.findViewById(R.id.paisID);
+            TextView puntosID = (TextView) v.findViewById(R.id.puntosID);
+
 
 
             //Updating the text views
+            Log.i("print30", clasificacionID.getText().toString());
+            clasificacionID.setText(pos.getPosicion().toString());
+            if(pos.getPosicion()<=10){
+                clasificacionID.setTextColor(Color.parseColor("#009B2B"));
+            }
+
+            pilotoID.setText(pos.getPiloto().toString());
+            motoID.setText(pos.getMoto().toString());
+            paisID.setText(pos.getPais().toString());
+            puntosID.setText(pos.getPuntos().toString());
+            /*
             posicionTextView.setText(pos.getPosicion() +". "+
                      pos.getPiloto()+"\n"+
                     "Moto: "+ pos.getMoto()+"\n"+
@@ -71,6 +88,7 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
                     }
                 }
             });
+            */
 
         }
 

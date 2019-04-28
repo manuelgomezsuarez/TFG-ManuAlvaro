@@ -36,8 +36,8 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     private static String categoriaMainActivitySelector;
     private static String tituloCarrera;
 
-    private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
-    //private String url = "http://10.0.2.2:44541/carrera/";
+    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
+    private String url = "https://motogp-api.herokuapp.com/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
 
     private ProgressDialog pDialog;

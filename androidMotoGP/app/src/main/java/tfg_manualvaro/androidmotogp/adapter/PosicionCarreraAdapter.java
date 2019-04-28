@@ -42,11 +42,13 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
         final PosicionCarrera pos = dataSet.getPosiciones().get(position);
         if (pos != null) {
             //Text View references
-            TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
+            //TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
 
 
             //Updating the text views
+            /*
             posicionTextView.setText(pos.getPosicion() +". "+
+
                      pos.getPiloto()+"\n"+
                     "Puntos: "+ pos.getPuntos()+"\n"+
                     "Num: "+ pos.getNumero()+"\n"+
@@ -75,6 +77,7 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
                     }
                 }
             });
+            */
 
         }
 
