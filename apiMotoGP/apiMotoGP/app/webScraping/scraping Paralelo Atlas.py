@@ -14,6 +14,7 @@ def multiprocessingScraping(ano):
         print("Connected successfully on Process:"+ multiprocessing.current_process().name)
     except:   
         print("Could not connect to MongoDB")
+    # database 
 
     db = conn.motoGP_db
     global collection 
@@ -119,9 +120,12 @@ def multiprocessingScraping(ano):
     campeonatos = soup.find('div', id='champ_results')
     cont=0
     for li in campeonatos.find_all('li'):
+        
+           
         docCampeonato=requests.get("http://www.motogp.com"+li.find('a').get('href')).text
         soupCampeonato = BeautifulSoup(docCampeonato,'html5lib')
         tablaCampeonato=soupCampeonato.find("table", {"class":"width100"})
+
 
         for tr in tablaCampeonato.select("tr")[1:]:
             #Aquí deberiamos comprobar que existen entradas en la tabla.
@@ -156,10 +160,7 @@ procesos = []
 if __name__ == '__main__':
     print("comprobacion paralela")
 
-    fechaPrimera=1949
-    fechaUltima=2019
-
-    for ano in range(fechaPrimera,fechaPrimera+35):       
+    for ano in range(1949,2018):       
         proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
         procesos.append(proceso)
         proceso.start()
@@ -167,15 +168,7 @@ if __name__ == '__main__':
     for proceso in procesos:
         proceso.join()
 
-    #repetimos el bucle porque la pagina donde tenemos desplegado mongo tiene capada el número de conexiones con la base de datos a los usuarios gratuitos
-    #es necesario cerrar la conexion y reabrirla
-    for ano in range(fechaPrimera+35,fechaUltima):       
-        proceso = multiprocessing.Process(target=multiprocessingScraping, args=(ano,))
-        procesos.append(proceso)
-        proceso.start()
-        
-    for proceso in procesos:
-        proceso.join()
+
         
     print('That took {} seconds'.format(time.time() - starttime))
 

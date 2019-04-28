@@ -102,6 +102,7 @@ class PosicionDocumentacionViewSet(meviewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Documentacion.objects.all() 
+        print(queryset)
         filtering_kwargs = self.get_kwargs_for_filtering() # get the fields with values for filtering 
         distinctUrl= self.request.query_params.get('distinct', None)
         if distinctUrl is not None:
