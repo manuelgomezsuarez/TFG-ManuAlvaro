@@ -2,14 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main_selector"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#161712"
     android:orientation="vertical"
-
-
-    tools:context="tfg_manualvaro.androidmotogp.MainActivitySelector">
+    tools:context="tfg_manualvaro.androidmotogp.MainActivityInicial">
 
 
     <ScrollView
@@ -29,19 +27,41 @@
                 android:layout_height="200dp"
                 app:srcCompat="@drawable/background" />
 
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:text="Bienvenido. Utilice los filtros a su disposicion para buscar las carreras y campeonatos que usted desee "
+                android:textColor="#e5e5e5"
+                android:textStyle="bold" />
+
             <Button
-                android:id="@+id/carreraButton"
+                android:id="@+id/filtroBasicoButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:layout_marginLeft="70dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="70dp"
-                android:onClick="BuscarCarreras"
-                android:text="Carreras" />
+                android:onClick="FiltroBasico"
+                android:text="Filtro Básico" />
 
             <Button
-                android:id="@+id/campeonatoButton"
+                android:id="@+id/filtroAvanzandoButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="70dp"
+                android:onClick="BuscarCampeonato"
+                android:text="Filtro Avanzando" />
+
+            <Button
+                android:id="@+id/ultimaCarreraButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -50,12 +70,14 @@
                 android:layout_marginRight="70dp"
                 android:layout_marginBottom="30dp"
                 android:onClick="BuscarCampeonato"
-                android:text="Campeonato" />
+                android:text="Ultima Carrera" />
 
 
         </LinearLayout>
 
 
     </ScrollView>
+
+
 
 </LinearLayout>

@@ -14,7 +14,7 @@
 
             <TextView
                 android:id="@+id/clasificacionID"
-                android:layout_width="40dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@+id/pilotoID"
-                android:layout_width="140dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/motoID"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/paisID"
-                android:layout_width="65dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -52,11 +52,29 @@
 
             <TextView
                 android:id="@+id/puntosID"
-                android:layout_width="60dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="puntosID"
+                android:textColor="#e5e5e5" />
+
+            <TextView
+                android:id="@+id/kmhID"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="kmhID"
+                android:textColor="#e5e5e5" />
+
+            <TextView
+                android:id="@+id/diferenciaID"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="diferenciaID"
                 android:textColor="#e5e5e5" />
 
         </LinearLayout>

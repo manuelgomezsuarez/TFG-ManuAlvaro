@@ -11,42 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivityCategoria" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivitySelector" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivityCarrera" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-        <activity android:name=".MainActivityCampeonatoDisplay" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivityCarreraDisplay" >
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivityCategoria"/>
+        <activity android:name=".MainActivitySelector"/>
+        <activity android:name=".MainActivityCarrera"/>
+        <activity android:name=".MainActivityCampeonatoDisplay"/>
+        <activity android:name=".MainActivityCarreraDisplay"/>
+        <activity android:name=".MainActivityInicial" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

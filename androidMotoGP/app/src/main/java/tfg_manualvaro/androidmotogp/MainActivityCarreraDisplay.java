@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,9 +130,8 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
             pDialog.dismiss();
             runOnUiThread(new Runnable() {
                 public void run() {
-                    TextView temporadaTextView = (TextView) findViewById(R.id.textoTemporada);
                     TextView categoriaTextView = (TextView) findViewById(R.id.textoCategoria);
-                    temporadaTextView.setText(temporadaMainActivitySelector.getTemporada().toString());
+
                     categoriaTextView.setText(categoriaMainActivitySelector);
                     ListView listView =(ListView)findViewById(R.id.objectList);
                     if (success >0) {
@@ -155,12 +157,15 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                                 carrera.setTitulo(posicionJSON.getString("titulo"));
                                 posicionesList.add(pos);
                             }
+
                             TextView lugarTextView = (TextView) findViewById(R.id.textoLugar);
                             TextView fechaTextView = (TextView) findViewById(R.id.textoFecha);
-                            TextView tituloTextView = (TextView) findViewById(R.id.textoTitulo);
+                            //TextView tituloTextView = (TextView) findViewById(R.id.textoTitulo);
+                            TextView abreviaturaTextView = (TextView) findViewById(R.id.textoAbreviatura);
                             lugarTextView.setText(carrera.getLugar());
-                            fechaTextView.setText(carrera.getFecha());
-                            tituloTextView.setText(carrera.getTitulo());
+                            fechaTextView.setText(carrera.getFecha().split("T")[0]);
+                            //tituloTextView.setText(carrera.getTitulo());
+                            abreviaturaTextView.setText(carrera.getTitulo());
                             categoriaTextView.setText(categoriaMainActivitySelector);
 
 
@@ -170,6 +175,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCarreraAdapter(carrera,getApplicationContext());
                             listView.setAdapter(adapter);
+                            MainActivityCarreraDisplay.Utility.setListViewHeightBasedOnChildren(listView);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -186,5 +192,28 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
         }
     }
 
+
+    public static class Utility {
+        public static void setListViewHeightBasedOnChildren(ListView listView) {
+            ListAdapter listAdapter = listView.getAdapter();
+            if (listAdapter == null) {
+                // pre-condition
+                return;
+            }
+
+            int totalHeight = 0;
+            int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.AT_MOST);
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+        }
+    }
 
 }

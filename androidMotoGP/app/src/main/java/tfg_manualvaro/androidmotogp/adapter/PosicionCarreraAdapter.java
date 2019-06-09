@@ -37,47 +37,33 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
         View v = convertView;
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.posicion_row, null);
+            v = inflater.inflate(R.layout.posicion_carrera_row, null);
         }
         final PosicionCarrera pos = dataSet.getPosiciones().get(position);
         if (pos != null) {
             //Text View references
-            //TextView posicionTextView = (TextView) v.findViewById(R.id.posicionID);
+            TextView clasificacionID = (TextView) v.findViewById(R.id.clasificacionID);
+            TextView pilotoID = (TextView) v.findViewById(R.id.pilotoID);
+            TextView motoID = (TextView) v.findViewById(R.id.motoID);
+            TextView paisID = (TextView) v.findViewById(R.id.paisID);
+            TextView puntosID = (TextView) v.findViewById(R.id.puntosID);
+            TextView kmhID = (TextView) v.findViewById(R.id.kmhID);
+            TextView diferenciaID = (TextView) v.findViewById(R.id.diferenciaID);
 
 
             //Updating the text views
-            /*
-            posicionTextView.setText(pos.getPosicion() +". "+
+            Log.i("print30", clasificacionID.getText().toString());
+            clasificacionID.setText(pos.getPosicion().toString());
+            if(pos.getPosicion()<=3 && pos.getPosicion()>0){
+                clasificacionID.setTextColor(Color.parseColor("#009B2B"));
+            }
 
-                     pos.getPiloto()+"\n"+
-                    "Puntos: "+ pos.getPuntos()+"\n"+
-                    "Num: "+ pos.getNumero()+"\n"+
-                    "Pais: "+ pos.getPais()+"\n"+
-                    "Equipo: "+ pos.getEquipo()+"\n"+
-                    "Moto: "+ pos.getMoto()+"\n"+
-                    "KM/H: "+ pos.getKmh()+"\n"+
-                    "Diferencia: "+ pos.getDiferencia()
-
-            );
-            posicionTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View viewIn) {
-                    try {
-                        TextView tv= (TextView) viewIn.findViewById(R.id.posicionID);
-
-                        //alter text of textview widget
-
-
-                        //MainActivity.changeToCarreraActivity(carrera);
-
-                        //assign the textview forecolor
-                        tv.setTextColor(Color.RED);
-                    } catch (Exception except) {
-                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
-                    }
-                }
-            });
-            */
+            pilotoID.setText(pos.getPiloto().toString());
+            motoID.setText(pos.getMoto().toString());
+            paisID.setText(pos.getPais().toString());
+            puntosID.setText(pos.getPuntos().toString());
+            kmhID.setText(pos.getKmh().toString());
+            diferenciaID.setText(pos.getDiferencia().toString());
 
         }
 

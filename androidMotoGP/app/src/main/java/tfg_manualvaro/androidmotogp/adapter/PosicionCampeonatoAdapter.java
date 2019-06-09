@@ -18,10 +18,6 @@ import tfg_manualvaro.androidmotogp.models.Carrera;
 import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 
 
-/**
- * Created by Abhi on 03 Sep 2017 008.
- */
-
 public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> {
 
     private CampeonatoModelo dataSet;
@@ -55,7 +51,7 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
             //Updating the text views
             Log.i("print30", clasificacionID.getText().toString());
             clasificacionID.setText(pos.getPosicion().toString());
-            if(pos.getPosicion()<=10){
+            if(pos.getPosicion()<=3 && pos.getPosicion()>0){
                 clasificacionID.setTextColor(Color.parseColor("#009B2B"));
             }
 
@@ -63,32 +59,6 @@ public class PosicionCampeonatoAdapter extends ArrayAdapter<PosicionCampeonato> 
             motoID.setText(pos.getMoto().toString());
             paisID.setText(pos.getPais().toString());
             puntosID.setText(pos.getPuntos().toString());
-            /*
-            posicionTextView.setText(pos.getPosicion() +". "+
-                     pos.getPiloto()+"\n"+
-                    "Moto: "+ pos.getMoto()+"\n"+
-                    "Pais: "+ pos.getPais()+"\n"+
-                    "Puntos: "+ pos.getPuntos()
-            );
-            posicionTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View viewIn) {
-                    try {
-                        TextView tv= (TextView) viewIn.findViewById(R.id.posicionID);
-
-                        //alter text of textview widget
-
-
-                        //MainActivity.changeToCarreraActivity(carrera);
-
-                        //assign the textview forecolor
-                        tv.setTextColor(Color.RED);
-                    } catch (Exception except) {
-                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
-                    }
-                }
-            });
-            */
 
         }
 

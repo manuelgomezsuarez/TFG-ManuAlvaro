@@ -1,57 +1,301 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:paddingTop="8dp"
-    android:paddingRight="8dp"
-    android:paddingBottom="8dp"
     android:background="#161712"
+    android:orientation="vertical"
     tools:context="tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay">
 
-    <TextView
-        android:id="@+id/textoTemporada"
-        android:layout_width="334dp"
-        android:layout_height="130dp"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/textoCategoria"
-        android:layout_width="334dp"
-        android:layout_height="130dp"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
-    <TextView
-        android:id="@+id/textoLugar"
-        android:layout_width="334dp"
-        android:layout_height="130dp"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <TextView
-        android:id="@+id/textoFecha"
-        android:layout_width="334dp"
-        android:layout_height="130dp"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textoTitulo"
-        android:layout_width="334dp"
-        android:layout_height="130dp"
-        android:layout_alignParentTop="true"
-        android:text="TextView" />
-    <ListView
-        android:id="@+id/objectList"
-        android:layout_width="368dp"
-        android:layout_height="345dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="5dp"
-        android:scrollbars="vertical" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-</RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:contentDescription="TODO"
+                        app:srcCompat="@drawable/carrera" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="115dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="15dp"
+                            android:text="Información General"
+                            android:textColor="#e5e5e5"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/calendar" />
+
+                        <TextView
+                            android:id="@+id/textoFecha"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/motor" />
+
+                        <TextView
+                            android:id="@+id/textoCategoria"
+                            android:layout_width="62dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="62dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/file" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="5dp">
+
+                        <ImageView
+                            android:id="@+id/imagenLugar"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/place" />
+
+                        <TextView
+                            android:id="@+id/textoLugar"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
+
+                        <ImageView
+                            android:id="@+id/imagenFecha"
+                            android:layout_width="58dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/titulo" />
+
+                        <TextView
+                            android:id="@+id/textoAbreviatura"
+                            android:layout_width="150dp"
+                            android:layout_height="34dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingLeft="15dp"
+                            android:text="Clasificación"
+                            android:textColor="#e5e5e5"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imageView11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="7"
+                            android:adjustViewBounds="false"
+                            android:cropToPadding="false"
+                            app:srcCompat="@drawable/orange_arrow2" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:fillViewport="true"
+                android:layout_height="match_parent"
+                android:fadingEdge="vertical|horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/barra"
+                        android:orientation="horizontal"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp">
+
+                        <ImageView
+                            android:id="@+id/racing"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/racing" />
+
+                        <ImageView
+                            android:id="@+id/piloto"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="0dp"
+
+                            app:srcCompat="@drawable/piloto" />
+
+                        <ImageView
+                            android:id="@+id/motorbike"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/motorbike" />
+
+                        <ImageView
+                            android:id="@+id/pais"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/pais" />
+
+                        <ImageView
+                            android:id="@+id/puntos"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/puntos" />
+
+                        <ImageView
+                            android:id="@+id/kmh"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/kmh" />
+
+                        <ImageView
+                            android:id="@+id/diferencia"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_weight="1"
+
+                            app:srcCompat="@drawable/diferencia" />
+
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/objectList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</LinearLayout>
