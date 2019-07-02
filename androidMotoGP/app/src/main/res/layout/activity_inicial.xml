@@ -27,8 +27,8 @@
                 android:layout_height="200dp"
                 app:srcCompat="@drawable/background" />
 
-            <EditText
-                android:id="@+id/editText"
+            <TextView
+                android:id="@+id/mensaje"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
@@ -44,21 +44,10 @@
                 android:layout_height="match_parent"
 
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
                 android:onClick="FiltroBasico"
                 android:text="Filtro Básico" />
-
-            <Button
-                android:id="@+id/filtroAvanzandoButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="70dp"
-                android:onClick="BuscarCampeonato"
-                android:text="Filtro Avanzando" />
 
             <Button
                 android:id="@+id/ultimaCarreraButton"
@@ -66,11 +55,39 @@
                 android:layout_height="match_parent"
 
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
-                android:layout_marginBottom="30dp"
                 android:onClick="BuscarCampeonato"
                 android:text="Ultima Carrera" />
+
+            <Button
+                android:id="@+id/buscarPilotoButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="70dp"
+                android:onClick="BuscarPiloto"
+                android:text="Buscar Piloto" />
+
+            <EditText
+                android:id="@+id/textoPiloto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Introduzca el nombre del piloto"
+                android:inputType="textPersonName"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:textStyle="normal"
+                android:visibility="invisible"
+                tools:maxLines="1" />
 
 
         </LinearLayout>

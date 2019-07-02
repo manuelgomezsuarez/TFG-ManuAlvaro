@@ -4,9 +4,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 
@@ -21,6 +25,7 @@ public class MainActivityInicial extends AppCompatActivity{
     private static final String KEY_DATA = "results";
     private static final String KEY_CATEGORIA = "categoria";
     private static final String KEY_NEXT = "next";
+
 
     //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
     private String url = "https://motogp-api.herokuapp.com/campeonato/";
@@ -66,6 +71,22 @@ public class MainActivityInicial extends AppCompatActivity{
         Log.i("print8", "vamos a cambiar a mainActivityCampeonatoDisplay");
         Intent intentMainActivityCampeonato = new Intent(mContext, MainActivityCampeonatoDisplay.class);
         mContext.startActivity(intentMainActivityCampeonato);
+    }
+
+    public  void BuscarPiloto(View view){
+        EditText nombrePiloto = (EditText) findViewById(R.id.textoPiloto);
+        String nombre= nombrePiloto.getText().toString();
+        Log.i("print30", nombre);
+        if (nombre.length()>0){
+            Log.i("print8", "vamos a cambiar a mainActivityCampeonatoDisplay");
+            Intent intentMainActivityInicial = new Intent(mContext, MainActivityPiloto.class);
+            intentMainActivityInicial.putExtra("nombrePiloto",nombre);
+            mContext.startActivity(intentMainActivityInicial);
+        }
+        else{
+            nombrePiloto.setVisibility(View.VISIBLE);
+        }
+
     }
 
 

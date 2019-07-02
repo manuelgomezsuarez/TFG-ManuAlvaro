@@ -13,6 +13,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity"/>
         <activity android:name=".MainActivityCategoria"/>
+        <activity android:name=".MainActivityPiloto"/>
+        <activity android:name=".MainActivityPilotoDisplay"/>
         <activity android:name=".MainActivitySelector"/>
         <activity android:name=".MainActivityCarrera"/>
         <activity android:name=".MainActivityCampeonatoDisplay"/>
