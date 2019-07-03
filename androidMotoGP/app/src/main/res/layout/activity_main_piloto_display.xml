@@ -93,6 +93,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -121,9 +122,19 @@
                     android:text=""
                     android:textColor="#e5e5e5"
                     android:textStyle="bold"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
             </LinearLayout>
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barchart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp">
+
+
+            </com.github.mikephil.charting.charts.BarChart>
 
         </LinearLayout>
 

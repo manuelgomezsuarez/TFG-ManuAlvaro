@@ -3,19 +3,26 @@ package tfg_manualvaro.androidmotogp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 
+import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -26,6 +33,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import tfg_manualvaro.androidmotogp.adapter.PosicionCarreraAdapter;
 import tfg_manualvaro.androidmotogp.models.Piloto;
@@ -147,6 +160,49 @@ public class MainActivityPilotoDisplay extends AppCompatActivity{
                             Picasso.with(mContext).load(imageUri).resize(300, 300).into(imagenPiloto);
 
                             ImageView entry = (ImageView) findViewById(R.id.infoPiloto);
+
+                            BarChart chart = findViewById(R.id.barchart);
+
+
+
+                            chart.getAxisLeft().setTextColor(Color.WHITE); // left y-axis
+                            chart.getAxisLeft().setTextSize(15);
+                            chart.getXAxis().setTextColor(Color.WHITE);
+                            chart.getXAxis().setTextSize(15);
+                            chart.getLegend().setTextColor(Color.WHITE);
+                            chart.getLegend().setTextSize(12);
+                            chart.animateY(1500);
+                            chart.getAxisRight().setDrawLabels(false);
+                            chart.setDescriptionColor(Color.WHITE);
+                            chart.setDescriptionTextSize(15);
+                            chart.setDescription("grafico de ejemplo");
+
+                            List<BarEntry> entries = new ArrayList<>();
+
+                            BarDataSet dataSet = new BarDataSet(entries, "Numero de victorias");
+                            ArrayList<String> labels = new ArrayList<String>();
+
+                            JSONArray temporadasPilotoJSONArray= pilotoJSON.getJSONArray("datosAnuales");
+
+                            for (int i = 0; i < temporadasPilotoJSONArray.length(); i++) {
+
+                                JSONObject temporadaPiloto = temporadasPilotoJSONArray.getJSONObject(i);
+                                String temporada=temporadaPiloto.keys().next();
+                                JSONObject datosTemporadaPiloto=temporadaPiloto.getJSONObject(temporada);
+                                //primer valor es altura de la y, segundo valor es el indice de la tabla
+                                entries.add(new BarEntry(datosTemporadaPiloto.getInt("num_victorias"),i));
+                                labels.add(temporada);
+                            }
+
+                            dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+
+                            BarData data = new BarData(labels,dataSet);
+                            chart.setData(data);
+                            chart.invalidate(); // refresh
+
+
+
+
 
                             entry.setOnClickListener(new View.OnClickListener() {
 
