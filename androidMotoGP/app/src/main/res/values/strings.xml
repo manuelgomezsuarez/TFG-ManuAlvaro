@@ -2,4 +2,14 @@
     <string name="app_name">androidMotoGP</string>
     <string name="campeonato">CAMPEONATO</string>
     <string name="todo">TODO</string>
+
+    <string name="tablaPilotoMenu">Filtros</string>
+    <string-array name="tablaPilotoMenuOpciones">
+        <item>Número de Victorias</item>
+        <item>Número de Podios</item>
+        <item>Categoría</item>
+        <item>Velocidad Media</item>
+        <item>Moto</item>
+        <item>Posicion</item>
+    </string-array>
 </resources>

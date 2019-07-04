@@ -11,18 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".MainActivityCategoria"/>
-        <activity android:name=".MainActivityPiloto"/>
-        <activity android:name=".MainActivityPilotoDisplay"/>
-        <activity android:name=".MainActivitySelector"/>
-        <activity android:name=".MainActivityCarrera"/>
-        <activity android:name=".MainActivityCampeonatoDisplay"/>
-        <activity android:name=".MainActivityCarreraDisplay"/>
-        <activity android:name=".MainActivityInicial" >
+        <activity android:name=".MainActivity" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityCategoria" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityPiloto" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityPilotoDisplay" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivitySelector" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityCarrera" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityCampeonatoDisplay" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityCarreraDisplay" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityInicial" android:configChanges="screenSize|orientation" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
