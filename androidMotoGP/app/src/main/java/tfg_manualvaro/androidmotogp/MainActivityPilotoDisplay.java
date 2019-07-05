@@ -82,8 +82,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
     private BarChart chart;
 
-    private PieChart piechart;
-
+    private PieChart piechartVictoriasPorCategoria;
+    private PieChart piechartVictoriasPorMoto;
+    private BarData dataBarchar;
 
 
     @Override
@@ -108,6 +109,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         chart.getAxisRight().setDrawLabels(false);
         chart.setDescriptionColor(Color.GREEN);
         chart.setDescriptionTextSize(15);
+
 
 
 
@@ -172,14 +174,19 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                         dataSet.setStackLabels(new String[]{"Posiciones 2ª o 3ª","Número Victorias"});
 
                     }else{
-                        entries.add(new BarEntry(datosTemporadaPiloto.getInt(filtros.get(filtro)[0]), i));
+                        Float velocidadMediaJSON = (float)datosTemporadaPiloto.getDouble(filtros.get(filtro)[0]);
+                        entries.add(new BarEntry(velocidadMediaJSON, i));
                         dataSet = new BarDataSet(entries, filtro);
                         dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+                        Log.i("print39",Double.toString(datosTemporadaPiloto.getDouble(filtros.get(filtro)[0])));
 
                     }
 
-                    BarData data = new BarData(labels, dataSet);
-                    chart.setData(data);
+                    dataBarchar = new BarData(labels, dataSet);
+                    dataBarchar.setValueTextSize(0);
+
+                    dataBarchar.setValueTextColor(Color.WHITE);
+                    chart.setData(dataBarchar);
                     chart.invalidate(); // refresh
                 }
 
@@ -291,12 +298,16 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 chart.setDescription(filtros.get(filtro)[1]);
                                 List<BarEntry> entries = new ArrayList<>();
                                 BarDataSet dataSetBarchart = new BarDataSet(entries, filtro);
+
                                 ArrayList<String> labels = new ArrayList<String>();
                                 Log.i("print20", "JSON recuperado");
 
                                 String categoria;
+                                String moto;
                                 Integer victorias;
+
                                 final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
+                                final HashMap<String,Integer>victoriasPorMoto=new HashMap<>();
                                 for (int i = 0; i < temporadasPilotoJSONArray.length(); i++) {
 
                                     JSONObject temporadaPiloto = null;
@@ -310,10 +321,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     labels.add(temporada);
                                     //*************************************************barchar
 
-
-                                    //piechar*************************************************************
-                                    categoria=datosTemporadaPiloto.getString("categoria");
                                     victorias=datosTemporadaPiloto.getInt("num_victorias");
+                                    //piechartVictoriasPorCategoria*************************************************************
+                                    categoria=datosTemporadaPiloto.getString("categoria");
                                     //si el map no contiene la categoria la añadimos con las victorias
                                     if(!victoriasPorCategoria.containsKey(categoria)){
                                         victoriasPorCategoria.put(categoria,victorias);
@@ -323,105 +333,211 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         victoriasPorCategoria.put(categoria,victoriasPorCategoria.get(categoria) +victorias);
                                     }
 
-                                    //************************************************************piechart
+                                    //************************************************************piechartVictoriasPorCategoria
 
+
+                                    //piechartVictoriasPorMoto*************************************************************
+                                    moto=datosTemporadaPiloto.getString("moto");
+
+                                    //si el map no contiene la categoria la añadimos con las victorias
+                                    if(!victoriasPorMoto.containsKey(moto)){
+                                        victoriasPorMoto.put(moto,victorias);
+                                    }
+                                    //si ya la contiene le sumamos los puntos
+                                    else{
+                                        victoriasPorMoto.put(moto,victoriasPorMoto.get(moto) +victorias);
+                                    }
+
+                                    //************************************************************piechartVictoriasPorMoto
 
 
 
 
                                 }
                                 dataSetBarchart.setColors(ColorTemplate.LIBERTY_COLORS);
-                                BarData dataBarchar = new BarData(labels, dataSetBarchart);
+                                dataBarchar = new BarData(labels, dataSetBarchart);
+                                dataBarchar.setValueTextSize(0);
+                                dataBarchar.setValueTextColor(Color.WHITE);
                                 chart.setData(dataBarchar);
                                 chart.invalidate(); // refresh
 
 
-                                //piechart****************
-
-
-                                piechart = (PieChart) findViewById(R.id.piechart);
-
-                                //   mChart.setUsePercentValues(true);
-                                piechart.setDescription("Historico Victorias");
-                                piechart.setDescriptionColor(Color.GREEN);
-                                piechart.setDescriptionTextSize(15);
-
-                                piechart.setRotationEnabled(true);
-
-                                int[] yValues = {21, 2, 2};
-                                final String[] xValues = {"Present Days", "Absents", "Leaves"};
-
-                                // colors for different sections in pieChart
-                                int[] MY_COLORS = {Color.RED,Color.GREEN,Color.BLUE};
-
-
-                                piechart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                                chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 
                                     @Override
                                     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
                                         // display msg when value selected
                                         if (e == null)
                                             return;
-
+                                        dataBarchar.setValueTextSize(12);
                                         Toast.makeText(MainActivityPilotoDisplay.this,
-                                                 e.getVal()+ " victorias en esa categoría", Toast.LENGTH_SHORT).show();
+                                                " El valor en la temporada "+ dataBarchar.getXVals().get(e.getXIndex())+" es de: "+e.getVal(), Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
                                     public void onNothingSelected() {
-
+                                        dataBarchar.setValueTextSize(0);
                                     }
                                 });
 
-                                ArrayList<Entry> entriesPiechart = new ArrayList<Entry>();
-                                ArrayList<String> labelsPiechart = new ArrayList<String>();
+
+                                //piechartVictoriasPorCategoria****************
+
+
+                                piechartVictoriasPorCategoria = (PieChart) findViewById(R.id.piechartVictoriasPorCategoria);
+
+                                //   mChart.setUsePercentValues(true);
+                                piechartVictoriasPorCategoria.setDescription("Por categoría");
+                                piechartVictoriasPorCategoria.setDescriptionColor(Color.GREEN);
+                                piechartVictoriasPorCategoria.setDescriptionTextSize(15);
+                                piechartVictoriasPorCategoria.setDrawCenterText(true);
+                                piechartVictoriasPorCategoria.setRotationEnabled(true);
+                                piechartVictoriasPorCategoria.setDescriptionPosition(440,480);
+
+
+                                ArrayList<Entry> entriesPiechartVictoriasPorCategoria = new ArrayList<Entry>();
+                                ArrayList<String> labelsPiechartVictoriasPorCategoria = new ArrayList<String>();
 
                                 Integer contadorVictoriasPorCategoriaLoop=0;
                                 for (Map.Entry<String, Integer> relacionCategoriaVictorias : victoriasPorCategoria.entrySet()) {
-                                    entriesPiechart.add(new Entry(relacionCategoriaVictorias.getValue(), contadorVictoriasPorCategoriaLoop));
-                                    labelsPiechart.add(relacionCategoriaVictorias.getKey());
+                                    entriesPiechartVictoriasPorCategoria.add(new Entry(relacionCategoriaVictorias.getValue(), contadorVictoriasPorCategoriaLoop));
+                                    labelsPiechartVictoriasPorCategoria.add(relacionCategoriaVictorias.getKey());
                                     contadorVictoriasPorCategoriaLoop++;
                                 }
 
                                 // create pieDataSet
-                                PieDataSet dataSetPiechart = new PieDataSet(entriesPiechart, "");
-                                dataSetPiechart.setSliceSpace(1);
-                                dataSetPiechart.setSelectionShift(10);
+                                PieDataSet dataSetPiechartVictoriasPorCategoria = new PieDataSet(entriesPiechartVictoriasPorCategoria, "");
+                                dataSetPiechartVictoriasPorCategoria.setSliceSpace(1);
+                                dataSetPiechartVictoriasPorCategoria.setSelectionShift(10);
+                                dataSetPiechartVictoriasPorCategoria.setVisible(true);
 
-                                // adding colors
-                                ArrayList<Integer> coloresPiechart = new ArrayList<Integer>();
-                                // Added My Own colors
-                                for (int c : MY_COLORS)
-                                    coloresPiechart.add(c);
-                                dataSetPiechart.setColors(ColorTemplate.PASTEL_COLORS);
+                                dataSetPiechartVictoriasPorCategoria.setColors(ColorTemplate.PASTEL_COLORS);
 
                                 //  create pie data object and set xValues and yValues and set it to the pieChart
-                                PieData dataPiechart = new PieData(labelsPiechart, dataSetPiechart);
-                                //   data.setValueFormatter(new DefaultValueFormatter());
-                                //   data.setValueFormatter(new PercentFormatter());
+                                final PieData dataPiechartVictoriasPorCategoria = new PieData(labelsPiechartVictoriasPorCategoria, dataSetPiechartVictoriasPorCategoria);
 
-                                dataPiechart.setValueTextSize(12);
-                                dataPiechart.setValueTextColor(Color.WHITE);
-
+                                dataPiechartVictoriasPorCategoria.setValueTextSize(0);
+                                dataPiechartVictoriasPorCategoria.setValueTextColor(Color.WHITE);
                                 // Legends to show on bottom of the graph
-                                Legend l = piechart.getLegend();
-                                l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-                                l.setXEntrySpace(7);
-                                l.setYEntrySpace(5);
+                                Legend l = piechartVictoriasPorCategoria.getLegend();
+                                //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                                l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+                                l.setXEntrySpace(4);
+                                l.setYEntrySpace(3);
                                 l.setTextColor(Color.WHITE);
                                 l.setTextSize(12);
 
-                                piechart.setData(dataPiechart);
+
+                                piechartVictoriasPorCategoria.setData(dataPiechartVictoriasPorCategoria);
                                 // undo all highlights
-                                piechart.highlightValues(null);
+                                piechartVictoriasPorCategoria.highlightValues(null);
                                 // refresh/update pie chart
-                                piechart.invalidate();
-                                // animate piechart
-                                piechart.animateXY(1500, 3000);
-
-                                //*************************piechart
+                                piechartVictoriasPorCategoria.invalidate();
+                                // animate piechartVictoriasPorCategoria
+                                piechartVictoriasPorCategoria.animateXY(1500, 3000);
 
 
+
+
+                                piechartVictoriasPorCategoria.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                    @Override
+                                    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                        // display msg when value selected
+                                        if (e == null)
+                                            return;
+                                        dataPiechartVictoriasPorCategoria.setValueTextSize(12);
+                                        Toast.makeText(MainActivityPilotoDisplay.this,
+                                                (int)e.getVal()+ " victorias en la categoría "+dataPiechartVictoriasPorCategoria.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected() {
+                                        dataPiechartVictoriasPorCategoria.setValueTextSize(0);
+                                    }
+                                });
+
+                                //*************************piechartVictoriasPorCategoria
+
+
+                                //piechartVictoriasPorMoto*********************************************************
+
+
+                                piechartVictoriasPorMoto = (PieChart) findViewById(R.id.piechartVictoriasPorMoto);
+
+                                //   mChart.setUsePercentValues(true);
+                                piechartVictoriasPorMoto.setDescription("Por moto");
+                                piechartVictoriasPorMoto.setDescriptionColor(Color.GREEN);
+                                piechartVictoriasPorMoto.setDescriptionTextSize(15);
+                                piechartVictoriasPorMoto.setDrawCenterText(true);
+                                piechartVictoriasPorMoto.setRotationEnabled(true);
+                                piechartVictoriasPorMoto.setDescriptionPosition(280,480);
+
+
+                                ArrayList<Entry> entriesPiechartVictoriasPorMoto = new ArrayList<Entry>();
+                                ArrayList<String> labelsPiechartVictoriasPorMoto = new ArrayList<String>();
+
+                                Integer contadorVictoriasPorMotoLoop=0;
+                                for (Map.Entry<String, Integer> relacionMotoVictorias : victoriasPorMoto.entrySet()) {
+                                    entriesPiechartVictoriasPorMoto.add(new Entry(relacionMotoVictorias.getValue(), contadorVictoriasPorMotoLoop));
+                                    labelsPiechartVictoriasPorMoto.add(relacionMotoVictorias.getKey());
+                                    contadorVictoriasPorMotoLoop++;
+                                }
+
+                                // create pieDataSet
+                                PieDataSet dataSetPiechartVictoriasPorMoto = new PieDataSet(entriesPiechartVictoriasPorMoto, "");
+                                dataSetPiechartVictoriasPorMoto.setSliceSpace(1);
+                                dataSetPiechartVictoriasPorMoto.setSelectionShift(10);
+                                dataSetPiechartVictoriasPorMoto.setVisible(true);
+
+                                dataSetPiechartVictoriasPorMoto.setColors(ColorTemplate.PASTEL_COLORS);
+
+                                //  create pie data object and set xValues and yValues and set it to the pieChart
+                                final PieData dataPiechartVictoriasPorMoto = new PieData(labelsPiechartVictoriasPorMoto, dataSetPiechartVictoriasPorMoto);
+
+                                dataPiechartVictoriasPorMoto.setValueTextSize(0);
+                                dataPiechartVictoriasPorMoto.setValueTextColor(Color.WHITE);
+                                // Legends to show on bottom of the graph
+                                Legend leyendaPiechartVictoriasPorMoto = piechartVictoriasPorMoto.getLegend();
+                                //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                                leyendaPiechartVictoriasPorMoto.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+                                leyendaPiechartVictoriasPorMoto.setXEntrySpace(4);
+                                leyendaPiechartVictoriasPorMoto.setYEntrySpace(3);
+                                leyendaPiechartVictoriasPorMoto.setTextColor(Color.WHITE);
+                                leyendaPiechartVictoriasPorMoto.setTextSize(12);
+
+
+                                piechartVictoriasPorMoto.setData(dataPiechartVictoriasPorMoto);
+                                // undo all highlights
+                                piechartVictoriasPorMoto.highlightValues(null);
+                                // refresh/update pie chart
+                                piechartVictoriasPorMoto.invalidate();
+                                // animate piechartVictoriasPorMoto
+                                piechartVictoriasPorMoto.animateXY(1500, 3000);
+
+
+
+
+                                piechartVictoriasPorMoto.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                    @Override
+                                    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                        // display msg when value selected
+                                        if (e == null)
+                                            return;
+                                        dataPiechartVictoriasPorMoto.setValueTextSize(12);
+                                        Toast.makeText(MainActivityPilotoDisplay.this,
+                                                (int)e.getVal()+ " victorias usando la moto "+dataPiechartVictoriasPorMoto.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected() {
+                                        dataPiechartVictoriasPorMoto.setValueTextSize(0);
+                                    }
+                                });
+
+
+                                //************************************************************piechartVictoriasPorMoto
 
 
                             }
