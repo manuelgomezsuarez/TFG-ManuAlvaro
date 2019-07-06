@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity{
                                 temporada.setTemporada(temporadaJSON.getInt(KEY_TEMPORADA));
                                 temporadasList.add(temporada);
                             }
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             Collections.reverse(temporadasList);
                             adapter = new TemporadaAdapter(temporadasList,getApplicationContext());
                             listView.setAdapter(adapter);

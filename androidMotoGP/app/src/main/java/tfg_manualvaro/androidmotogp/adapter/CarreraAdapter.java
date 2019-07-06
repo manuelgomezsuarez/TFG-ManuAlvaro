@@ -30,7 +30,7 @@ import static butterknife.internal.Finder.ACTIVITY;
  */
 
 public class CarreraAdapter extends ArrayAdapter<Carrera> {
-    private static final String KEY_CARRERA = "Carrera: ";
+    private static final String KEY_CARRERA = "";
 
     private List<Carrera> dataSet;
 
@@ -54,7 +54,7 @@ public class CarreraAdapter extends ArrayAdapter<Carrera> {
             TextView carreraTextView = (TextView) v.findViewById(R.id.carreraID);
 
             //Updating the text views
-            carreraTextView.setText(KEY_CARRERA + carrera.getTitulo());
+            carreraTextView.setText(KEY_CARRERA + ""+ (dataSet.size() - (position)) + " - "+carrera.getTitulo());
             carreraTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View viewIn) {
@@ -62,7 +62,6 @@ public class CarreraAdapter extends ArrayAdapter<Carrera> {
                         TextView tv= (TextView) viewIn.findViewById(R.id.carreraID);
 
                         //alter text of textview widget
-
 
                         MainActivityCarrera.changeToCarreraActivityDisplay(carrera);
 

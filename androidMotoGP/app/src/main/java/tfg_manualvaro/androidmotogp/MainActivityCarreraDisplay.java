@@ -216,4 +216,14 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
         }
     }
 
+
+    public static void changeToDisplayPiloto(String piloto){
+        Log.i("print13", "vamos a cambiar a mainActivityPilotoDisplay");
+        Intent intentMainActivityNombrewPilotoPosicion= new Intent(mContext, MainActivityPilotoDisplay.class);
+        intentMainActivityNombrewPilotoPosicion.putExtra("nombrePiloto",piloto);
+        mContext.startActivity(intentMainActivityNombrewPilotoPosicion);
+
+    }
+
+
 }

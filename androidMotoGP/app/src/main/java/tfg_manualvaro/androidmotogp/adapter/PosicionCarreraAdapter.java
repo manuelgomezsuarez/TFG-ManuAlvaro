@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import tfg_manualvaro.androidmotogp.MainActivityCarrera;
+import tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay;
 import tfg_manualvaro.androidmotogp.R;
 import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
 import tfg_manualvaro.androidmotogp.models.CarreraModelo;
@@ -42,28 +44,46 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
         final PosicionCarrera pos = dataSet.getPosiciones().get(position);
         if (pos != null) {
             //Text View references
-            TextView clasificacionID = (TextView) v.findViewById(R.id.clasificacionID);
-            TextView pilotoID = (TextView) v.findViewById(R.id.pilotoID);
-            TextView motoID = (TextView) v.findViewById(R.id.motoID);
-            TextView paisID = (TextView) v.findViewById(R.id.paisID);
-            TextView puntosID = (TextView) v.findViewById(R.id.puntosID);
-            TextView kmhID = (TextView) v.findViewById(R.id.kmhID);
-            TextView diferenciaID = (TextView) v.findViewById(R.id.diferenciaID);
+            TextView clasificacionIDTextView = (TextView) v.findViewById(R.id.clasificacionID);
+            TextView pilotoIDTextView = (TextView) v.findViewById(R.id.pilotoID);
+            TextView motoIDTextView = (TextView) v.findViewById(R.id.motoID);
+            TextView paisIDTextView = (TextView) v.findViewById(R.id.paisID);
+            TextView puntosIDTextView = (TextView) v.findViewById(R.id.puntosID);
+            TextView kmhIDTextView = (TextView) v.findViewById(R.id.kmhID);
+            TextView diferenciaIDTextView = (TextView) v.findViewById(R.id.diferenciaID);
 
 
             //Updating the text views
-            Log.i("print30", clasificacionID.getText().toString());
-            clasificacionID.setText(pos.getPosicion().toString());
+            clasificacionIDTextView.setText(pos.getPosicion().toString());
             if(pos.getPosicion()<=3 && pos.getPosicion()>0){
-                clasificacionID.setTextColor(Color.parseColor("#009B2B"));
+                clasificacionIDTextView.setTextColor(Color.parseColor("#009B2B"));
             }
 
-            pilotoID.setText(pos.getPiloto().toString());
-            motoID.setText(pos.getMoto().toString());
-            paisID.setText(pos.getPais().toString());
-            puntosID.setText(pos.getPuntos().toString());
-            kmhID.setText(pos.getKmh().toString());
-            diferenciaID.setText(pos.getDiferencia().toString());
+            pilotoIDTextView.setText(pos.getPiloto().toString());
+            motoIDTextView.setText(pos.getMoto().toString());
+            paisIDTextView.setText(pos.getPais().toString());
+            puntosIDTextView.setText(pos.getPuntos().toString());
+            kmhIDTextView.setText(pos.getKmh().toString());
+            diferenciaIDTextView.setText(pos.getDiferencia().toString());
+
+            pilotoIDTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View viewIn) {
+                    try {
+                        TextView tv= (TextView) viewIn.findViewById(R.id.pilotoID);
+
+                        //alter text of textview widget
+                        MainActivityCarreraDisplay.changeToDisplayPiloto(tv.getText().toString());
+
+
+
+                        //assign the textview forecolor
+                        tv.setTextColor(Color.RED);
+                    } catch (Exception except) {
+                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
+                    }
+                }
+            });
 
         }
 

@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -137,7 +138,7 @@ public class MainActivityCarrera extends AppCompatActivity{
                                 carrera.setCarrera(carreraJSON.getString(KEY_CARRERA));
                                 carrerasList.add(carrera);
                             }
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
+                            Collections.reverse(carrerasList);
                             adapter = new CarreraAdapter(carrerasList,getApplicationContext());
                             listView.setAdapter(adapter);
 
