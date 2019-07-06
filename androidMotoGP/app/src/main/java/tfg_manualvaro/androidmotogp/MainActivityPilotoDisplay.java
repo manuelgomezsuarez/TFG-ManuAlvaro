@@ -84,6 +84,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
     private PieChart piechartVictoriasPorCategoria;
     private PieChart piechartVictoriasPorMoto;
+    private PieChart piechartVictoriasPorPodios;
     private BarData dataBarchar;
 
 
@@ -278,7 +279,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                             nombreTextView.setText(pilotoJSON.getString("nombre"));
 
                             TextView numCapeonatosGanadosTextView = (TextView) findViewById(R.id.textoNumCampeonatosGanados);
-                            numCapeonatosGanadosTextView.setText(pilotoJSON.getString("num_campeonatos_ganados"));
+                            numCapeonatosGanadosTextView.setText(pilotoJSON.getString("num_campeonatos_ganados")+" campeonatos");
 
                             TextView nacionalidadTextView = (TextView) findViewById(R.id.textoNacionalidad);
                             nacionalidadTextView.setText(pilotoJSON.getString("pais"));
@@ -305,9 +306,11 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 String categoria;
                                 String moto;
                                 Integer victorias;
-
+                                Integer podios;
                                 final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
                                 final HashMap<String,Integer>victoriasPorMoto=new HashMap<>();
+                                ArrayList<Entry> entriesPiechartVictoriasPorPodios = new ArrayList<Entry>();
+                                ArrayList<String> labelsPiechartVictoriasPorPodios = new ArrayList<String>();
                                 for (int i = 0; i < temporadasPilotoJSONArray.length(); i++) {
 
                                     JSONObject temporadaPiloto = null;
@@ -322,6 +325,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     //*************************************************barchar
 
                                     victorias=datosTemporadaPiloto.getInt("num_victorias");
+                                    podios=datosTemporadaPiloto.getInt("num_podios");
                                     //piechartVictoriasPorCategoria*************************************************************
                                     categoria=datosTemporadaPiloto.getString("categoria");
                                     //si el map no contiene la categoria la añadimos con las victorias
@@ -337,6 +341,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
 
                                     //piechartVictoriasPorMoto*************************************************************
+
                                     moto=datosTemporadaPiloto.getString("moto");
 
                                     //si el map no contiene la categoria la añadimos con las victorias
@@ -349,6 +354,45 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     }
 
                                     //************************************************************piechartVictoriasPorMoto
+
+
+                                    //resumenUltimoAno***********************************************************
+                                    if(i==(temporadasPilotoJSONArray.length()-1)){
+
+
+                                        TextView resumenUltimoAnoTextView = (TextView) findViewById(R.id.resumenUltimoAno);
+                                        resumenUltimoAnoTextView.setText(resumenUltimoAnoTextView.getText().toString()+ " ("+temporada+")");
+
+                                        TextView posicionTextView = (TextView) findViewById(R.id.textoPosicion);
+                                        //Log.i("print71",pilotoJSON.getString("posicion_campeonato"));
+                                        posicionTextView.setText(datosTemporadaPiloto.getString("posicion_campeonato"));
+
+                                        TextView puntosTextView = (TextView) findViewById(R.id.textoPuntos);
+                                        //puntosTextView.setText(datosTemporadaPiloto.getString("puntos"));
+
+                                        TextView motoTextView = (TextView) findViewById(R.id.textoMoto);
+                                        motoTextView.setText(datosTemporadaPiloto.getString("moto"));
+
+                                        TextView cateoriaTextView = (TextView) findViewById(R.id.textoCategoria);
+                                        cateoriaTextView.setText(datosTemporadaPiloto.getString("categoria"));
+
+                                        TextView equipoTextView = (TextView) findViewById(R.id.textoEquipo);
+                                        equipoTextView.setText("Equipo");
+                                        //equipoTextView.setText(datosTemporadaPiloto.getString("equipo"));
+
+                                        //piechartVictoriasPorPodio*************************************
+                                        entriesPiechartVictoriasPorPodios.add(new Entry(victorias,0));
+                                        entriesPiechartVictoriasPorPodios.add(new Entry(podios-victorias,1));
+                                        labelsPiechartVictoriasPorPodios.add("Número de Victorias");
+                                        labelsPiechartVictoriasPorPodios.add("Número de Podios");
+                                        //********************************************piechartVictoriasPorPodio
+
+                                    }
+
+
+                                    //**************************************************************resumenUltimoAno
+
+
 
 
 
@@ -380,6 +424,80 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     }
                                 });
 
+
+
+                                //piechartVictoriasPorPodios*********************************************************
+
+
+                                piechartVictoriasPorPodios = (PieChart) findViewById(R.id.piechartVictoriasPorPodios);
+
+                                //   mChart.setUsePercentValues(true);
+                                piechartVictoriasPorPodios.setDescription("Por moto");
+                                piechartVictoriasPorPodios.setDescriptionColor(Color.GREEN);
+                                piechartVictoriasPorPodios.setDescriptionTextSize(15);
+                                piechartVictoriasPorPodios.setDrawCenterText(true);
+                                piechartVictoriasPorPodios.setRotationEnabled(true);
+                                piechartVictoriasPorPodios.setDescriptionPosition(280,480);
+
+
+
+
+
+
+                                // create pieDataSet
+                                PieDataSet dataSetPiechartVictoriasPorPodios = new PieDataSet(entriesPiechartVictoriasPorPodios, "");
+                                dataSetPiechartVictoriasPorPodios.setSliceSpace(1);
+                                dataSetPiechartVictoriasPorPodios.setSelectionShift(10);
+                                dataSetPiechartVictoriasPorPodios.setVisible(true);
+
+                                dataSetPiechartVictoriasPorPodios.setColors(ColorTemplate.PASTEL_COLORS);
+
+                                //  create pie data object and set xValues and yValues and set it to the pieChart
+                                final PieData dataPiechartVictoriasPorPodios = new PieData(labelsPiechartVictoriasPorPodios, dataSetPiechartVictoriasPorPodios);
+
+                                dataPiechartVictoriasPorPodios.setValueTextSize(0);
+                                dataPiechartVictoriasPorPodios.setValueTextColor(Color.WHITE);
+                                // Legends to show on bottom of the graph
+                                Legend leyendaPiechartVictoriasPorPodios = piechartVictoriasPorPodios.getLegend();
+                                //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                                leyendaPiechartVictoriasPorPodios.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+                                leyendaPiechartVictoriasPorPodios.setXEntrySpace(4);
+                                leyendaPiechartVictoriasPorPodios.setYEntrySpace(3);
+                                leyendaPiechartVictoriasPorPodios.setTextColor(Color.WHITE);
+                                leyendaPiechartVictoriasPorPodios.setTextSize(12);
+
+
+                                piechartVictoriasPorPodios.setData(dataPiechartVictoriasPorPodios);
+                                // undo all highlights
+                                piechartVictoriasPorPodios.highlightValues(null);
+                                // refresh/update pie chart
+                                piechartVictoriasPorPodios.invalidate();
+                                // animate piechartVictoriasPorPodios
+                                piechartVictoriasPorPodios.animateXY(1500, 3000);
+
+
+
+
+                                piechartVictoriasPorPodios.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                    @Override
+                                    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                        // display msg when value selected
+                                        if (e == null)
+                                            return;
+                                        dataPiechartVictoriasPorPodios.setValueTextSize(12);
+                                        Toast.makeText(MainActivityPilotoDisplay.this,
+                                                (int)e.getVal()+ " victorias usando la moto "+dataPiechartVictoriasPorPodios.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected() {
+                                        dataPiechartVictoriasPorPodios.setValueTextSize(0);
+                                    }
+                                });
+
+
+                                //************************************************************piechartVictoriasPorPodios
 
                                 //piechartVictoriasPorCategoria****************
 
@@ -540,7 +658,13 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 //************************************************************piechartVictoriasPorMoto
 
 
+
+
+
                             }
+
+
+
 
                             entry.setOnClickListener(new View.OnClickListener() {
 

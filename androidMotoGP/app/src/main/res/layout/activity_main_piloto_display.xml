@@ -44,88 +44,284 @@
                 android:layout_marginBottom="20dp" />
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoInformación"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Información General"
+                    android:textColor="#e5e5e5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            app:srcCompat="@drawable/winner" />
+
+                        <TextView
+                            android:id="@+id/textoNumCampeonatosGanados"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="left|fill_vertical"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingLeft="70dp">
+
+                        <ImageView
+                            android:id="@+id/infoPiloto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/file" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView12"
+                        android:id="@+id/imageView14"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.4"
-                        app:srcCompat="@drawable/winner" />
+                        android:layout_weight="0.2"
+                        app:srcCompat="@drawable/pais" />
 
                     <TextView
-                        android:id="@+id/textoNumCampeonatosGanados"
+                        android:id="@+id/textoNacionalidad"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.60"
+                        android:layout_weight="0.3"
                         android:gravity="left|fill_vertical"
                         android:textColor="#e5e5e5"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:paddingLeft="70dp">
-
-                    <ImageView
-                        android:id="@+id/infoPiloto"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textoView20"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/file"/>
-
+                        android:layout_weight="0.5"
+                        android:gravity="left|fill_vertical"
+                        android:text=""
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
                 </LinearLayout>
+
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView14"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    app:srcCompat="@drawable/pais" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textoNacionalidad"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:gravity="left|fill_vertical"
+                    android:id="@+id/resumenUltimoAno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Resumen  Ultimo Año"
                     android:textColor="#e5e5e5"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textoView20"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:gravity="left|fill_vertical"
-                    android:text=""
-                    android:textColor="#e5e5e5"
-                    android:textStyle="bold"
-                    android:visibility="invisible" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imagenPosicion"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                app:srcCompat="@drawable/racing" />
+
+                            <TextView
+                                android:id="@+id/textoPosicion"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.60"
+                                android:gravity="left|fill_vertical"
+                                android:text="3ª"
+                                android:textColor="#e5e5e5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imagenPuntos"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                app:srcCompat="@drawable/puntos" />
+
+                            <TextView
+                                android:id="@+id/textoPuntos"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.60"
+                                android:gravity="left|fill_vertical"
+                                android:text="42"
+                                android:textColor="#e5e5e5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imagenCategoria"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                app:srcCompat="@drawable/motor" />
+
+                            <TextView
+                                android:id="@+id/textoCategoria"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.60"
+                                android:gravity="left|fill_vertical"
+                                android:text="500cc"
+                                android:textColor="#e5e5e5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imagenMoto"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                app:srcCompat="@drawable/motorbike" />
+
+                            <TextView
+                                android:id="@+id/textoMoto"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.60"
+                                android:gravity="left|fill_vertical"
+                                android:text="Yamaha"
+                                android:textColor="#e5e5e5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imagenEquipo"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.4"
+                                app:srcCompat="@drawable/winner" />
+
+                            <TextView
+                                android:id="@+id/textoEquipo"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.60"
+                                android:gravity="left|fill_vertical"
+                                android:text="Repsol no te abandona"
+                                android:textColor="#e5e5e5"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/piechartVictoriasPorPodios"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="0.5" />
+                </LinearLayout>
+
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textEstadisticas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Estadisticas Generales"
+                android:textColor="#e5e5e5"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -134,7 +330,6 @@
                 android:layout_marginStart="3dp"
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="5dp" />
-
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
