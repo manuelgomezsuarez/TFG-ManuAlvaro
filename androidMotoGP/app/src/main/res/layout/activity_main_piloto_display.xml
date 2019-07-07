@@ -287,10 +287,20 @@
                     <com.github.mikephil.charting.charts.PieChart
                         android:id="@+id/piechartVictoriasPorPodios"
                         android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_weight="0.5">
+
+                    </com.github.mikephil.charting.charts.PieChart>
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="0dp"
                         android:layout_height="170dp"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="0.5" />
+                        android:text="" />
+
                 </LinearLayout>
 
             </LinearLayout>

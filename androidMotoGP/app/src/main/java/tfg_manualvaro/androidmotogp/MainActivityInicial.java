@@ -74,6 +74,12 @@ public class MainActivityInicial extends AppCompatActivity{
         mContext.startActivity(intentMainActivityCampeonato);
     }
 
+    public  void BuscarDashboard(View view){
+        Log.i("print8", "vamos a cambiar a mainActivityDasboardDisplay");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityDashboardDisplay.class);
+        mContext.startActivity(intentMainActivityInicial);
+    }
+
     public  void BuscarPiloto(View view){
         final EditText nombrePiloto = (EditText) findViewById(R.id.textoPiloto);
         nombrePiloto.setOnKeyListener(new View.OnKeyListener() {

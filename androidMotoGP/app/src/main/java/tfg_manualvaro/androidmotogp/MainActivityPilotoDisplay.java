@@ -308,6 +308,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 String categoria;
                                 String moto;
                                 Integer victorias;
+                                Integer victoriasSegundaPosicion;
+                                Integer victoriasTerceraPosicion;
                                 Integer podios;
                                 final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
                                 final HashMap<String,Integer>victoriasPorMoto=new HashMap<>();
@@ -328,6 +330,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                     victorias=datosTemporadaPiloto.getInt("num_victorias");
                                     podios=datosTemporadaPiloto.getInt("num_podios");
+                                    victoriasSegundaPosicion=datosTemporadaPiloto.getInt("num_segundo");
+                                    victoriasTerceraPosicion=datosTemporadaPiloto.getInt("num_tercero");
                                     //piechartVictoriasPorCategoria*************************************************************
                                     categoria=datosTemporadaPiloto.getString("categoria");
                                     //si el map no contiene la categoria la añadimos con las victorias
@@ -383,9 +387,11 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                         //piechartVictoriasPorPodio*************************************
                                         entriesPiechartVictoriasPorPodios.add(new Entry(victorias,0));
-                                        entriesPiechartVictoriasPorPodios.add(new Entry(podios-victorias,1));
-                                        labelsPiechartVictoriasPorPodios.add("Número de Victorias");
-                                        labelsPiechartVictoriasPorPodios.add("Número de Podios");
+                                        entriesPiechartVictoriasPorPodios.add(new Entry(victoriasSegundaPosicion,1));
+                                        entriesPiechartVictoriasPorPodios.add(new Entry(victoriasTerceraPosicion,2));
+                                        labelsPiechartVictoriasPorPodios.add("1ª");
+                                        labelsPiechartVictoriasPorPodios.add("2ª");
+                                        labelsPiechartVictoriasPorPodios.add("3ª");
                                         //********************************************piechartVictoriasPorPodio
 
                                     }
@@ -448,12 +454,12 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorPodios = (PieChart) findViewById(R.id.piechartVictoriasPorPodios);
 
                                 //   mChart.setUsePercentValues(true);
-                                piechartVictoriasPorPodios.setDescription("Por moto");
+                                piechartVictoriasPorPodios.setDescription("Posiciones");
                                 piechartVictoriasPorPodios.setDescriptionColor(Color.GREEN);
                                 piechartVictoriasPorPodios.setDescriptionTextSize(15);
                                 piechartVictoriasPorPodios.setDrawCenterText(true);
                                 piechartVictoriasPorPodios.setRotationEnabled(true);
-                                piechartVictoriasPorPodios.setDescriptionPosition(280,480);
+                                piechartVictoriasPorPodios.setDescriptionPosition(280,390);
 
 
 
@@ -476,7 +482,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorPodios = piechartVictoriasPorPodios.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-                                leyendaPiechartVictoriasPorPodios.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+                                leyendaPiechartVictoriasPorPodios.setPosition(Legend.LegendPosition.RIGHT_OF_CHART_CENTER);
                                 leyendaPiechartVictoriasPorPodios.setXEntrySpace(4);
                                 leyendaPiechartVictoriasPorPodios.setYEntrySpace(3);
                                 leyendaPiechartVictoriasPorPodios.setTextColor(Color.WHITE);
@@ -490,6 +496,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorPodios.invalidate();
                                 // animate piechartVictoriasPorPodios
                                 piechartVictoriasPorPodios.animateXY(1500, 3000);
+
 
 
 

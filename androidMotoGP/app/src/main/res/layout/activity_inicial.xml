@@ -61,6 +61,17 @@
                 android:text="Ultima Carrera" />
 
             <Button
+                android:id="@+id/dashboardButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="70dp"
+                android:onClick="BuscarDashboard"
+                android:text="Estadísticas" />
+
+            <Button
                 android:id="@+id/buscarPilotoButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
