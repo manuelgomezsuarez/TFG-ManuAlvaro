@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#161712"
     android:orientation="vertical"
-    tools:context="tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay">
+    tools:context="tfg_manualvaro.androidmotogp.MainActivityDocumentacion">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -98,13 +98,7 @@
                             android:text="TextView"
                             android:textColor="#e5e5e5" />
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="62dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/pdf"
-                            android:onClick="changeToDocumentacionActivity"/>
+
 
                     </LinearLayout>
 
@@ -173,14 +167,6 @@
                             android:textColor="#e5e5e5"
                             android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/imageView11"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="7"
-                            android:adjustViewBounds="false"
-                            android:cropToPadding="false"
-                            app:srcCompat="@drawable/orange_arrow2" />
                     </LinearLayout>
 
 
@@ -212,27 +198,6 @@
                         android:paddingBottom="4dp">
 
                         <ImageView
-                            android:id="@+id/racing"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-
-                            app:srcCompat="@drawable/racing" />
-
-                        <ImageView
-                            android:id="@+id/piloto"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-                            android:paddingLeft="0dp"
-
-                            app:srcCompat="@drawable/piloto" />
-
-                        <ImageView
                             android:id="@+id/motorbike"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
@@ -240,47 +205,7 @@
 
                             android:layout_weight="1"
 
-                            app:srcCompat="@drawable/motorbike" />
-
-                        <ImageView
-                            android:id="@+id/pais"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-
-                            app:srcCompat="@drawable/pais" />
-
-                        <ImageView
-                            android:id="@+id/puntos"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-
-                            app:srcCompat="@drawable/puntos" />
-
-                        <ImageView
-                            android:id="@+id/kmh"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-
-                            app:srcCompat="@drawable/kmh" />
-
-                        <ImageView
-                            android:id="@+id/diferencia"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_weight="1"
-
-                            app:srcCompat="@drawable/diferencia" />
+                            app:srcCompat="@drawable/pdf" />
 
                     </LinearLayout>
 

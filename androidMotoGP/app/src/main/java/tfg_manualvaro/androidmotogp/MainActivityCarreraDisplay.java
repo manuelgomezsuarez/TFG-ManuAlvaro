@@ -49,7 +49,12 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     private Integer pagination=1;
     private PosicionCarreraAdapter adapter;
     private JSONArray posicionesCarreraJSONArray=null;
-
+//Propiedades para Documentación
+    private String temporada;
+    private String categoria;
+    private String titulo;
+    private String lugar;
+    private String fecha;
 
 
     @Override
@@ -65,6 +70,9 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
         tituloCarrera=intentMainActivitySelector.getStringExtra("tituloString");
         Log.i("print16",temporadaMainActivitySelector.getTemporada().toString());
         Log.i("print17",categoriaMainActivitySelector);
+
+
+
         new FetchCarrera().execute();
 
     }
@@ -155,6 +163,8 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                                 carrera.setFecha(posicionJSON.getString("fecha"));
                                 carrera.setLugar(posicionJSON.getString("lugar"));
                                 carrera.setTitulo(posicionJSON.getString("titulo"));
+                                carrera.setCategoria(posicionJSON.getString("categoria"));
+                                carrera.setTemporada(posicionJSON.getString("temporada"));
                                 posicionesList.add(pos);
                             }
 
@@ -169,9 +179,17 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             categoriaTextView.setText(categoriaMainActivitySelector);
 
 
+                            //Seteamos propiedades para documentación.
+                            temporada=carrera.getTemporada().toString();
+                            fecha=carrera.getFecha();
+                            lugar=carrera.getLugar();
+                            categoria=carrera.getCategoria();
+                            titulo=carrera.getTitulo();
+
+
                             carrera.setPosiciones(posicionesList);
                             carrera.setCategoria(categoriaMainActivitySelector);
-                            carrera.setTemporada(temporadaMainActivitySelector.getTemporada());
+                            carrera.setTemporada(carrera.getTemporada());
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCarreraAdapter(carrera,getApplicationContext());
                             listView.setAdapter(adapter);
@@ -225,5 +243,17 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
     }
 
+    public void changeToDocumentacionActivity(View view){
+        Log.i("print13", "vamos a cambiar a mainActivityDocumentacion");
+        Intent intentMainActivityDocumentacion= new Intent(mContext, MainActivityDocumentacion.class);
+        intentMainActivityDocumentacion.putExtra("temporada",temporada);
+        intentMainActivityDocumentacion.putExtra("categoria",categoria);
+        intentMainActivityDocumentacion.putExtra("titulo",titulo);
+        intentMainActivityDocumentacion.putExtra("lugar",lugar);
+        intentMainActivityDocumentacion.putExtra("fecha",fecha);
+
+
+        mContext.startActivity(intentMainActivityDocumentacion);
+    }
 
 }

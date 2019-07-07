@@ -87,7 +87,8 @@
                 android:textColorHint="@color/colorAccent"
                 android:textStyle="normal"
                 android:visibility="invisible"
-                tools:maxLines="1" />
+                tools:maxLines="1"
+                />
 
 
         </LinearLayout>

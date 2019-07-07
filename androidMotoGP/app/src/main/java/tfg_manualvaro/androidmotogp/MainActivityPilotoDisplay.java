@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -110,6 +111,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         chart.getAxisRight().setDrawLabels(false);
         chart.setDescriptionColor(Color.GREEN);
         chart.setDescriptionTextSize(15);
+
 
 
 
@@ -376,8 +378,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         TextView cateoriaTextView = (TextView) findViewById(R.id.textoCategoria);
                                         cateoriaTextView.setText(datosTemporadaPiloto.getString("categoria"));
 
-                                        TextView equipoTextView = (TextView) findViewById(R.id.textoEquipo);
-                                        equipoTextView.setText("Equipo");
+
                                         //equipoTextView.setText(datosTemporadaPiloto.getString("equipo"));
 
                                         //piechartVictoriasPorPodio*************************************
@@ -421,6 +422,21 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     @Override
                                     public void onNothingSelected() {
                                         dataBarchar.setValueTextSize(0);
+                                    }
+                                });
+                                chart.setOnTouchListener(new View.OnTouchListener() {
+
+                                    public boolean onTouch(View view, MotionEvent event) {
+
+                                        if (view.getId() == R.id.barchart) {
+                                            view.getParent().requestDisallowInterceptTouchEvent(true);
+                                            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                                                case MotionEvent.ACTION_UP:
+                                                    view.getParent().requestDisallowInterceptTouchEvent(false);
+                                                    break;
+                                            }
+                                        }
+                                        return false;
                                     }
                                 });
 
@@ -671,13 +687,23 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 @Override
                                 public void onClick(View v) {
                                     Uri uri = null;
+                                    String urlString= "Wiki Not Found";
                                     try {
                                         uri = Uri.parse(pilotoJSON.getString("wiki_piloto"));
+                                        urlString = pilotoJSON.getString("wiki_piloto");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
+
+                                    if(urlString.equals("Wiki Not Found")){
+                                        Toast.makeText(MainActivityPilotoDisplay.this,
+                                                "Wiki No Encontrada",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                    else{
                                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                     startActivity(intent);
+                                    }
                                 }
                             });
 

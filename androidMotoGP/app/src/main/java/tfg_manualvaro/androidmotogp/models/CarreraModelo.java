@@ -4,7 +4,7 @@ import java.util.List;
 public class CarreraModelo {
 
     private String id;
-    private Integer temporada;
+    private String temporada;
     private String categoria;
     private String lugar;
     private String titulo;
@@ -46,11 +46,11 @@ public class CarreraModelo {
         this.id = id;
     }
 
-    public Integer getTemporada() {
+    public String getTemporada() {
         return temporada;
     }
 
-    public void setTemporada(Integer temporada) {
+    public void setTemporada(String temporada) {
         this.temporada = temporada;
     }
 

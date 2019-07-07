@@ -102,7 +102,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/file" />
+                            app:srcCompat="@drawable/wiki" />
 
                     </LinearLayout>
 
@@ -279,22 +279,6 @@
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:id="@+id/imagenEquipo"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0.4"
-                                app:srcCompat="@drawable/winner" />
-
-                            <TextView
-                                android:id="@+id/textoEquipo"
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.60"
-                                android:gravity="left|fill_vertical"
-                                android:text="Repsol no te abandona"
-                                android:textColor="#e5e5e5"
-                                android:textStyle="bold" />
                         </LinearLayout>
 
 

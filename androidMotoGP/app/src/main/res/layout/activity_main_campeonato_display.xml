@@ -98,13 +98,6 @@
                             android:textColor="#e5e5e5"
                             android:text="TextView" />
 
-                        <ImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="62dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@drawable/file" />
-
                     </LinearLayout>
 
                 </LinearLayout>
