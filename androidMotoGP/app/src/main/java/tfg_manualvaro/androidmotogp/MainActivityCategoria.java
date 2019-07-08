@@ -31,18 +31,22 @@ public class MainActivityCategoria extends AppCompatActivity{
     private static final String KEY_NEXT = "next";
     private static Context mContext;
     private static Temporada temporadaMainActivity;
+    private static String tituloUltima;
+    private static String entrada;
 
 
     //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
     private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
-
+    private String url2 = "https://motogp-api.herokuapp.com/dashboard/";
+    private Map<String,String> urlParams2= new HashMap<>();
     private ProgressDialog pDialog;
     private int success;
     private String next;
     private Integer pagination=1;
     private CategoriaAdapter adapter;
     private JSONArray categoriasJSONArray=null;
+    private JSONArray ultimaJSONArray=null;
 
 
 
@@ -54,6 +58,8 @@ public class MainActivityCategoria extends AppCompatActivity{
         mContext = this;
         Intent intentMainActivity = getIntent();
         temporadaMainActivity=intentMainActivity.getParcelableExtra("Temporada");
+        tituloUltima=intentMainActivity.getStringExtra("Titulo");
+        entrada=intentMainActivity.getStringExtra("entrada");
         new FetchCategoria().execute();
 
     }
@@ -63,6 +69,7 @@ public class MainActivityCategoria extends AppCompatActivity{
 
     private class FetchCategoria extends AsyncTask<String, String, String> {
         JSONObject response;
+        JSONObject response2;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -77,6 +84,32 @@ public class MainActivityCategoria extends AppCompatActivity{
         @Override
         protected String doInBackground(String... params) {
             HttpJsonParser jsonParser = new HttpJsonParser();
+            HttpJsonParser jsonParser2 = new HttpJsonParser();
+            if(entrada!=null){
+                urlParams2.put("format","json");
+                urlParams2.put("page",pagination.toString());
+                Log.i("print19",urlParams2.toString());
+                response2 = jsonParser.makeHttpRequest(url2,"GET",urlParams);
+
+                try {
+                    success = response2.getInt(KEY_SUCCESS);
+                    ultimaJSONArray =  response2.getJSONArray(KEY_DATA);
+                    Log.i("printUltima",ultimaJSONArray.toString());
+                    JSONObject dashboard= ultimaJSONArray.getJSONObject(0);
+                    JSONArray datosHistoricos=dashboard.getJSONArray("datos_ultima_temporada");
+
+                    String ultimaCarrera = datosHistoricos.getJSONObject(0).getString("ultima_carrera");
+                    String tituloCarrera=ultimaCarrera.split(" - ")[1];
+                    String temporadaCarrera=ultimaCarrera.split(" - ")[0].split("/")[2];
+                    Log.i("printUltima",temporadaCarrera);
+                    Temporada t= new Temporada();
+                    t.setTemporada(Integer.valueOf(temporadaCarrera));
+                    temporadaMainActivity=t;
+                    tituloUltima=tituloCarrera;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
             Log.d("print10",temporadaMainActivity.getTemporada().toString());
             urlParams.put("format","json");
@@ -155,6 +188,7 @@ public class MainActivityCategoria extends AppCompatActivity{
         Intent intentMainActivityCategoria = new Intent(mContext, MainActivitySelector.class);
         intentMainActivityCategoria.putExtra("Temporada",temporadaPrueba);
         intentMainActivityCategoria.putExtra("CategoriaString",categoria.getCategoria());
+        intentMainActivityCategoria.putExtra("Titulo",tituloUltima);
         mContext.startActivity(intentMainActivityCategoria);
     }
 

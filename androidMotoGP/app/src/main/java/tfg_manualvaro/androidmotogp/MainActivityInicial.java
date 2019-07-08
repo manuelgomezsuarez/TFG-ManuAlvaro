@@ -68,6 +68,15 @@ public class MainActivityInicial extends AppCompatActivity{
 
     }
 
+
+    public  void UltimaCarrera(View view){
+        Log.i("print8", "vamos a cambiar a UltimaCarrera");
+        Intent intentMainActivity= new Intent(mContext, MainActivityCategoria.class);
+        intentMainActivity.putExtra("entrada","ultimaCarrera");
+        mContext.startActivity(intentMainActivity);
+
+    }
+
     public  void BuscarCampeonato(View view){
         Log.i("print8", "vamos a cambiar a mainActivityCampeonatoDisplay");
         Intent intentMainActivityCampeonato = new Intent(mContext, MainActivityCampeonatoDisplay.class);

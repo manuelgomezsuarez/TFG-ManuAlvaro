@@ -57,7 +57,7 @@
                 android:layout_marginLeft="70dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
-                android:onClick="BuscarCampeonato"
+                android:onClick="UltimaCarrera"
                 android:text="Ultima Carrera" />
 
             <Button

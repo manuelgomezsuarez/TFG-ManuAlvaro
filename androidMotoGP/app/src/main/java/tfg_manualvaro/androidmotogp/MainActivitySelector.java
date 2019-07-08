@@ -45,6 +45,7 @@ public class MainActivitySelector extends AppCompatActivity{
 
     private static Temporada temporadaMainActivityCategoria;
     private static String categoriaMainActivityCategoria;
+    private static String tituloUltimaCarrera;
 
 
     @Override
@@ -56,9 +57,9 @@ public class MainActivitySelector extends AppCompatActivity{
         Intent intentMainActivityCategoria = getIntent();
         temporadaMainActivityCategoria = intentMainActivityCategoria.getParcelableExtra("Temporada");
         categoriaMainActivityCategoria = intentMainActivityCategoria.getStringExtra("CategoriaString");
+        tituloUltimaCarrera= intentMainActivityCategoria.getStringExtra("Titulo");
         //Intent intentRecuperado = getIntent();
         Log.i("print7", "estamos en metodo selector");
-
 
         Log.i("print8", temporadaMainActivityCategoria.getTemporada().toString());
         Log.i("print9", categoriaMainActivityCategoria);
@@ -68,14 +69,24 @@ public class MainActivitySelector extends AppCompatActivity{
     }
 
     public  void BuscarCarreras(View view){
-        Log.i("print8", "vamos a cambiar a mainActivityCarrera");
-        Log.i("print9", temporadaMainActivityCategoria.getTemporada().toString());
-        Log.i("print10", categoriaMainActivityCategoria);
-        Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarrera.class);
-        intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivityCategoria);
-        intentMainActivityCarrera.putExtra("CategoriaString",categoriaMainActivityCategoria);
-        mContext.startActivity(intentMainActivityCarrera);
+        if(tituloUltimaCarrera!=null){
+            Log.i("printUltima", "Caso Ultima Carrera");
+            Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
+            intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivityCategoria);
+            intentMainActivityCarrera.putExtra("CategoriaString",categoriaMainActivityCategoria);
+            intentMainActivityCarrera.putExtra("tituloString",tituloUltimaCarrera);
+            mContext.startActivity(intentMainActivityCarrera);
+        }
+        else {
 
+            Log.i("print8", "vamos a cambiar a mainActivityCarrera");
+            Log.i("print9", temporadaMainActivityCategoria.getTemporada().toString());
+            Log.i("print10", categoriaMainActivityCategoria);
+            Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarrera.class);
+            intentMainActivityCarrera.putExtra("Temporada", temporadaMainActivityCategoria);
+            intentMainActivityCarrera.putExtra("CategoriaString", categoriaMainActivityCategoria);
+            mContext.startActivity(intentMainActivityCarrera);
+        }
     }
 
     public  void BuscarCampeonato(View view){
