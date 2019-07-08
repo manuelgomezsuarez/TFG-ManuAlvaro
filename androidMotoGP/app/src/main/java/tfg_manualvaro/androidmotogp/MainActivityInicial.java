@@ -46,10 +46,12 @@ public class MainActivityInicial extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final EditText nombrePiloto = (EditText) findViewById(R.id.textoPiloto);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
         //Call the AsyncTask
         mContext = this;
+
 
 
         //Intent intentRecuperado = getIntent();
@@ -91,18 +93,7 @@ public class MainActivityInicial extends AppCompatActivity{
 
     public  void BuscarPiloto(View view){
         final EditText nombrePiloto = (EditText) findViewById(R.id.textoPiloto);
-        nombrePiloto.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View view, int keyCode, KeyEvent keyevent) {
-                //If the keyevent is a key-down event on the "enter" button
-                if ((keyevent.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    Intent intentMainActivityInicial = new Intent(mContext, MainActivityPiloto.class);
-                    intentMainActivityInicial.putExtra("nombrePiloto",nombrePiloto.getText().toString());
-                    mContext.startActivity(intentMainActivityInicial);
-                    return true;
-                }
-                return false;
-            }
-        });
+
 
         String nombre= nombrePiloto.getText().toString();
         Log.i("print30", nombre);

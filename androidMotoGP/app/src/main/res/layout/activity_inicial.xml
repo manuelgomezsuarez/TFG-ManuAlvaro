@@ -34,7 +34,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:gravity="center"
-                android:text="Bienvenido. Utilice los filtros a su disposicion para buscar las carreras y campeonatos que usted desee "
+                android:text="Bienvenido. Utilice los filtros a su disposicion para buscar las carreras y campeonatos que usted desee"
                 android:textColor="#e5e5e5"
                 android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
                 android:onClick="FiltroBasico"
-                android:text="Filtro Básico" />
+                android:text="Búsqueda Por Temporada" />
 
             <Button
                 android:id="@+id/ultimaCarreraButton"
@@ -58,7 +58,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
                 android:onClick="UltimaCarrera"
-                android:text="Ultima Carrera" />
+                android:text="Última Carrera/Campeonato" />
 
             <Button
                 android:id="@+id/dashboardButton"
@@ -69,38 +69,47 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="70dp"
                 android:onClick="BuscarDashboard"
-                android:text="Estadísticas" />
+                android:text="Datos Históricos" />
 
-            <Button
-                android:id="@+id/buscarPilotoButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
 
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="70dp"
-                android:onClick="BuscarPiloto"
-                android:text="Buscar Piloto" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:alwaysDrawnWithCache="false"
+            android:animateLayoutChanges="false"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/textoPiloto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"
-                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Introduzca el nombre del piloto"
+                android:hint="Nombre Piloto"
                 android:inputType="textPersonName"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
                 android:textColorHint="@color/colorAccent"
                 android:textStyle="normal"
-                android:visibility="invisible"
-                tools:maxLines="1"
-                />
+                android:imeOptions="actionSearch"
+                tools:maxLines="1" />
 
+            <Button
+                android:id="@+id/buscarPilotoButton"
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:onClick="BuscarPiloto"
+                android:text="Buscar" />
+
+
+        </LinearLayout>
 
         </LinearLayout>
 

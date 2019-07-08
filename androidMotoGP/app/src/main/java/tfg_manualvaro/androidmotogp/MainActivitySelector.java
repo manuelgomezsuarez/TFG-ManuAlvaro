@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,12 +53,17 @@ public class MainActivitySelector extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_selector);
+
         //Call the AsyncTask
         mContext = this;
         Intent intentMainActivityCategoria = getIntent();
         temporadaMainActivityCategoria = intentMainActivityCategoria.getParcelableExtra("Temporada");
         categoriaMainActivityCategoria = intentMainActivityCategoria.getStringExtra("CategoriaString");
         tituloUltimaCarrera= intentMainActivityCategoria.getStringExtra("Titulo");
+        if(tituloUltimaCarrera!=null){
+            Button btn = (Button) findViewById(R.id.carreraButton);
+            btn.setText("Carrera");
+        }
         //Intent intentRecuperado = getIntent();
         Log.i("print7", "estamos en metodo selector");
 
@@ -71,10 +77,12 @@ public class MainActivitySelector extends AppCompatActivity{
     public  void BuscarCarreras(View view){
         if(tituloUltimaCarrera!=null){
             Log.i("printUltima", "Caso Ultima Carrera");
+
             Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
             intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivityCategoria);
             intentMainActivityCarrera.putExtra("CategoriaString",categoriaMainActivityCategoria);
             intentMainActivityCarrera.putExtra("tituloString",tituloUltimaCarrera);
+
             mContext.startActivity(intentMainActivityCarrera);
         }
         else {

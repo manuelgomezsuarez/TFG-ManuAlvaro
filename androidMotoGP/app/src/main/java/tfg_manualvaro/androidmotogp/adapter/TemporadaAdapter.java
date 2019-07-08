@@ -29,7 +29,7 @@ import static butterknife.internal.Finder.ACTIVITY;
  */
 
 public class TemporadaAdapter extends ArrayAdapter<Temporada> {
-    private static final String KEY_TEMPORADA = "Temporada: ";
+    private static final String KEY_TEMPORADA = "";
 
     private List<Temporada> dataSet;
 

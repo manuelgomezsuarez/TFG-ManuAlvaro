@@ -23,7 +23,7 @@ import tfg_manualvaro.androidmotogp.models.Categoria;
  */
 
 public class CategoriaAdapter extends ArrayAdapter<Categoria> {
-    private static final String KEY_CATEGORIA = "Categoría: ";
+    private static final String KEY_CATEGORIA = "";
 
     private List<Categoria> dataSet;
 

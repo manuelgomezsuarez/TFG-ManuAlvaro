@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -186,6 +187,7 @@ public class MainActivityCategoria extends AppCompatActivity{
         Log.i("print9", temporadaMainActivity.getTemporada().toString());
         Temporada temporadaPrueba=new Temporada(temporadaMainActivity.getTemporada());
         Intent intentMainActivityCategoria = new Intent(mContext, MainActivitySelector.class);
+
         intentMainActivityCategoria.putExtra("Temporada",temporadaPrueba);
         intentMainActivityCategoria.putExtra("CategoriaString",categoria.getCategoria());
         intentMainActivityCategoria.putExtra("Titulo",tituloUltima);
