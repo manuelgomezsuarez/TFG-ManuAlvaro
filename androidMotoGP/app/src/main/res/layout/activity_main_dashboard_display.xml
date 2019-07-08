@@ -35,7 +35,7 @@
                 android:textColor="#e5e5e5"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:text="Estadisticas"/>
+                android:text="Estadísticas"/>
 
             <TextView
                 android:id="@+id/textoTitulo2"
@@ -49,12 +49,14 @@
                 android:textColor="#e5e5e5"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="Top DatosHistoricos"/>
+                android:text="Top Datos Historicos"/>
 
 
             <LinearLayout
+                android:id="@+id/layerPilotosMasVictoriasCarreras"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="30dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -326,7 +328,828 @@
 
             </LinearLayout>
 
+            <LinearLayout
+            android:id="@+id/layerPilotosMasVictoriasCampeonatos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                android:layout_marginBottom="25dp"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textoPilotosMasVictoriasCampeonatos"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:text="Pilotos con más Victorias en Campeonatos"
+                android:textColor="#e5e5e5"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/posicionPiloto1Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/numero1" />
+
+                    <ImageView
+                        android:id="@+id/fotoPiloto1Campeonatos"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rossi" />
+
+                    <TextView
+                        android:id="@+id/puntuacionPiloto1Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="prueba"
+                        android:gravity="center"
+                        android:textColor="#e5e5e5"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/posicionPiloto2Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/numero2" />
+
+                    <ImageView
+                        android:id="@+id/fotoPiloto2Campeonatos"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rossi" />
+
+                    <TextView
+                        android:id="@+id/puntuacionPiloto2Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="prueba"
+                        android:gravity="center"
+                        android:textColor="#e5e5e5"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/posicionPiloto3Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/numero3" />
+
+                    <ImageView
+                        android:id="@+id/fotoPiloto3Campeonatos"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rossi" />
+
+                    <TextView
+                        android:id="@+id/puntuacionPiloto3Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="prueba"
+                        android:gravity="center"
+                        android:textColor="#e5e5e5"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/posicionPiloto4Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/numero4" />
+
+                    <ImageView
+                        android:id="@+id/fotoPiloto4Campeonatos"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rossi" />
+
+                    <TextView
+                        android:id="@+id/puntuacionPiloto4Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="prueba"
+                        android:gravity="center"
+                        android:textColor="#e5e5e5"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/posicionPiloto5Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/numero5" />
+
+                    <ImageView
+                        android:id="@+id/fotoPiloto5Campeonatos"
+                        android:layout_marginTop="3dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/rossi" />
+
+                    <TextView
+                        android:id="@+id/puntuacionPiloto5Campeonatos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="prueba"
+                        android:gravity="center"
+                        android:textColor="#e5e5e5"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/nombrePiloto1Campeonatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#e5e5e5"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:text="Nombre Apellido" />
+
+                <TextView
+                    android:id="@+id/nombrePiloto2Campeonatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#e5e5e5"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:text="Nombre Apellido" />
+
+                <TextView
+                    android:id="@+id/nombrePiloto3Campeonatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#e5e5e5"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:text="Nombre Apellido" />
+
+                <TextView
+                    android:id="@+id/nombrePiloto4Campeonatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#e5e5e5"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:text="Nombre Apellido" />
+
+                <TextView
+                    android:id="@+id/nombrePiloto5Campeonatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textColor="#e5e5e5"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:text="Nombre Apellido" />
+            </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layerPilotosMasVictoriasPuntosGlobales"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoPilotosMasVictoriasPuntosGlobales"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="Pilotos con más puntos globales"
+                    android:textColor="#e5e5e5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto1PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero1" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto1PuntosGlobales"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto1PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto2PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero2" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto2PuntosGlobales"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto2PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto3PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero3" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto3PuntosGlobales"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto3PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto4PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero4" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto4PuntosGlobales"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto4PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto5PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero5" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto5PuntosGlobales"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto5PuntosGlobales"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/nombrePiloto1PuntosGlobales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto2PuntosGlobales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto3PuntosGlobales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto4PuntosGlobales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto5PuntosGlobales"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layerPilotosMasVictoriasPuntosCampeonatosDisputados"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoPilotosMasVictoriasPuntosCampeonatosDisputados"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:text="Pilotos con más campeonatos disputados"
+                    android:textColor="#e5e5e5"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto1PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero1" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto1PuntosCampeonatosDisputados"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto1PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto2PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero2" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto2PuntosCampeonatosDisputados"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto2PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto3PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero3" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto3PuntosCampeonatosDisputados"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto3PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto4PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero4" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto4PuntosCampeonatosDisputados"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto4PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/posicionPiloto5PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/numero5" />
+
+                        <ImageView
+                            android:id="@+id/fotoPiloto5PuntosCampeonatosDisputados"
+                            android:layout_marginTop="3dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/rossi" />
+
+                        <TextView
+                            android:id="@+id/puntuacionPiloto5PuntosCampeonatosDisputados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="prueba"
+                            android:gravity="center"
+                            android:textColor="#e5e5e5"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/nombrePiloto1PuntosCampeonatosDisputados"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto2PuntosCampeonatosDisputados"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto3PuntosCampeonatosDisputados"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto4PuntosCampeonatosDisputados"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textStyle="bold"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+
+                    <TextView
+                        android:id="@+id/nombrePiloto5PuntosCampeonatosDisputados"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="Nombre Apellido" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

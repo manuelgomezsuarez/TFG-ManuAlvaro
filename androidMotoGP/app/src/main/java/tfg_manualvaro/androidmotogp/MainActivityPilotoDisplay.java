@@ -459,7 +459,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorPodios.setDescriptionTextSize(15);
                                 piechartVictoriasPorPodios.setDrawCenterText(true);
                                 piechartVictoriasPorPodios.setRotationEnabled(true);
-                                piechartVictoriasPorPodios.setDescriptionPosition(280,390);
+                                piechartVictoriasPorPodios.setDescriptionPosition(280,370);
 
 
 
