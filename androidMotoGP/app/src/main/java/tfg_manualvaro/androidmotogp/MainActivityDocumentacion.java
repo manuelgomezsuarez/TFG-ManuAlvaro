@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -59,7 +60,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
     private DocumentacionAdapter adapter;
     private JSONArray urlsJSONArray = null;
     private String urls=null;
-
+    private LinearLayout LayoutDeCarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class MainActivityDocumentacion extends AppCompatActivity {
         tituloMainActivitySelector = intentMainActivitySelector.getStringExtra("titulo");
         fechaMainActivitySelector = intentMainActivitySelector.getStringExtra("fecha");
         lugarMainActivitySelector = intentMainActivitySelector.getStringExtra("lugar");
+        LayoutDeCarga=(LinearLayout) findViewById(R.id.LayoutDeCarga);
+        LayoutDeCarga.setVisibility(View.INVISIBLE);
 
 //        Log.i("print16", temporadaMainActivitySelector);
 //        Log.i("print17", categoriaMainActivitySelector);
@@ -184,6 +187,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                             documentacion.setTitulo(tituloMainActivitySelector);
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new DocumentacionAdapter(documentacion, getApplicationContext());
+                            LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
                             Utility.setListViewHeightBasedOnChildren(listView);
                         } catch (JSONException e) {
@@ -222,9 +226,16 @@ public class MainActivityDocumentacion extends AppCompatActivity {
 
             ViewGroup.LayoutParams params = listView.getLayoutParams();
             params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+
             listView.setLayoutParams(params);
             listView.requestLayout();
         }
+    }
+
+    public  void GoHome(View view){
+        Log.i("print8", "go home");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
+        mContext.startActivity(intentMainActivityInicial);
     }
 
 

@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
     private Integer pagination=1;
     private PosicionCampeonatoAdapter adapter;
     private JSONArray posicionesCampeonatoJSONArray=null;
-
+    private LinearLayout LayoutDeCarga;
 
 
     @Override
@@ -66,6 +67,8 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
         categoriaMainActivitySelector = intentMainActivitySelector.getStringExtra("CategoriaString");
         Log.i("print16",temporadaMainActivitySelector.getTemporada().toString());
         Log.i("print17",categoriaMainActivitySelector);
+        LayoutDeCarga=(LinearLayout) findViewById(R.id.LayoutDeCarga);
+        LayoutDeCarga.setVisibility(View.INVISIBLE);
         new FetchCampeonato().execute();
 
     }
@@ -157,6 +160,7 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                             campeonato.setTemporada(temporadaMainActivitySelector.getTemporada());
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCampeonatoAdapter(campeonato,getApplicationContext());
+                            LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
                             Utility.setListViewHeightBasedOnChildren(listView);
 
@@ -207,6 +211,11 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
 
     }
 
+    public  void GoHome(View view){
+        Log.i("print8", "go home");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
+        mContext.startActivity(intentMainActivityInicial);
+    }
 
 
 }

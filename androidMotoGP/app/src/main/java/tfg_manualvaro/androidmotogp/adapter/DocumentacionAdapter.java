@@ -54,7 +54,13 @@ public class DocumentacionAdapter extends ArrayAdapter<Url> {
 
 
             //Updating the text views
-            urlTextView.setText(pos.getUrl());
+            //cambiamos lo que se muestra de url para no poner el enlace entero.
+            //Nos vamos a quedar con la parte desde la última "/" hasta el interrogante
+
+            String url = pos.getUrl();
+            String urlAcortada= url.split("\\/")[url.split("\\/").length-1];
+            String urlAcortadaSinInterrogante= urlAcortada.split("\\?")[0];
+            urlTextView.setText(urlAcortadaSinInterrogante);
 
             urlTextView.setOnClickListener(new View.OnClickListener() {
                 @Override

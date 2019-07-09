@@ -43,9 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="70dp"
+                android:layout_marginRight="60dp"
                 android:onClick="FiltroBasico"
                 android:text="Búsqueda Por Temporada" />
 
@@ -54,9 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="70dp"
+                android:layout_marginRight="60dp"
                 android:onClick="UltimaCarrera"
                 android:text="Última Carrera/Campeonato" />
 
@@ -65,9 +65,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="70dp"
+                android:layout_marginRight="60dp"
                 android:onClick="BuscarDashboard"
                 android:text="Datos Históricos" />
 
@@ -79,8 +79,8 @@
             android:focusableInTouchMode="true"
             android:alwaysDrawnWithCache="false"
             android:animateLayoutChanges="false"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
@@ -103,7 +103,7 @@
             <Button
                 android:id="@+id/buscarPilotoButton"
                 android:layout_width="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.75"
                 android:layout_height="match_parent"
                 android:onClick="BuscarPiloto"
                 android:text="Buscar" />

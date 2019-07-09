@@ -3,6 +3,7 @@ package tfg_manualvaro.androidmotogp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -20,6 +21,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
@@ -158,6 +168,9 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
     private TextView[] arrayNombresPilotoPuntosCampeonatosDisputadosTextView;
     private LinearLayout pilotosMasVictoriasPuntosCampeonatosDisputadosLinearLayout;
     //*****************************PuntosCampeonatosDisputados
+
+
+    private RadarChart radarchartVictoriasPorMoto;
 
 
     @Override
@@ -560,6 +573,79 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                             //*****************************PuntosGlobales
 
+
+
+                            //RadarchartVictoriasPorMoto****************
+
+                            final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
+
+                            ArrayList<Entry> entriesRadarchartVictoriasPorMoto = new ArrayList<Entry>();
+                            ArrayList<String> labelsRadarchartVictoriasPorMoto = new ArrayList<String>();
+                            for (int i = 0; i<top5VictoriasMoto.length();i++){
+                                String motoNombre;
+                                JSONObject piloto=top5VictoriasMoto.getJSONObject(i);
+                                motoNombre=piloto.names().get(0).toString();
+                                labelsRadarchartVictoriasPorMoto.add(motoNombre);
+                                entriesRadarchartVictoriasPorMoto.add(new Entry(piloto.getInt(motoNombre), i));
+                            }
+
+                            radarchartVictoriasPorMoto = (RadarChart) findViewById(R.id.radarchartVictoriasPorMoto);
+
+
+                            radarchartVictoriasPorMoto.getXAxis().setTextColor(Color.WHITE);
+                            radarchartVictoriasPorMoto.getXAxis().setTextSize(14);
+
+                            // create pieDataSet
+
+                            RadarDataSet dataSetRadarchartVictoriasPorMoto = new RadarDataSet(entriesRadarchartVictoriasPorMoto, "");
+
+                            dataSetRadarchartVictoriasPorMoto.setVisible(true);
+                            dataSetRadarchartVictoriasPorMoto.setHighlightCircleFillColor(Color.GREEN);
+                            dataSetRadarchartVictoriasPorMoto.setValueTextColor(Color.RED);
+                            dataSetRadarchartVictoriasPorMoto.setDrawFilled(true);
+                            //  create pie data object and set xValues and yValues and set it to the pieChart
+                            final RadarData dataRadarchartVictoriasPorMoto = new RadarData(labelsRadarchartVictoriasPorMoto, dataSetRadarchartVictoriasPorMoto);
+
+                            dataRadarchartVictoriasPorMoto.setValueTextSize(0);
+                            dataRadarchartVictoriasPorMoto.setValueTextColor(Color.WHITE);
+                            // Legends to show on bottom of the graph
+
+
+                            Legend l = radarchartVictoriasPorMoto.getLegend();
+                            //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+                            l.setEnabled(false);
+                            radarchartVictoriasPorMoto.getYAxis().setEnabled(false);
+                            radarchartVictoriasPorMoto.setDescription("");
+                            radarchartVictoriasPorMoto.setWebColor(Color.YELLOW);
+                            radarchartVictoriasPorMoto.setWebColorInner(Color.BLUE);
+                            radarchartVictoriasPorMoto.setData(dataRadarchartVictoriasPorMoto);
+                            // undo all highlights
+                            radarchartVictoriasPorMoto.highlightValues(null);
+                            // refresh/update pie chart
+                            radarchartVictoriasPorMoto.invalidate();
+                            // animate piechartVictoriasPorCategoria
+                            radarchartVictoriasPorMoto.animateY(1500);
+                            radarchartVictoriasPorMoto.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                @Override
+                                public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                    // display msg when value selected
+                                    if (e == null)
+                                        return;
+                                    dataRadarchartVictoriasPorMoto.setValueTextSize(13);
+                                    Toast.makeText(MainActivityDashboardDisplay.this,
+                                            (int)e.getVal()+ " victorias con la moto "+dataRadarchartVictoriasPorMoto.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onNothingSelected() {
+                                    dataRadarchartVictoriasPorMoto.setValueTextSize(0);
+                                }
+                            });
+
+                            //*************************piechartVictoriasPorCategoria
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -917,5 +1003,11 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
         }
     }
 
+
+    public  void GoHome(View view){
+        Log.i("print8", "go home");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
+        mContext.startActivity(intentMainActivityInicial);
+    }
 
 }

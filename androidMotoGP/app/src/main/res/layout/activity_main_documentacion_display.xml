@@ -39,6 +39,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/LayoutDeCarga"
                     android:layout_width="match_parent"
                     android:layout_height="115dp"
                     android:layout_marginTop="15dp"
@@ -174,18 +175,7 @@
 
         </LinearLayout>
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:fillViewport="true"
-                android:layout_height="match_parent"
-                android:fadingEdge="vertical|horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,8 +204,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 
-                </LinearLayout>
-            </HorizontalScrollView>
 
         </LinearLayout>
 

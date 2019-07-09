@@ -23,26 +23,54 @@
             android:animateLayoutChanges="false"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textoTitulo"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:gravity="center"
-                android:textAllCaps="false"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
-                android:textColor="#e5e5e5"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:text="Estadísticas"/>
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="0.50"/>
+                <TextView
+                    android:id="@+id/textoTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                    android:textColor="#e5e5e5"
+                    android:textSize="30sp"
+                    android:layout_weight="0.1"
+                    android:textStyle="bold"
+                    android:text="Estadísticas"/>
+
+                <ImageView
+                    android:id="@+id/imageHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="0.50"
+                    android:contentDescription="TODO"
+                    android:onClick="GoHome"
+                    app:srcCompat="@drawable/home" />
+
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/textoTitulo2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
+
                 android:gravity="center"
                 android:textAllCaps="false"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
@@ -50,6 +78,8 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:text="Top Datos Historicos"/>
+
+
 
 
             <LinearLayout
@@ -879,17 +909,17 @@
                 android:id="@+id/layerPilotosMasVictoriasPuntosCampeonatosDisputados"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="25dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textoPilotosMasVictoriasPuntosCampeonatosDisputados"
-                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:gravity="center"
                     android:text="Pilotos con más campeonatos disputados"
                     android:textColor="#e5e5e5"
                     android:textSize="16sp"
@@ -897,17 +927,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="15dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="8dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
@@ -920,9 +950,9 @@
 
                         <ImageView
                             android:id="@+id/fotoPiloto1PuntosCampeonatosDisputados"
-                            android:layout_marginTop="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/rossi" />
 
@@ -931,8 +961,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="prueba"
                             android:gravity="center"
+                            android:text="prueba"
                             android:textColor="#e5e5e5"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -941,9 +971,9 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <ImageView
@@ -955,9 +985,9 @@
 
                         <ImageView
                             android:id="@+id/fotoPiloto2PuntosCampeonatosDisputados"
-                            android:layout_marginTop="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/rossi" />
 
@@ -966,8 +996,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="prueba"
                             android:gravity="center"
+                            android:text="prueba"
                             android:textColor="#e5e5e5"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -976,9 +1006,9 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <ImageView
@@ -990,9 +1020,9 @@
 
                         <ImageView
                             android:id="@+id/fotoPiloto3PuntosCampeonatosDisputados"
-                            android:layout_marginTop="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/rossi" />
 
@@ -1001,8 +1031,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="prueba"
                             android:gravity="center"
+                            android:text="prueba"
                             android:textColor="#e5e5e5"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -1011,9 +1041,9 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <ImageView
@@ -1025,9 +1055,9 @@
 
                         <ImageView
                             android:id="@+id/fotoPiloto4PuntosCampeonatosDisputados"
-                            android:layout_marginTop="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/rossi" />
 
@@ -1036,8 +1066,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="prueba"
                             android:gravity="center"
+                            android:text="prueba"
                             android:textColor="#e5e5e5"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -1046,9 +1076,9 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <ImageView
@@ -1060,9 +1090,9 @@
 
                         <ImageView
                             android:id="@+id/fotoPiloto5PuntosCampeonatosDisputados"
-                            android:layout_marginTop="3dp"
                             android:layout_width="match_parent"
                             android:layout_height="70dp"
+                            android:layout_marginTop="3dp"
                             android:layout_weight="1"
                             app:srcCompat="@drawable/rossi" />
 
@@ -1071,15 +1101,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="prueba"
                             android:gravity="center"
+                            android:text="prueba"
                             android:textColor="#e5e5e5"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
-
-
-
 
 
                 </LinearLayout>
@@ -1087,8 +1114,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:orientation="horizontal">
 
 
@@ -1097,56 +1124,84 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textColor="#e5e5e5"
-                        android:textStyle="bold"
-                        android:textSize="12dp"
                         android:gravity="center"
-                        android:text="Nombre Apellido" />
+                        android:text="Nombre Apellido"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/nombrePiloto2PuntosCampeonatosDisputados"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textColor="#e5e5e5"
-                        android:textStyle="bold"
-                        android:textSize="12dp"
                         android:gravity="center"
-                        android:text="Nombre Apellido" />
+                        android:text="Nombre Apellido"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/nombrePiloto3PuntosCampeonatosDisputados"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textColor="#e5e5e5"
-                        android:textStyle="bold"
-                        android:textSize="12dp"
                         android:gravity="center"
-                        android:text="Nombre Apellido" />
+                        android:text="Nombre Apellido"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/nombrePiloto4PuntosCampeonatosDisputados"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textColor="#e5e5e5"
-                        android:textStyle="bold"
-                        android:textSize="12dp"
                         android:gravity="center"
-                        android:text="Nombre Apellido" />
+                        android:text="Nombre Apellido"
+                        android:textColor="#e5e5e5"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/nombrePiloto5PuntosCampeonatosDisputados"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Nombre Apellido"
                         android:textColor="#e5e5e5"
                         android:textSize="12dp"
-                        android:textStyle="bold"
-                        android:gravity="center"
-                        android:text="Nombre Apellido" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textoTituloGrafico"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center|bottom"
+                    android:text="Victorias por moto"
+                    android:textAllCaps="false"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                    android:textColor="#FF00FF00"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+                <com.github.mikephil.charting.charts.RadarChart
+                    android:id="@+id/radarchartVictoriasPorMoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_weight="1">
+                    android:gravity="center|top"
+                </com.github.mikephil.charting.charts.RadarChart>
 
 
             </LinearLayout>

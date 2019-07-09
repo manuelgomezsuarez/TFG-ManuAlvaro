@@ -26,19 +26,44 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="40dp"
+                        android:layout_weight="0.50"/>
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+
+                        android:layout_weight="0.1"
                         android:contentDescription="TODO"
                         app:srcCompat="@drawable/winner" />
+
+
+                    <ImageView
+                        android:id="@+id/imageHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginBottom="40dp"
+                        android:layout_weight="0.50"
+
+                        android:contentDescription="TODO"
+                        android:onClick="GoHome"
+                        app:srcCompat="@drawable/home" />
+
+
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/LayoutDeCarga"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginTop="15dp"
@@ -55,9 +80,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingLeft="15dp"
+                            android:text="Información General"
                             android:textColor="#e5e5e5"
-                            android:textStyle="bold"
-                            android:text="Información General" />
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -79,8 +104,8 @@
                             android:layout_height="34dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
-                            android:textColor="#e5e5e5"
-                            android:text="TextView" />
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -95,8 +120,8 @@
                             android:layout_height="34dp"
                             android:layout_marginTop="5dp"
                             android:layout_weight="1"
-                            android:textColor="#e5e5e5"
-                            android:text="TextView" />
+                            android:text="TextView"
+                            android:textColor="#e5e5e5" />
 
                     </LinearLayout>
 

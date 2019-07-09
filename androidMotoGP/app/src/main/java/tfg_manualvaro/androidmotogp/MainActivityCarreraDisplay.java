@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,6 +56,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     private String titulo;
     private String lugar;
     private String fecha;
+    private LinearLayout LayoutDeCarga;
 
 
     @Override
@@ -70,7 +72,8 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
         tituloCarrera=intentMainActivitySelector.getStringExtra("tituloString");
         Log.i("print16",temporadaMainActivitySelector.getTemporada().toString());
         Log.i("print17",categoriaMainActivitySelector);
-
+        LayoutDeCarga=(LinearLayout) findViewById(R.id.LayoutDeCarga);
+        LayoutDeCarga.setVisibility(View.INVISIBLE);
 
 
         new FetchCarrera().execute();
@@ -192,6 +195,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             carrera.setTemporada(carrera.getTemporada());
                             //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCarreraAdapter(carrera,getApplicationContext());
+                            LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
                             MainActivityCarreraDisplay.Utility.setListViewHeightBasedOnChildren(listView);
 
@@ -254,6 +258,13 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
 
         mContext.startActivity(intentMainActivityDocumentacion);
+    }
+
+
+    public  void GoHome(View view){
+        Log.i("print8", "go home");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
+        mContext.startActivity(intentMainActivityInicial);
     }
 
 }

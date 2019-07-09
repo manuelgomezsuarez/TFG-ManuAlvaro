@@ -78,7 +78,6 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
     private String next;
     private Integer pagination=1;
     private JSONArray posicionesPilotoJSONArray=null;
-    private String[] country = { "Número de Victorias", "Número de Podios", "Categoría", "Velocidad Media", "Moto","Posicion"};
     private HashMap<String,String[]> filtros = new HashMap<String, String[]>();
 
     private BarChart chart;
@@ -112,10 +111,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         chart.setDescriptionColor(Color.GREEN);
         chart.setDescriptionTextSize(15);
 
-
-
-
-
+        chart.getLegend().setTextSize(15);
         Spinner spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
 
@@ -123,7 +119,6 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         filtros.put("Posicion en el campeonato", new String[]{"posicion_campeonato", "Puesto que ha quedado en el campeonato"});
         filtros.put("Número de Victorias", new String[]{"num_victorias", "Veces que ha llegado al podio"});
         filtros.put("Velocidad Media", new String[]{"vel_media", "Velocidad media que ha conseguido en las carreras"});
-        filtros.put("Moto", new String[]{"moto", "Moto que ha utilizado"});
         //Creating the ArrayAdapter instance having the country list
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,filtros.keySet().toArray());
         int spinnerPosition = aa.getPosition(1);
@@ -150,7 +145,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         if (temporadasPilotoJSONArray!=null) {
             try {
 
-                chart.setDescription(filtros.get(filtro)[1]);
+                chart.setDescription("");
                 BarDataSet dataSet;
                 List<BarEntry> entries = new ArrayList<>();
 
@@ -191,6 +186,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                     dataBarchar.setValueTextColor(Color.WHITE);
                     chart.setData(dataBarchar);
                     chart.invalidate(); // refresh
+                    chart.animateY(1500);
                 }
 
             } catch (JSONException e) {
@@ -298,7 +294,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                             Log.i("print18","metodo pilotofech");
                             temporadasPilotoJSONArray= pilotoJSON.getJSONArray("datos_anuales");
                             if (temporadasPilotoJSONArray!=null) {
-                                chart.setDescription(filtros.get(filtro)[1]);
+                                chart.setDescription("");
                                 List<BarEntry> entries = new ArrayList<>();
                                 BarDataSet dataSetBarchart = new BarDataSet(entries, filtro);
 
@@ -453,13 +449,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                 piechartVictoriasPorPodios = (PieChart) findViewById(R.id.piechartVictoriasPorPodios);
 
-                                //   mChart.setUsePercentValues(true);
-                                piechartVictoriasPorPodios.setDescription("Posiciones");
-                                piechartVictoriasPorPodios.setDescriptionColor(Color.GREEN);
-                                piechartVictoriasPorPodios.setDescriptionTextSize(15);
-                                piechartVictoriasPorPodios.setDrawCenterText(true);
-                                piechartVictoriasPorPodios.setRotationEnabled(true);
-                                piechartVictoriasPorPodios.setDescriptionPosition(280,370);
+                                piechartVictoriasPorPodios.setUsePercentValues(true);
+                                piechartVictoriasPorPodios.setDescription("");
 
 
 
@@ -478,7 +469,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorPodios = new PieData(labelsPiechartVictoriasPorPodios, dataSetPiechartVictoriasPorPodios);
 
                                 dataPiechartVictoriasPorPodios.setValueTextSize(0);
-                                dataPiechartVictoriasPorPodios.setValueTextColor(Color.WHITE);
+                                dataPiechartVictoriasPorPodios.setValueTextColor(Color.RED);
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorPodios = piechartVictoriasPorPodios.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -493,6 +484,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 // undo all highlights
                                 piechartVictoriasPorPodios.highlightValues(null);
                                 // refresh/update pie chart
+
                                 piechartVictoriasPorPodios.invalidate();
                                 // animate piechartVictoriasPorPodios
                                 piechartVictoriasPorPodios.animateXY(1500, 3000);
@@ -508,9 +500,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         // display msg when value selected
                                         if (e == null)
                                             return;
-                                        dataPiechartVictoriasPorPodios.setValueTextSize(12);
+                                        dataPiechartVictoriasPorPodios.setValueTextSize(17);
                                         Toast.makeText(MainActivityPilotoDisplay.this,
-                                                (int)e.getVal()+ " victorias usando la moto "+dataPiechartVictoriasPorPodios.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                                (int)e.getVal()+ " victorias quedando en la "+dataPiechartVictoriasPorPodios.getXVals().get(e.getXIndex())+ "posición", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
@@ -534,7 +526,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorCategoria.setDrawCenterText(true);
                                 piechartVictoriasPorCategoria.setRotationEnabled(true);
                                 piechartVictoriasPorCategoria.setDescriptionPosition(440,480);
-
+                                piechartVictoriasPorCategoria.setUsePercentValues(true);
 
                                 ArrayList<Entry> entriesPiechartVictoriasPorCategoria = new ArrayList<Entry>();
                                 ArrayList<String> labelsPiechartVictoriasPorCategoria = new ArrayList<String>();
@@ -558,7 +550,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorCategoria = new PieData(labelsPiechartVictoriasPorCategoria, dataSetPiechartVictoriasPorCategoria);
 
                                 dataPiechartVictoriasPorCategoria.setValueTextSize(0);
-                                dataPiechartVictoriasPorCategoria.setValueTextColor(Color.WHITE);
+                                dataPiechartVictoriasPorCategoria.setValueTextColor(Color.RED);
                                 // Legends to show on bottom of the graph
                                 Legend l = piechartVictoriasPorCategoria.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -587,7 +579,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         // display msg when value selected
                                         if (e == null)
                                             return;
-                                        dataPiechartVictoriasPorCategoria.setValueTextSize(12);
+                                        dataPiechartVictoriasPorCategoria.setValueTextSize(17);
                                         Toast.makeText(MainActivityPilotoDisplay.this,
                                                 (int)e.getVal()+ " victorias en la categoría "+dataPiechartVictoriasPorCategoria.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
                                     }
@@ -637,7 +629,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorMoto = new PieData(labelsPiechartVictoriasPorMoto, dataSetPiechartVictoriasPorMoto);
 
                                 dataPiechartVictoriasPorMoto.setValueTextSize(0);
-                                dataPiechartVictoriasPorMoto.setValueTextColor(Color.WHITE);
+                                dataPiechartVictoriasPorMoto.setValueTextColor(Color.RED);
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorMoto = piechartVictoriasPorMoto.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -655,7 +647,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorMoto.invalidate();
                                 // animate piechartVictoriasPorMoto
                                 piechartVictoriasPorMoto.animateXY(1500, 3000);
-
+                                piechartVictoriasPorMoto.setUsePercentValues(true);
 
 
 
@@ -666,7 +658,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         // display msg when value selected
                                         if (e == null)
                                             return;
-                                        dataPiechartVictoriasPorMoto.setValueTextSize(12);
+                                        dataPiechartVictoriasPorMoto.setValueTextSize(17);
                                         Toast.makeText(MainActivityPilotoDisplay.this,
                                                 (int)e.getVal()+ " victorias usando la moto "+dataPiechartVictoriasPorMoto.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
                                     }
@@ -727,6 +719,12 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                 }
             });
         }
+    }
+
+    public  void GoHome(View view){
+        Log.i("print8", "go home");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
+        mContext.startActivity(intentMainActivityInicial);
     }
 
 

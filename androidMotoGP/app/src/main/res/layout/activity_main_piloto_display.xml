@@ -23,18 +23,51 @@
             android:animateLayoutChanges="false"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textoNombre"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:gravity="center"
-                android:textAllCaps="false"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
-                android:textColor="#e5e5e5"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:layout_height="80dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="0.50"/>
+                <TextView
+                    android:id="@+id/textoNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                    android:textColor="#e5e5e5"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_weight="0.1"
+                    android:text=""/>
+
+
+                <ImageView
+                    android:id="@+id/imageHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="40dp"
+                    android:layout_weight="0.50"
+
+                    android:contentDescription="TODO"
+                    android:onClick="GoHome"
+                    app:srcCompat="@drawable/home" />
+
+
+            </LinearLayout>
+
 
 
             <ImageView
@@ -277,16 +310,37 @@
 
                     </LinearLayout>
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/piechartVictoriasPorPodios"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginRight="12dp"
+                        android:orientation="vertical"
                         android:layout_weight="0.5">
 
-                    </com.github.mikephil.charting.charts.PieChart>
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/piechartVictoriasPorPodios"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                        </com.github.mikephil.charting.charts.PieChart>
+
+                        <TextView
+                            android:id="@+id/textoTituloGrafico"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="38dp"
+                            android:text="Posiciones"
+                            android:layout_weight="8"
+                            android:textAllCaps="false"
+                            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                            android:textColor="#FF00FF00"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/textView2"
@@ -321,7 +375,7 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="320dp"
                 android:layout_marginLeft="3dp"
                 android:layout_marginRight="3dp">
 
