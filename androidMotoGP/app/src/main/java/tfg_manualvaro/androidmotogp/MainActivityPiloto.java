@@ -139,7 +139,7 @@ public class MainActivityPiloto extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityPiloto.this,
-                                "Some error occurred while loading data",
+                                "Lo sentimos, no se ha encontrado ningun piloto con el nombre introducido",
                                 Toast.LENGTH_LONG).show();
 
                     }

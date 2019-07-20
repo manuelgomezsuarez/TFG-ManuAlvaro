@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 
@@ -97,13 +98,16 @@ public class MainActivityInicial extends AppCompatActivity{
 
         String nombre= nombrePiloto.getText().toString();
         Log.i("print30", nombre);
-        if (nombre.length()>0){
+
+
+        if (nombre.trim().length()>=3 && !nombre.trim().isEmpty()){
             Log.i("print8", "vamos a cambiar a mainActivityCampeonatoDisplay");
             Intent intentMainActivityInicial = new Intent(mContext, MainActivityPiloto.class);
-            intentMainActivityInicial.putExtra("nombrePiloto",nombre);
+            intentMainActivityInicial.putExtra("nombrePiloto",nombre.trim());
             mContext.startActivity(intentMainActivityInicial);
         }
         else{
+            Toast.makeText(this, "Por favor, introduce al menos 3 caracteres para buscar un piloto", Toast.LENGTH_SHORT).show();
             nombrePiloto.setVisibility(View.VISIBLE);
         }
 
