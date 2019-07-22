@@ -24,9 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import tfg_manualvaro.androidmotogp.adapter.PosicionCarreraAdapter;
-import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
 import tfg_manualvaro.androidmotogp.models.CarreraModelo;
-import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
 import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
@@ -40,7 +38,6 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     private static String categoriaMainActivitySelector;
     private static String tituloCarrera;
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
     private String url = "https://motogp-api.herokuapp.com/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
 
@@ -50,7 +47,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     private Integer pagination=1;
     private PosicionCarreraAdapter adapter;
     private JSONArray posicionesCarreraJSONArray=null;
-//Propiedades para Documentación
+    //Propiedades para Documentación
     private String temporada;
     private String categoria;
     private String titulo;
@@ -61,21 +58,17 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("print13","hemos llegado el MainActivityCarreraDisplay");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_carrera_display);
-        //Call the AsyncTask
         mContext = this;
         Intent intentMainActivitySelector = getIntent();
         temporadaMainActivitySelector = intentMainActivitySelector.getParcelableExtra("Temporada");
         categoriaMainActivitySelector = intentMainActivitySelector.getStringExtra("CategoriaString");
         tituloCarrera=intentMainActivitySelector.getStringExtra("tituloString");
-        Log.i("print16",temporadaMainActivitySelector.getTemporada().toString());
-        Log.i("print17",categoriaMainActivitySelector);
         LayoutDeCarga=(LinearLayout) findViewById(R.id.LayoutDeCarga);
         LayoutDeCarga.setVisibility(View.INVISIBLE);
 
-
+        //Llamada a metodo asíncrono
         new FetchCarrera().execute();
 
     }
@@ -88,9 +81,9 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityCarreraDisplay.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -106,9 +99,9 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
             urlParams.put("categoria",categoriaMainActivitySelector);
             urlParams.put("titulo",tituloCarrera);
             urlParams.put("page",pagination.toString());
-            Log.i("print19",urlParams.toString());
+            Log.d("print19",urlParams.toString());
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
-            Log.i("print18",response.toString());
+            Log.d("print18",response.toString());
 
             try {
                 success = response.getInt(KEY_SUCCESS);
@@ -117,10 +110,10 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray posicionesCarreraJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < posicionesCarreraJSONArrayNext.length(); i++) {
@@ -129,7 +122,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                         posicionesCarreraJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", posicionesCarreraJSONArray.toString());
+                Log.d("next", posicionesCarreraJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -177,7 +170,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             TextView abreviaturaTextView = (TextView) findViewById(R.id.textoAbreviatura);
                             lugarTextView.setText(carrera.getLugar());
                             fechaTextView.setText(carrera.getFecha().split("T")[0]);
-                            //tituloTextView.setText(carrera.getTitulo());
+                            //tituloTextView.setText(carrera.getTitulo());re
                             abreviaturaTextView.setText(carrera.getTitulo());
                             categoriaTextView.setText(categoriaMainActivitySelector);
 
@@ -240,7 +233,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
 
     public static void changeToDisplayPiloto(String piloto){
-        Log.i("print13", "vamos a cambiar a mainActivityPilotoDisplay");
+        Log.d("print13", "vamos a cambiar a mainActivityPilotoDisplay");
         Intent intentMainActivityNombrewPilotoPosicion= new Intent(mContext, MainActivityPilotoDisplay.class);
         intentMainActivityNombrewPilotoPosicion.putExtra("nombrePiloto",piloto);
         mContext.startActivity(intentMainActivityNombrewPilotoPosicion);
@@ -248,7 +241,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
     }
 
     public void changeToDocumentacionActivity(View view){
-        Log.i("print13", "vamos a cambiar a mainActivityDocumentacion");
+        Log.d("print13", "vamos a cambiar a mainActivityDocumentacion");
         Intent intentMainActivityDocumentacion= new Intent(mContext, MainActivityDocumentacion.class);
         intentMainActivityDocumentacion.putExtra("temporada",temporada);
         intentMainActivityDocumentacion.putExtra("categoria",categoria);
@@ -262,9 +255,19 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
 
     public  void GoHome(View view){
-        Log.i("print8", "go home");
+        Log.d("print8", "go home");
         Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
         mContext.startActivity(intentMainActivityInicial);
     }
+
+
+
+
+
+
+
+
+
+
 
 }

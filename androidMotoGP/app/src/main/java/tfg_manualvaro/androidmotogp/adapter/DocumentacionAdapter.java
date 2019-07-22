@@ -11,17 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
-import tfg_manualvaro.androidmotogp.MainActivityCampeonatoDisplay;
-import tfg_manualvaro.androidmotogp.MainActivityCarrera;
-import tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay;
+
 import tfg_manualvaro.androidmotogp.MainActivityDocumentacion;
 import tfg_manualvaro.androidmotogp.R;
-import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
 import tfg_manualvaro.androidmotogp.models.Url;
 import tfg_manualvaro.androidmotogp.models.DocumentacionModelo;
-import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
-import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
 
 
 /**

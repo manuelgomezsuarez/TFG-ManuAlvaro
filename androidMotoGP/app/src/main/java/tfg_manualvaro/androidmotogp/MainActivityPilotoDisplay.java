@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -19,23 +18,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ImageView;
-import com.github.mikephil.charting.charts.BarChart;
+
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
 
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,13 +41,9 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-import tfg_manualvaro.androidmotogp.adapter.PosicionCarreraAdapter;
 import tfg_manualvaro.androidmotogp.models.Piloto;
-import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
-import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
 public class MainActivityPilotoDisplay extends AppCompatActivity implements
@@ -69,7 +56,6 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
     private String filtro;
     private JSONArray temporadasPilotoJSONArray;
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/piloto/";
     private String url = "https://motogp-api.herokuapp.com/piloto/info/";
     private Map<String,String> urlParams= new HashMap<>();
 
@@ -90,14 +76,14 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("print13","hemos llegado el MainActivityPilotoDisplay");
+        Log.d("print13","hemos llegado el MainActivityPilotoDisplay");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_piloto_display);
         //Call the AsyncTask
         mContext = this;
         Intent intentMainActivitySelector = getIntent();
         nombrePilotoMainActivityInicial = intentMainActivitySelector.getStringExtra("nombrePiloto");
-        Log.i("print17",nombrePilotoMainActivityInicial);
+        Log.d("print17",nombrePilotoMainActivityInicial);
 
         chart = findViewById(R.id.barchart);
         chart.getAxisLeft().setTextColor(Color.WHITE); // left y-axis
@@ -150,17 +136,16 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                 List<BarEntry> entries = new ArrayList<>();
 
                 ArrayList<String> labels = new ArrayList<String>();
-                Log.i("print20","JSON recuperado");
+                Log.d("print20","JSON recuperado");
                 for (int i = 0; i < temporadasPilotoJSONArray.length(); i++) {
 
-                    JSONObject temporadaPiloto = null;
+                    JSONObject temporadaPiloto;
                     temporadaPiloto = temporadasPilotoJSONArray.getJSONObject(i);
                     String temporada = temporadaPiloto.keys().next();
                     labels.add(temporada);
                     JSONObject datosTemporadaPiloto = temporadaPiloto.getJSONObject(temporada);
 
                     //primer valor es altura de la y, segundo valor es el indice de la tabla
-
                     if(filtro.equals("Número de Victorias")){
                         Integer numeroVictorias=datosTemporadaPiloto.getInt("num_victorias");
                         Integer numeroPodios=datosTemporadaPiloto.getInt("num_podios")-numeroVictorias;
@@ -176,7 +161,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                         entries.add(new BarEntry(velocidadMediaJSON, i));
                         dataSet = new BarDataSet(entries, filtro);
                         dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
-                        Log.i("print39",Double.toString(datosTemporadaPiloto.getDouble(filtros.get(filtro)[0])));
+                        Log.d("print39",Double.toString(datosTemporadaPiloto.getDouble(filtros.get(filtro)[0])));
 
                     }
 
@@ -197,7 +182,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
             arg0.setSelection(1);
             filtro = arg0.getSelectedItem().toString();
         }
-        Log.i("print18",arg0.getSelectedItem().toString());
+        Log.d("print18",arg0.getSelectedItem().toString());
 
 
     }
@@ -216,9 +201,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityPilotoDisplay.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -230,9 +215,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
             urlParams.put("format","json");
             urlParams.put("piloto",nombrePilotoMainActivityInicial);
             urlParams.put("page",pagination.toString());
-            Log.i("print19",urlParams.toString());
+            Log.d("print19",urlParams.toString());
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
-            Log.i("print18",response.toString());
+            Log.d("print18",response.toString());
 
             try {
                 success = response.getInt(KEY_SUCCESS);
@@ -241,10 +226,10 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray posicionesPilotoJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < posicionesPilotoJSONArrayNext.length(); i++) {
@@ -253,7 +238,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                         posicionesPilotoJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", posicionesPilotoJSONArray.toString());
+                Log.d("next", posicionesPilotoJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -291,7 +276,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
 
 
-                            Log.i("print18","metodo pilotofech");
+                            Log.d("print18","metodo pilotofech");
                             temporadasPilotoJSONArray= pilotoJSON.getJSONArray("datos_anuales");
                             if (temporadasPilotoJSONArray!=null) {
                                 chart.setDescription("");
@@ -299,7 +284,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 BarDataSet dataSetBarchart = new BarDataSet(entries, filtro);
 
                                 ArrayList<String> labels = new ArrayList<String>();
-                                Log.i("print20", "JSON recuperado");
+                                Log.d("print20", "JSON recuperado");
 
                                 String categoria;
                                 String moto;
@@ -307,13 +292,13 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 Integer victoriasSegundaPosicion;
                                 Integer victoriasTerceraPosicion;
                                 Integer podios;
-                                final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
                                 final HashMap<String,Integer>victoriasPorMoto=new HashMap<>();
                                 ArrayList<Entry> entriesPiechartVictoriasPorPodios = new ArrayList<Entry>();
                                 ArrayList<String> labelsPiechartVictoriasPorPodios = new ArrayList<String>();
+                                final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
                                 for (int i = 0; i < temporadasPilotoJSONArray.length(); i++) {
 
-                                    JSONObject temporadaPiloto = null;
+                                    JSONObject temporadaPiloto;
                                     temporadaPiloto = temporadasPilotoJSONArray.getJSONObject(i);
                                     String temporada = temporadaPiloto.keys().next();
                                     JSONObject datosTemporadaPiloto = temporadaPiloto.getJSONObject(temporada);
@@ -366,7 +351,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                         resumenUltimoAnoTextView.setText(resumenUltimoAnoTextView.getText().toString()+ " ("+temporada+")");
 
                                         TextView posicionTextView = (TextView) findViewById(R.id.textoPosicion);
-                                        //Log.i("print71",pilotoJSON.getString("posicion_campeonato"));
+                                        //Log.d("print71",pilotoJSON.getString("posicion_campeonato"));
                                         posicionTextView.setText(datosTemporadaPiloto.getString("posicion_campeonato"));
 
                                         TextView puntosTextView = (TextView) findViewById(R.id.textoPuntos);
@@ -446,15 +431,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                 //piechartVictoriasPorPodios*********************************************************
 
-
                                 piechartVictoriasPorPodios = (PieChart) findViewById(R.id.piechartVictoriasPorPodios);
-
                                 piechartVictoriasPorPodios.setUsePercentValues(true);
                                 piechartVictoriasPorPodios.setDescription("");
-
-
-
-
 
 
                                 // create pieDataSet
@@ -516,10 +495,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                 //piechartVictoriasPorCategoria****************
 
-
                                 piechartVictoriasPorCategoria = (PieChart) findViewById(R.id.piechartVictoriasPorCategoria);
 
-                                //   mChart.setUsePercentValues(true);
                                 piechartVictoriasPorCategoria.setDescription("Por categoría");
                                 piechartVictoriasPorCategoria.setDescriptionColor(Color.GREEN);
                                 piechartVictoriasPorCategoria.setDescriptionTextSize(15);
@@ -538,7 +515,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                     contadorVictoriasPorCategoriaLoop++;
                                 }
 
-                                // create pieDataSet
+                                // creación de grafico
                                 PieDataSet dataSetPiechartVictoriasPorCategoria = new PieDataSet(entriesPiechartVictoriasPorCategoria, "");
                                 dataSetPiechartVictoriasPorCategoria.setSliceSpace(1);
                                 dataSetPiechartVictoriasPorCategoria.setSelectionShift(10);
@@ -546,12 +523,12 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
                                 dataSetPiechartVictoriasPorCategoria.setColors(ColorTemplate.PASTEL_COLORS);
 
-                                //  create pie data object and set xValues and yValues and set it to the pieChart
+                                //  introducimos valores al grafico
                                 final PieData dataPiechartVictoriasPorCategoria = new PieData(labelsPiechartVictoriasPorCategoria, dataSetPiechartVictoriasPorCategoria);
 
                                 dataPiechartVictoriasPorCategoria.setValueTextSize(0);
                                 dataPiechartVictoriasPorCategoria.setValueTextColor(Color.RED);
-                                // Legends to show on bottom of the graph
+                                // asignamos valores a la leyenda
                                 Legend l = piechartVictoriasPorCategoria.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
                                 l.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
@@ -722,7 +699,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
     }
 
     public  void GoHome(View view){
-        Log.i("print8", "go home");
+        Log.d("print8", "go home");
         Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
         mContext.startActivity(intentMainActivityInicial);
     }

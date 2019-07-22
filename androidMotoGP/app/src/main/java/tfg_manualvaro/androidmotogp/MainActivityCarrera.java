@@ -35,7 +35,6 @@ public class MainActivityCarrera extends AppCompatActivity{
     private static String categoriaMainActivitySelector;
 
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
     private String url = "https://motogp-api.herokuapp.com/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
 
@@ -58,8 +57,8 @@ public class MainActivityCarrera extends AppCompatActivity{
         Intent intentMainActivitySelector = getIntent();
         temporadaMainActivitySelector = intentMainActivitySelector.getParcelableExtra("Temporada");
         categoriaMainActivitySelector = intentMainActivitySelector.getStringExtra("CategoriaString");
-        Log.i("print1666",temporadaMainActivitySelector.getTemporada().toString());
-        Log.i("print1777",categoriaMainActivitySelector);
+        Log.d("print1666",temporadaMainActivitySelector.getTemporada().toString());
+        Log.d("print1777",categoriaMainActivitySelector);
         new FetchCarrera().execute();
 
     }
@@ -72,9 +71,9 @@ public class MainActivityCarrera extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityCarrera.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -90,9 +89,9 @@ public class MainActivityCarrera extends AppCompatActivity{
             urlParams.put("distinct","titulo");
             urlParams.put("categoria",categoriaMainActivitySelector);
             urlParams.put("page",pagination.toString());
-            Log.i("print19",urlParams.toString());
+            Log.d("print19",urlParams.toString());
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
-            Log.i("print18",response.toString());
+            Log.d("print18",response.toString());
 
             try {
                 success = response.getInt(KEY_SUCCESS);
@@ -101,10 +100,10 @@ public class MainActivityCarrera extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray carrerasJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < carrerasJSONArrayNext.length(); i++) {
@@ -113,7 +112,7 @@ public class MainActivityCarrera extends AppCompatActivity{
                         carrerasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", carrerasJSONArray.toString());
+                Log.d("next", carrerasJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -158,8 +157,8 @@ public class MainActivityCarrera extends AppCompatActivity{
     }
 
     public static void changeToCarreraActivityDisplay(Carrera carrera){
-        Log.i("print8", "vamos a cambiar a mainActivityCarreraDisplay");
-        Log.i("print9", temporadaMainActivitySelector.getTemporada().toString());
+        Log.d("print8", "vamos a cambiar a mainActivityCarreraDisplay");
+        Log.d("print9", temporadaMainActivitySelector.getTemporada().toString());
         //Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
         Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
         intentMainActivityCarrera.putExtra("Temporada",temporadaMainActivitySelector);

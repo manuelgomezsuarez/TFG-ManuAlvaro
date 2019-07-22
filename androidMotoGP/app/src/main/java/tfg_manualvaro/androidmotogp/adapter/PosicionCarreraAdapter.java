@@ -10,12 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import tfg_manualvaro.androidmotogp.MainActivityCarrera;
 import tfg_manualvaro.androidmotogp.MainActivityCarreraDisplay;
 import tfg_manualvaro.androidmotogp.R;
-import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
 import tfg_manualvaro.androidmotogp.models.CarreraModelo;
-import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
 
 
@@ -80,7 +77,7 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
                         //assign the textview forecolor
                         tv.setTextColor(Color.RED);
                     } catch (Exception except) {
-                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
+                        Log.e("Error","Ha ocurrido un error"+except.getMessage());
                     }
                 }
             });
@@ -88,7 +85,6 @@ public class PosicionCarreraAdapter extends ArrayAdapter<PosicionCarrera> {
         }
 
         return v;
-
 
     }
 

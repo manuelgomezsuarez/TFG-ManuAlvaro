@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,7 +35,6 @@ public class MainActivityCategoria extends AppCompatActivity{
     private static String entrada;
 
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
     private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
     private String url2 = "https://motogp-api.herokuapp.com/dashboard/";
@@ -74,9 +72,9 @@ public class MainActivityCategoria extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityCategoria.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -89,20 +87,20 @@ public class MainActivityCategoria extends AppCompatActivity{
             if(entrada!=null){
                 urlParams2.put("format","json");
                 urlParams2.put("page",pagination.toString());
-                Log.i("print19",urlParams2.toString());
+                Log.d("print19",urlParams2.toString());
                 response2 = jsonParser.makeHttpRequest(url2,"GET",urlParams);
 
                 try {
                     success = response2.getInt(KEY_SUCCESS);
                     ultimaJSONArray =  response2.getJSONArray(KEY_DATA);
-                    Log.i("printUltima",ultimaJSONArray.toString());
+                    Log.d("printUltima",ultimaJSONArray.toString());
                     JSONObject dashboard= ultimaJSONArray.getJSONObject(0);
                     JSONArray datosHistoricos=dashboard.getJSONArray("datos_ultima_temporada");
 
                     String ultimaCarrera = datosHistoricos.getJSONObject(0).getString("ultima_carrera");
                     String tituloCarrera=ultimaCarrera.split(" - ")[1];
                     String temporadaCarrera=ultimaCarrera.split(" - ")[0].split("/")[2];
-                    Log.i("printUltima",temporadaCarrera);
+                    Log.d("printUltima",temporadaCarrera);
                     Temporada t= new Temporada();
                     t.setTemporada(Integer.valueOf(temporadaCarrera));
                     temporadaMainActivity=t;
@@ -126,10 +124,10 @@ public class MainActivityCategoria extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray categoriasJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < categoriasJSONArrayNext.length(); i++) {
@@ -138,7 +136,7 @@ public class MainActivityCategoria extends AppCompatActivity{
                         categoriasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", categoriasJSONArray.toString());
+                Log.d("next", categoriasJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -183,8 +181,8 @@ public class MainActivityCategoria extends AppCompatActivity{
     }
 
     public static void changeToSelectorActivity(Categoria categoria){
-        Log.i("print8", "vamos a cambiar a mainActivitySelector");
-        Log.i("print9", temporadaMainActivity.getTemporada().toString());
+        Log.d("print8", "vamos a cambiar a mainActivitySelector");
+        Log.d("print9", temporadaMainActivity.getTemporada().toString());
         Temporada temporadaPrueba=new Temporada(temporadaMainActivity.getTemporada());
         Intent intentMainActivityCategoria = new Intent(mContext, MainActivitySelector.class);
 

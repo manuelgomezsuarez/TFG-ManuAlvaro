@@ -20,19 +20,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import tfg_manualvaro.androidmotogp.adapter.CategoriaAdapter;
 import tfg_manualvaro.androidmotogp.adapter.DocumentacionAdapter;
-import tfg_manualvaro.androidmotogp.adapter.PosicionCarreraAdapter;
-import tfg_manualvaro.androidmotogp.models.CarreraModelo;
-import tfg_manualvaro.androidmotogp.models.Categoria;
 import tfg_manualvaro.androidmotogp.models.DocumentacionModelo;
-import tfg_manualvaro.androidmotogp.models.PosicionCarrera;
-import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.models.Url;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
@@ -49,7 +42,6 @@ public class MainActivityDocumentacion extends AppCompatActivity {
     private static String fechaMainActivitySelector;
     private static String tituloCarrera;
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/carrera/";
     private String url = "https://motogp-api.herokuapp.com/documentacion/";
     private Map<String, String> urlParams = new HashMap<>();
 
@@ -64,7 +56,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("print13", "hemos llegado el MainActivityDocumentacionDisplay");
+        Log.d("print13", "hemos llegado el MainActivityDocumentacionDisplay");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_documentacion_display);
         //Call the AsyncTask
@@ -78,9 +70,9 @@ public class MainActivityDocumentacion extends AppCompatActivity {
         LayoutDeCarga=(LinearLayout) findViewById(R.id.LayoutDeCarga);
         LayoutDeCarga.setVisibility(View.INVISIBLE);
 
-//        Log.i("print16", temporadaMainActivitySelector);
-//        Log.i("print17", categoriaMainActivitySelector);
-//        Log.i("print18", tituloMainActivitySelector);
+//        Log.d("print16", temporadaMainActivitySelector);
+//        Log.d("print17", categoriaMainActivitySelector);
+//        Log.d("print18", tituloMainActivitySelector);
         new MainActivityDocumentacion.FetchDocumentacion().execute();
 
     }
@@ -95,9 +87,9 @@ public class MainActivityDocumentacion extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityDocumentacion.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -113,7 +105,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
             urlParams.put("categoria", categoriaMainActivitySelector);
             urlParams.put("titulo", tituloMainActivitySelector);
             urlParams.put("page", pagination.toString());
-            Log.i("print19", urlParams.toString());
+            Log.d("print19", urlParams.toString());
             response = jsonParser.makeHttpRequest(url, "GET", urlParams);
 
             try {
@@ -124,10 +116,10 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                 while (next != "null") {
                     pagination = pagination + 1;
                     urlParams.put("page", pagination.toString());
-                    Log.i("next", pagination.toString());
+                    Log.d("next", pagination.toString());
                     response = jsonParser.makeHttpRequest(url, "GET", urlParams);
                     next = response.getString(KEY_NEXT);
-                    Log.i("next", next);
+                    Log.d("next", next);
                     JSONArray urlsJSONArrayNext = response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < urlsJSONArrayNext.length(); i++) {
@@ -136,7 +128,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                         urlsJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", urlsJSONArray.toString());
+                Log.d("next", urlsJSONArray.toString());
                 pagination = 1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -169,11 +161,11 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                                 DocumentacionModelo pos = new DocumentacionModelo();
                                 JSONObject posicionJSON = urlsJSONArray.getJSONObject(i);
                                 JSONArray enlaces=posicionJSON.getJSONArray("documentacion");
-                                Log.i("printManu", Integer.toString(enlaces.length()));
+                                Log.d("printManu", Integer.toString(enlaces.length()));
                                 for (int n=0;n< enlaces.length();n++){
                                     Url url= new Url();
 
-                                    Log.i("printManu", enlaces.getString(n));
+                                    Log.d("printManu", enlaces.getString(n));
                                     url.setUrl(enlaces.getString(n));
                                     urlList.add(url);
                                 }
@@ -233,7 +225,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
     }
 
     public  void GoHome(View view){
-        Log.i("print8", "go home");
+        Log.d("print8", "go home");
         Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
         mContext.startActivity(intentMainActivityInicial);
     }

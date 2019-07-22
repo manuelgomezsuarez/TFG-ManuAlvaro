@@ -4,33 +4,23 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ColorTemplate;
-import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -39,7 +29,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
@@ -175,7 +164,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i("print13","hemos llegado el MainActivityDashboardDisplay");
+        Log.d("print13","hemos llegado el MainActivityDashboardDisplay");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard_display);
         //Call the AsyncTask
@@ -221,7 +210,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
         //top5_victorias_campeonatos***********************************************
 
-        puntuacionPiloto1PuntosGlobalesTextView = (TextView) findViewById(R.id.puntuacionPiloto1Campeonatos);
+        puntuacionPiloto1CampeonatosTextView = (TextView) findViewById(R.id.puntuacionPiloto1Campeonatos);
         puntuacionPiloto2CampeonatosTextView = (TextView) findViewById(R.id.puntuacionPiloto2Campeonatos);
         puntuacionPiloto3CampeonatosTextView = (TextView) findViewById(R.id.puntuacionPiloto3Campeonatos);
         puntuacionPiloto4CampeonatosTextView = (TextView) findViewById(R.id.puntuacionPiloto4Campeonatos);
@@ -240,7 +229,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
         fotoPiloto5CampeonatosImageView = (ImageView) findViewById(R.id.fotoPiloto5Campeonatos);
 
 
-        arrayPuntuacionesPilotoCampeonatosTextView= new TextView[]{puntuacionPiloto1PuntosGlobalesTextView,
+        arrayPuntuacionesPilotoCampeonatosTextView= new TextView[]{puntuacionPiloto1CampeonatosTextView,
                 puntuacionPiloto2CampeonatosTextView,puntuacionPiloto3CampeonatosTextView,puntuacionPiloto4CampeonatosTextView,
                 puntuacionPiloto5CampeonatosTextView};
 
@@ -348,9 +337,9 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityDashboardDisplay.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -361,9 +350,9 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
             HttpJsonParser jsonParser = new HttpJsonParser();
             urlParams.put("format","json");
             urlParams.put("page",pagination.toString());
-            Log.i("print19",urlParams.toString());
+            Log.d("print19",urlParams.toString());
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
-            Log.i("print18",response.toString());
+            Log.d("print18",response.toString());
 
             try {
                 success = response.getInt(KEY_SUCCESS);
@@ -372,10 +361,10 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray posicionesDashboardJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < posicionesDashboardJSONArrayNext.length(); i++) {
@@ -384,7 +373,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                         dashboardJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", dashboardJSONArray.toString());
+                Log.d("next", dashboardJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -450,7 +439,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                                 }
                             }
                             new FetchDashboardWikiCarreras().execute();
-                            Log.i("print38","siguiente operacion");
+                            Log.d("print38","siguiente operacion");
 
 
                             //***************************carreras
@@ -490,7 +479,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                                 }
                             }
                             new FetchDashboardWikiCampeonatos().execute();
-                            Log.i("print38","siguiente operacion");
+                            Log.d("print38","siguiente operacion");
 
                             //*****************************Campeonatos
 
@@ -530,7 +519,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                                 }
                             }
                             new FetchDashboardWikiPuntosGlobales().execute();
-                            Log.i("print38","siguiente operacion");
+                            Log.d("print38","siguiente operacion");
 
                             //*****************************PuntosGlobales
 
@@ -569,7 +558,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                                 }
                             }
                             new FetchDashboardWikiPuntosCampeonatosDisputados().execute();
-                            Log.i("print38","siguiente operacion");
+                            Log.d("print38","siguiente operacion");
 
                             //*****************************PuntosGlobales
 
@@ -679,9 +668,9 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
             urlParamsConsultaNombreEnWikipedia.put("formatversion","2");
             urlParamsConsultaNombreEnWikipedia.put("prop","pageimages");
             urlParamsConsultaNombreEnWikipedia.put("titles",nombrePilotosBusquedaWiki);
-            Log.i("print33",urlParamsConsultaNombreEnWikipedia.toString());
+            Log.d("print33",urlParamsConsultaNombreEnWikipedia.toString());
             consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/","GET",urlParamsConsultaNombreEnWikipedia);
-            Log.i("print34",consultaNombreEnWikipediaJSON.toString());
+            Log.d("print34",consultaNombreEnWikipediaJSON.toString());
             try {
                 JSONObject queryJSON=consultaNombreEnWikipediaJSON.getJSONObject("query");
                 JSONArray resuldosWikipediaJSONArray=queryJSON.getJSONArray("pages");
@@ -691,7 +680,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                     String nombreTitle=informacionJSON.getString("title");
                     try{
                         JSONObject enlaceJSON=informacionJSON.getJSONObject("thumbnail");
-                        Log.i("print42",enlaceJSON.toString());
+                        Log.d("print42",enlaceJSON.toString());
                         fotoUrlJSON=enlaceJSON.getString("source");
 
 
@@ -699,7 +688,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                         fotoUrlJSON="https://dit.ietcc.csic.es/wp-content/uploads/2018/11/foto-generica-200x200.jpg";
                     }
                     datosPilotos.get(nombreTitle).add(fotoUrlJSON);
-                    Log.i("print40",fotoUrlJSON);
+                    Log.d("print40",fotoUrlJSON);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -716,12 +705,12 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                     Integer contadorDatosPilotosLoop=0;
 
-                    Log.i("print43", nombrePilotosBusquedaWiki);
-                    Log.i("print44", nombrePilotosBusquedaWiki.split("\\|")[0]);
-                    Log.i("print45", nombrePilotosBusquedaWiki.split("\\|")[2]);
+                    Log.d("print43", nombrePilotosBusquedaWiki);
+                    Log.d("print44", nombrePilotosBusquedaWiki.split("\\|")[0]);
+                    Log.d("print45", nombrePilotosBusquedaWiki.split("\\|")[2]);
 
                     for(String nombre: nombrePilotosBusquedaWiki.split("\\|")){
-                        Log.i("print43", nombre);
+                        Log.d("print43", nombre);
                         final String nombreRedireccion=nombre;
                         arrayPuntuacionesPilotoTextView[contadorDatosPilotosLoop].setText(datosPilotos.get(nombre).get(0));
                         arrayNombresPilotoTextView[contadorDatosPilotosLoop].setText(nombre);
@@ -767,10 +756,10 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
             urlParamsConsultaNombreEnWikipedia.put("formatversion","2");
             urlParamsConsultaNombreEnWikipedia.put("prop","pageimages");
             urlParamsConsultaNombreEnWikipedia.put("titles",nombrePilotosBusquedaWikiCampeonatos);
-            Log.i("print33",urlParamsConsultaNombreEnWikipedia.toString());
-            https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
-            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/","GET",urlParamsConsultaNombreEnWikipedia);
-            Log.i("print34",consultaNombreEnWikipediaJSON.toString());
+            Log.d("print33",urlParamsConsultaNombreEnWikipedia.toString());
+            //en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
+            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/", "GET", urlParamsConsultaNombreEnWikipedia);
+            Log.d("print34",consultaNombreEnWikipediaJSON.toString());
             try {
                 JSONObject queryJSON=consultaNombreEnWikipediaJSON.getJSONObject("query");
                 JSONArray resuldosWikipediaJSONArray=queryJSON.getJSONArray("pages");
@@ -780,7 +769,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                     String nombreTitle=informacionJSON.getString("title");
                     try{
                         JSONObject enlaceJSON=informacionJSON.getJSONObject("thumbnail");
-                        Log.i("print42",enlaceJSON.toString());
+                        Log.d("print42",enlaceJSON.toString());
                         fotoUrlJSON=enlaceJSON.getString("source");
 
 
@@ -788,7 +777,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                         fotoUrlJSON="https://dit.ietcc.csic.es/wp-content/uploads/2018/11/foto-generica-200x200.jpg";
                     }
                     datosPilotosCampeonatos.get(nombreTitle).add(fotoUrlJSON);
-                    Log.i("print40",fotoUrlJSON);
+                    Log.d("print40",fotoUrlJSON);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -805,8 +794,8 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                     Integer contadorDatosPilotosLoop=0;
                     for(String nombre: nombrePilotosBusquedaWikiCampeonatos.split("\\|")){
-                        Log.i("print43", Integer.toString(contadorDatosPilotosLoop));
-                        Log.i("print43", nombre);
+                        Log.d("print43", Integer.toString(contadorDatosPilotosLoop));
+                        Log.d("print43", nombre);
 
                         final String nombreRedireccion=nombre;
                         arrayPuntuacionesPilotoCampeonatosTextView[contadorDatosPilotosLoop].setText(datosPilotosCampeonatos.get(nombre).get(0));
@@ -853,10 +842,10 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
             urlParamsConsultaNombreEnWikipedia.put("formatversion","2");
             urlParamsConsultaNombreEnWikipedia.put("prop","pageimages");
             urlParamsConsultaNombreEnWikipedia.put("titles",nombrePilotosBusquedaWikiPuntosGlobales);
-            Log.i("print33",urlParamsConsultaNombreEnWikipedia.toString());
-            https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
-            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/","GET",urlParamsConsultaNombreEnWikipedia);
-            Log.i("print34",consultaNombreEnWikipediaJSON.toString());
+            Log.d("print33",urlParamsConsultaNombreEnWikipedia.toString());
+            //en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
+            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/", "GET", urlParamsConsultaNombreEnWikipedia);
+            Log.d("print34",consultaNombreEnWikipediaJSON.toString());
             try {
                 JSONObject queryJSON=consultaNombreEnWikipediaJSON.getJSONObject("query");
                 JSONArray resuldosWikipediaJSONArray=queryJSON.getJSONArray("pages");
@@ -866,7 +855,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                     String nombreTitle=informacionJSON.getString("title");
                     try{
                         JSONObject enlaceJSON=informacionJSON.getJSONObject("thumbnail");
-                        Log.i("print42",enlaceJSON.toString());
+                        Log.d("print42",enlaceJSON.toString());
                         fotoUrlJSON=enlaceJSON.getString("source");
 
 
@@ -874,7 +863,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                         fotoUrlJSON="https://dit.ietcc.csic.es/wp-content/uploads/2018/11/foto-generica-200x200.jpg";
                     }
                     datosPilotosPuntosGlobales.get(nombreTitle).add(fotoUrlJSON);
-                    Log.i("print40",fotoUrlJSON);
+                    Log.d("print40",fotoUrlJSON);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -891,8 +880,8 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                     Integer contadorDatosPilotosLoop=0;
                     for(String nombre: nombrePilotosBusquedaWikiPuntosGlobales.split("\\|")){
-                        Log.i("print43", Integer.toString(contadorDatosPilotosLoop));
-                        Log.i("print43", nombre);
+                        Log.d("print43", Integer.toString(contadorDatosPilotosLoop));
+                        Log.d("print43", nombre);
 
                         final String nombreRedireccion=nombre;
                         arrayPuntuacionesPilotoPuntosGlobalesTextView[contadorDatosPilotosLoop].setText(datosPilotosPuntosGlobales.get(nombre).get(0));
@@ -938,10 +927,10 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
             urlParamsConsultaNombreEnWikipedia.put("formatversion","2");
             urlParamsConsultaNombreEnWikipedia.put("prop","pageimages");
             urlParamsConsultaNombreEnWikipedia.put("titles",nombrePilotosBusquedaWikiPuntosCampeonatosDisputados);
-            Log.i("print33",urlParamsConsultaNombreEnWikipedia.toString());
-            https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
-            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/","GET",urlParamsConsultaNombreEnWikipedia);
-            Log.i("print34",consultaNombreEnWikipediaJSON.toString());
+            Log.d("print33",urlParamsConsultaNombreEnWikipedia.toString());
+            //en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&&titles=Valentino%20Rossi|Jorge%20Lorenzo|Marc%20Márquez
+            consultaNombreEnWikipediaJSON = jsonParserConsultaNombreEnWikipediaJSON.makeHttpRequest("https://en.wikipedia.org/w/api.php/", "GET", urlParamsConsultaNombreEnWikipedia);
+            Log.d("print34",consultaNombreEnWikipediaJSON.toString());
             try {
                 JSONObject queryJSON=consultaNombreEnWikipediaJSON.getJSONObject("query");
                 JSONArray resuldosWikipediaJSONArray=queryJSON.getJSONArray("pages");
@@ -951,7 +940,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                     String nombreTitle=informacionJSON.getString("title");
                     try{
                         JSONObject enlaceJSON=informacionJSON.getJSONObject("thumbnail");
-                        Log.i("print42",enlaceJSON.toString());
+                        Log.d("print42",enlaceJSON.toString());
                         fotoUrlJSON=enlaceJSON.getString("source");
 
 
@@ -959,7 +948,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                         fotoUrlJSON="https://dit.ietcc.csic.es/wp-content/uploads/2018/11/foto-generica-200x200.jpg";
                     }
                     datosPilotosPuntosCampeonatosDisputados.get(nombreTitle).add(fotoUrlJSON);
-                    Log.i("print40",fotoUrlJSON);
+                    Log.d("print40",fotoUrlJSON);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -976,8 +965,8 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                     Integer contadorDatosPilotosLoop=0;
                     for(String nombre: nombrePilotosBusquedaWikiPuntosCampeonatosDisputados.split("\\|")){
-                        Log.i("print43", Integer.toString(contadorDatosPilotosLoop));
-                        Log.i("print43", nombre);
+                        Log.d("print43", Integer.toString(contadorDatosPilotosLoop));
+                        Log.d("print43", nombre);
 
                         final String nombreRedireccion=nombre;
                         arrayPuntuacionesPilotoPuntosCampeonatosDisputadosTextView[contadorDatosPilotosLoop].setText(datosPilotosPuntosCampeonatosDisputados.get(nombre).get(0));
@@ -1005,7 +994,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
 
     public  void GoHome(View view){
-        Log.i("print8", "go home");
+        Log.d("print8", "go home");
         Intent intentMainActivityInicial = new Intent(mContext, MainActivityInicial.class);
         mContext.startActivity(intentMainActivityInicial);
     }

@@ -21,7 +21,6 @@ import java.util.Map;
 
 import tfg_manualvaro.androidmotogp.adapter.PilotoAdapter;
 import tfg_manualvaro.androidmotogp.models.Piloto;
-import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
 public class MainActivityPiloto extends AppCompatActivity{
@@ -33,7 +32,6 @@ public class MainActivityPiloto extends AppCompatActivity{
     private static String nombrePilotoMainActivityInicial;
 
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
     private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
@@ -66,9 +64,9 @@ public class MainActivityPiloto extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivityPiloto.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -92,10 +90,10 @@ public class MainActivityPiloto extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray pilotosJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < pilotosJSONArrayNext.length(); i++) {
@@ -104,7 +102,7 @@ public class MainActivityPiloto extends AppCompatActivity{
                         pilotosJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", pilotosJSONArray.toString());
+                Log.d("next", pilotosJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -149,8 +147,8 @@ public class MainActivityPiloto extends AppCompatActivity{
     }
 
     public static void changeToMainActivityPilotoDisplay(Piloto piloto){
-        Log.i("print8", "vamos a cambiar a mainActivityPilotoDisplay");
-        Log.i("print9", nombrePilotoMainActivityInicial);
+        Log.d("print8", "vamos a cambiar a mainActivityPilotoDisplay");
+        Log.d("print9", nombrePilotoMainActivityInicial);
         //cambiar esta linea a MainActivityPilotoDisplay.class cuando hayas terminado esa clase
         Intent intentMainActivityPiloto = new Intent(mContext, MainActivityPilotoDisplay.class);
         intentMainActivityPiloto.putExtra("nombrePiloto",piloto.getNombre());

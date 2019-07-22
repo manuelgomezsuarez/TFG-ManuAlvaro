@@ -3,19 +3,14 @@ package tfg_manualvaro.androidmotogp;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
-import tfg_manualvaro.androidmotogp.adapter.EmployeeAdapter;
+
 import tfg_manualvaro.androidmotogp.adapter.TemporadaAdapter;
-import tfg_manualvaro.androidmotogp.models.EmployeeDetails;
 import tfg_manualvaro.androidmotogp.models.Temporada;
 import tfg_manualvaro.androidmotogp.utils.HttpJsonParser;
 
@@ -36,7 +31,6 @@ public class MainActivity extends AppCompatActivity{
     private static final String KEY_NEXT = "next";
     private static Context mContext;
 
-    //private String url = "http://hr8jeljvudseiccl8kzsu4.webrelay.io/campeonato/";
     private String url = "https://motogp-api.herokuapp.com/campeonato/";
     private Map<String,String> urlParams= new HashMap<>();
 
@@ -68,9 +62,9 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -85,7 +79,7 @@ public class MainActivity extends AppCompatActivity{
             urlParams.put("page",pagination.toString());
 
             response = jsonParser.makeHttpRequest(url,"GET",urlParams);
-            Log.i("print6", response.toString());
+            Log.d("print6", response.toString());
             try {
                 success = response.getInt(KEY_SUCCESS);
                 next=response.getString(KEY_NEXT);
@@ -93,10 +87,10 @@ public class MainActivity extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray temporadasJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < temporadasJSONArrayNext.length(); i++) {
@@ -105,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
                         temporadasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", temporadasJSONArray.toString());
+                Log.d("next", temporadasJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -154,9 +148,9 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Display progress bar
+            //Barra de progreso de carga
             pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Loading Data.. Please wait...");
+            pDialog.setMessage("Cargando datos... Por favor, espere...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(false);
             pDialog.show();
@@ -177,10 +171,10 @@ public class MainActivity extends AppCompatActivity{
                 while(next!="null"){
                     pagination=pagination+1;
                     urlParams.put("page",pagination.toString());
-                    Log.i("next",pagination.toString());
+                    Log.d("next",pagination.toString());
                     response = jsonParser.makeHttpRequest(url,"GET",urlParams);
                     next=response.getString(KEY_NEXT);
-                    Log.i("next",next);
+                    Log.d("next",next);
                     JSONArray temporadasJSONArrayNext =  response.getJSONArray(KEY_DATA);
 
                     for (int i = 0; i < temporadasJSONArrayNext.length(); i++) {
@@ -189,7 +183,7 @@ public class MainActivity extends AppCompatActivity{
                         temporadasJSONArray.put(jsonObject);
                     }
                 }
-                Log.i("next", temporadasJSONArray.toString());
+                Log.d("next", temporadasJSONArray.toString());
                 pagination=1;
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import tfg_manualvaro.androidmotogp.MainActivity;
 import tfg_manualvaro.androidmotogp.MainActivityCategoria;
 import tfg_manualvaro.androidmotogp.R;
 import tfg_manualvaro.androidmotogp.models.Categoria;

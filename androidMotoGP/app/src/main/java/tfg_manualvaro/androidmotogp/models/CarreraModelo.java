@@ -27,17 +27,6 @@ public class CarreraModelo {
     }
 
 
-    public CarreraModelo() {
-        this.id = id;
-        this.temporada = temporada;
-        this.categoria = categoria;
-        this.posiciones = posiciones;
-        this.lugar=lugar;
-        this.fecha=fecha;
-        this.titulo=titulo;
-        this.lugar=lugar;
-    }
-
     public String getId() {
         return id;
     }

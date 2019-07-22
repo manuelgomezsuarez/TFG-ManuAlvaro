@@ -26,12 +26,7 @@ public class CampeonatoModelo {
     }
 
 
-    public CampeonatoModelo() {
-        this.id = id;
-        this.temporada = temporada;
-        this.categoria = categoria;
-        this.posiciones = posiciones;
-    }
+
 
     public String getId() {
         return id;

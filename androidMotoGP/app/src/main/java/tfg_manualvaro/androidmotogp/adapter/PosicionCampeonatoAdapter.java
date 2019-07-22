@@ -10,12 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
 import tfg_manualvaro.androidmotogp.MainActivityCampeonatoDisplay;
 import tfg_manualvaro.androidmotogp.R;
 import tfg_manualvaro.androidmotogp.models.CampeonatoModelo;
-import tfg_manualvaro.androidmotogp.models.Carrera;
 import tfg_manualvaro.androidmotogp.models.PosicionCampeonato;
 
 

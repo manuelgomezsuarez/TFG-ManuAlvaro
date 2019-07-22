@@ -1,7 +1,6 @@
 package tfg_manualvaro.androidmotogp.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -13,15 +12,10 @@ import android.widget.TextView;
 
 
 import tfg_manualvaro.androidmotogp.MainActivity;
-import tfg_manualvaro.androidmotogp.MainActivityCategoria;
 import tfg_manualvaro.androidmotogp.R;
-import tfg_manualvaro.androidmotogp.models.EmployeeDetails;
 import tfg_manualvaro.androidmotogp.models.Temporada;
 
 import java.util.List;
-
-import static android.support.v4.content.ContextCompat.startActivity;
-import static butterknife.internal.Finder.ACTIVITY;
 
 
 /**
