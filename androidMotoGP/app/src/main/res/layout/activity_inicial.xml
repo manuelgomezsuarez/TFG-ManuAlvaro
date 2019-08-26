@@ -82,6 +82,16 @@
                 android:text="Última Carrera/Campeonato" />
 
             <Button
+                android:id="@+id/dashboardUltimaTemporadaButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="60dp"
+                android:onClick="BuscarDashboardUltimaTemporada"
+                android:text="Última temporada" />
+
+            <Button
                 android:id="@+id/dashboardButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -91,7 +101,6 @@
                 android:layout_marginRight="60dp"
                 android:onClick="BuscarDashboard"
                 android:text="Datos Históricos" />
-
 
 
         <LinearLayout

@@ -66,6 +66,12 @@ public class MainActivityInicial extends AppCompatActivity{
         mContext.startActivity(intentMainActivityInicial);
     }
 
+    public  void BuscarDashboardUltimaTemporada(View view){
+        Log.d("print8", "vamos a cambiar a mainActivityDasboardUltimaTemporadaDisplay");
+        Intent intentMainActivityInicial = new Intent(mContext, MainActivityDashboardUltimaTemporadaDisplay.class);
+        mContext.startActivity(intentMainActivityInicial);
+    }
+
     public  void BuscarPiloto(View view){
         final EditText nombrePiloto = (EditText) findViewById(R.id.textoPiloto);
 

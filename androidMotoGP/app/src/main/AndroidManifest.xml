@@ -22,6 +22,7 @@
         <activity android:name=".MainActivityCampeonatoDisplay" android:configChanges="screenSize|orientation"/>
         <activity android:name=".MainActivityCarreraDisplay" android:configChanges="screenSize|orientation"/>
         <activity android:name=".MainActivityDashboardDisplay" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".MainActivityDashboardUltimaTemporadaDisplay" android:configChanges="screenSize|orientation"/>
         <activity android:name=".MainActivityDocumentacion" android:configChanges="screenSize|orientation"/>
         <activity android:name=".MainActivityInicial" android:configChanges="screenSize|orientation" >
         <intent-filter>
