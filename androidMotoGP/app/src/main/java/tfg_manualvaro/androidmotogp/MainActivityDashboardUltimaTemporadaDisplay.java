@@ -83,10 +83,14 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
     private TextView nombrePiloto2TextView;
     private TextView nombrePiloto3TextView;
 
+    private TextView victoriasPiloto1TextView;
+    private TextView victoriasPiloto2TextView;
+    private TextView victoriasPiloto3TextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("print13","hemos llegado el MainActivityPilotoDisplay");
+        Log.d("print13","hemos llegado el MainActivityDashboardUltimaTemporada");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard_ultima_temporada_display);
         //Call the AsyncTask
@@ -96,6 +100,10 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
         nombrePiloto1TextView = (TextView) findViewById(R.id.nombrePiloto1);
         nombrePiloto2TextView = (TextView) findViewById(R.id.nombrePiloto2);
         nombrePiloto3TextView = (TextView) findViewById(R.id.nombrePiloto3);
+
+        victoriasPiloto1TextView = (TextView) findViewById(R.id.victoriasPiloto1);
+        victoriasPiloto2TextView = (TextView) findViewById(R.id.victoriasPiloto2);
+        victoriasPiloto3TextView = (TextView) findViewById(R.id.victoriasPiloto3);
 
 
         chart = findViewById(R.id.barchart);
@@ -150,8 +158,11 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                         if(filtro.equals(key)){
                             JSONArray datos = jsonObject.getJSONArray(key);
                             nombrePiloto1TextView.setText(datos.getJSONObject(0).getString("piloto"));
+                            victoriasPiloto1TextView.setText(datos.getJSONObject(0).getString("victorias"));
                             nombrePiloto2TextView.setText(datos.getJSONObject(1).getString("piloto"));
+                            victoriasPiloto2TextView.setText(datos.getJSONObject(1).getString("victorias"));
                             nombrePiloto3TextView.setText(datos.getJSONObject(2).getString("piloto"));
+                            victoriasPiloto3TextView.setText(datos.getJSONObject(2).getString("victorias"));
 
 
                             Log.d("print57",datos.toString());
@@ -259,7 +270,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                             TextView textoDashboardUltimaTemporadaTextView = (TextView) findViewById(R.id.textoDashboardUltimaTemporada);
                             textoDashboardUltimaTemporadaTextView.setText("Temporada "+ temporada.getTemporada().toString());
 
-                            TextView textoCarrerasDisputadasTextView = (TextView) findViewById(R.id.textoDashboardUltimaTemporada);
+                            TextView textoCarrerasDisputadasTextView = (TextView) findViewById(R.id.textoCarrerasDisputadas);
                             textoCarrerasDisputadasTextView.setText(numCarrerasDisputadas+" carreras disputadas");
 
                             final TextView textNombreCarreraTextView = (TextView) findViewById(R.id.textoNombreCarrera);
