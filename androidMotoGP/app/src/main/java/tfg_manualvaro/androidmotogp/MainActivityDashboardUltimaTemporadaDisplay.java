@@ -95,6 +95,9 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
     private TextView[] arrayVictoriasPilotoTextView;
     private RadarChart radarchartVictoriasPorMoto;
 
+    private Temporada temporada;
+    private String tituloCarrera;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("print13","hemos llegado el MainActivityDashboardUltimaTemporada");

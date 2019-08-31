@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -72,6 +73,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
     private PieChart piechartVictoriasPorMoto;
     private PieChart piechartVictoriasPorPodios;
     private BarData dataBarchar;
+    private LinearLayout contenidoPaginaLinearLayout;
+
 
 
     @Override
@@ -89,7 +92,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         chart.getAxisLeft().setTextColor(Color.WHITE); // left y-axis
         chart.getAxisLeft().setTextSize(15);
         chart.getXAxis().setTextColor(Color.WHITE);
-        chart.getXAxis().setTextSize(15);
+        chart.getXAxis().setTextSize(12);
         chart.getLegend().setTextColor(Color.WHITE);
         chart.getLegend().setTextSize(12);
         chart.animateY(1500);
@@ -100,6 +103,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
         chart.getLegend().setTextSize(15);
         Spinner spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
+        contenidoPaginaLinearLayout=(LinearLayout) findViewById(R.id.layerContenidoPagina);
+        contenidoPaginaLinearLayout.setVisibility(View.INVISIBLE);
 
         //nombre spinner,nombreJSON, descripcion grafica
         filtros.put("Posicion en el campeonato", new String[]{"posicion_campeonato", "Puesto que ha quedado en el campeonato"});
@@ -160,7 +165,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                         Float velocidadMediaJSON = (float)datosTemporadaPiloto.getDouble(filtros.get(filtro)[0]);
                         entries.add(new BarEntry(velocidadMediaJSON, i));
                         dataSet = new BarDataSet(entries, filtro);
-                        dataSet.setColors(ColorTemplate.LIBERTY_COLORS);
+                        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
                         Log.d("print39",Double.toString(datosTemporadaPiloto.getDouble(filtros.get(filtro)[0])));
 
                     }
@@ -383,13 +388,13 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
 
                                 }
-                                dataSetBarchart.setColors(ColorTemplate.LIBERTY_COLORS);
+                                dataSetBarchart.setColors(ColorTemplate.JOYFUL_COLORS);
                                 dataBarchar = new BarData(labels, dataSetBarchart);
                                 dataBarchar.setValueTextSize(0);
                                 dataBarchar.setValueTextColor(Color.WHITE);
                                 chart.setData(dataBarchar);
+                                chart.setVisibleXRangeMaximum(6);
                                 chart.invalidate(); // refresh
-
 
                                 chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 
@@ -432,20 +437,18 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorPodios.setUsePercentValues(true);
                                 piechartVictoriasPorPodios.setDescription("");
 
-
                                 // create pieDataSet
                                 PieDataSet dataSetPiechartVictoriasPorPodios = new PieDataSet(entriesPiechartVictoriasPorPodios, "");
                                 dataSetPiechartVictoriasPorPodios.setSliceSpace(1);
-                                dataSetPiechartVictoriasPorPodios.setSelectionShift(10);
-                                dataSetPiechartVictoriasPorPodios.setVisible(true);
-
-                                dataSetPiechartVictoriasPorPodios.setColors(ColorTemplate.PASTEL_COLORS);
+                                dataSetPiechartVictoriasPorPodios.setSelectionShift(5f);
+                                dataSetPiechartVictoriasPorPodios.setColors(ColorTemplate.JOYFUL_COLORS);
 
                                 //  create pie data object and set xValues and yValues and set it to the pieChart
                                 final PieData dataPiechartVictoriasPorPodios = new PieData(labelsPiechartVictoriasPorPodios, dataSetPiechartVictoriasPorPodios);
 
                                 dataPiechartVictoriasPorPodios.setValueTextSize(0);
                                 dataPiechartVictoriasPorPodios.setValueTextColor(Color.RED);
+
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorPodios = piechartVictoriasPorPodios.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -457,15 +460,11 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
 
                                 piechartVictoriasPorPodios.setData(dataPiechartVictoriasPorPodios);
-                                // undo all highlights
                                 piechartVictoriasPorPodios.highlightValues(null);
-                                // refresh/update pie chart
-
+                                piechartVictoriasPorPodios.setHoleColor(0);
+                                piechartVictoriasPorPodios.setDrawHoleEnabled(true);
+                                piechartVictoriasPorPodios.animateX(1000);
                                 piechartVictoriasPorPodios.invalidate();
-                                // animate piechartVictoriasPorPodios
-                                piechartVictoriasPorPodios.animateXY(1500, 3000);
-
-
 
 
 
@@ -497,7 +496,6 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorCategoria.setDescription("Por categoría");
                                 piechartVictoriasPorCategoria.setDescriptionColor(Color.GREEN);
                                 piechartVictoriasPorCategoria.setDescriptionTextSize(15);
-                                piechartVictoriasPorCategoria.setDrawCenterText(true);
                                 piechartVictoriasPorCategoria.setRotationEnabled(true);
                                 piechartVictoriasPorCategoria.setDescriptionPosition(440,480);
                                 piechartVictoriasPorCategoria.setUsePercentValues(true);
@@ -516,9 +514,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 PieDataSet dataSetPiechartVictoriasPorCategoria = new PieDataSet(entriesPiechartVictoriasPorCategoria, "");
                                 dataSetPiechartVictoriasPorCategoria.setSliceSpace(1);
                                 dataSetPiechartVictoriasPorCategoria.setSelectionShift(10);
+                                dataSetPiechartVictoriasPorCategoria.setColors(ColorTemplate.JOYFUL_COLORS);
                                 dataSetPiechartVictoriasPorCategoria.setVisible(true);
-
-                                dataSetPiechartVictoriasPorCategoria.setColors(ColorTemplate.PASTEL_COLORS);
 
                                 //  introducimos valores al grafico
                                 final PieData dataPiechartVictoriasPorCategoria = new PieData(labelsPiechartVictoriasPorCategoria, dataSetPiechartVictoriasPorCategoria);
@@ -534,18 +531,12 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 l.setTextColor(Color.WHITE);
                                 l.setTextSize(12);
 
-
                                 piechartVictoriasPorCategoria.setData(dataPiechartVictoriasPorCategoria);
-                                // undo all highlights
                                 piechartVictoriasPorCategoria.highlightValues(null);
-                                // refresh/update pie chart
+                                piechartVictoriasPorCategoria.setHoleColor(0);
+                                piechartVictoriasPorCategoria.setDrawHoleEnabled(true);
                                 piechartVictoriasPorCategoria.invalidate();
-                                // animate piechartVictoriasPorCategoria
                                 piechartVictoriasPorCategoria.animateXY(1500, 3000);
-
-
-
-
                                 piechartVictoriasPorCategoria.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 
                                     @Override
@@ -576,8 +567,9 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 piechartVictoriasPorMoto.setDescription("Por moto");
                                 piechartVictoriasPorMoto.setDescriptionColor(Color.GREEN);
                                 piechartVictoriasPorMoto.setDescriptionTextSize(15);
-                                piechartVictoriasPorMoto.setDrawCenterText(true);
                                 piechartVictoriasPorMoto.setRotationEnabled(true);
+                                piechartVictoriasPorMoto.setHoleColor(0);
+                                piechartVictoriasPorMoto.setDrawHoleEnabled(true);
                                 piechartVictoriasPorMoto.setDescriptionPosition(280,480);
 
 
@@ -595,9 +587,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 PieDataSet dataSetPiechartVictoriasPorMoto = new PieDataSet(entriesPiechartVictoriasPorMoto, "");
                                 dataSetPiechartVictoriasPorMoto.setSliceSpace(1);
                                 dataSetPiechartVictoriasPorMoto.setSelectionShift(10);
-                                dataSetPiechartVictoriasPorMoto.setVisible(true);
-
                                 dataSetPiechartVictoriasPorMoto.setColors(ColorTemplate.COLORFUL_COLORS);
+                                dataSetPiechartVictoriasPorMoto.setVisible(true);
 
                                 //  create pie data object and set xValues and yValues and set it to the pieChart
                                 final PieData dataPiechartVictoriasPorMoto = new PieData(labelsPiechartVictoriasPorMoto, dataSetPiechartVictoriasPorMoto);
@@ -615,11 +606,8 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
 
 
                                 piechartVictoriasPorMoto.setData(dataPiechartVictoriasPorMoto);
-                                // undo all highlights
                                 piechartVictoriasPorMoto.highlightValues(null);
-                                // refresh/update pie chart
                                 piechartVictoriasPorMoto.invalidate();
-                                // animate piechartVictoriasPorMoto
                                 piechartVictoriasPorMoto.animateXY(1500, 3000);
                                 piechartVictoriasPorMoto.setUsePercentValues(true);
 
@@ -690,6 +678,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 Toast.LENGTH_LONG).show();
 
                     }
+                    contenidoPaginaLinearLayout.setVisibility(View.VISIBLE);
                 }
             });
         }
