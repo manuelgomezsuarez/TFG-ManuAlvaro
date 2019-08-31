@@ -205,10 +205,23 @@
                 android:layout_marginEnd="3dp"
                 android:layout_marginBottom="5dp" />
 
+            <TextView
+                android:id="@+id/victoriasPiloto4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|top"
+                android:text="Victorias"
+                android:textColor="#e5e5e5"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:orientation="horizontal">
+
+
 
                 <ImageView
                     android:id="@+id/imageView120"
@@ -245,7 +258,7 @@
                         android:layout_weight="1"
                         android:gravity="center|top"
                         android:text="Nombre Apellido"
-                        android:textColor="#e5e5e5"
+                        android:textColor="@android:color/holo_blue_light"
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
@@ -256,7 +269,7 @@
                         android:layout_weight="1"
                         android:gravity="center|top"
                         android:text="Nombre Apellido"
-                        android:textColor="#e5e5e5"
+                        android:textColor="@android:color/holo_blue_light"
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
@@ -267,7 +280,7 @@
                         android:layout_weight="1"
                         android:gravity="center|top"
                         android:text="Nombre Apellido"
-                        android:textColor="#e5e5e5"
+                        android:textColor="@android:color/holo_blue_light"
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
@@ -323,30 +336,65 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/victoriasPiloto4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|top"
-                android:text="Victorias"
-                android:textColor="#e5e5e5"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+
 
         </LinearLayout>
 
 
 
 
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barchart"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp">
 
-            </com.github.mikephil.charting.charts.BarChart>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textoTituloBarchart"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center|bottom"
+                    android:text="Número de pilotos por nacionalidad"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="10dp"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                    android:textColor="#FF00FF00"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barchartNacionalidadPiloto"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_weight="1">
+                    android:gravity="center|top"
+                </com.github.mikephil.charting.charts.BarChart>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/textoTituloRadarChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center|bottom"
+                    android:text="Victorias por moto"
+                    android:textAllCaps="false"
+                    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Widget.TextView.PopupMenu"
+                    android:textColor="#FF00FF00"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+                <com.github.mikephil.charting.charts.RadarChart
+                    android:id="@+id/radarchartVictoriasPorMoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_weight="1">
+                    android:gravity="center|top"
+                </com.github.mikephil.charting.charts.RadarChart>
+            </LinearLayout>
 
 
 

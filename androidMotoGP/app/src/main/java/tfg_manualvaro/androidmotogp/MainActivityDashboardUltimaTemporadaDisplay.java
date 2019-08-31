@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -28,6 +29,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -87,6 +90,10 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
     private TextView victoriasPiloto2TextView;
     private TextView victoriasPiloto3TextView;
 
+    private ArrayList<JSONArray> arrayDatos;
+    private TextView[] arrayNombrePilotoTextView;
+    private TextView[] arrayVictoriasPilotoTextView;
+    private RadarChart radarchartVictoriasPorMoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,12 +108,17 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
         nombrePiloto2TextView = (TextView) findViewById(R.id.nombrePiloto2);
         nombrePiloto3TextView = (TextView) findViewById(R.id.nombrePiloto3);
 
+        arrayNombrePilotoTextView= new TextView[]{nombrePiloto1TextView,
+                nombrePiloto2TextView,nombrePiloto3TextView};
+
         victoriasPiloto1TextView = (TextView) findViewById(R.id.victoriasPiloto1);
         victoriasPiloto2TextView = (TextView) findViewById(R.id.victoriasPiloto2);
         victoriasPiloto3TextView = (TextView) findViewById(R.id.victoriasPiloto3);
 
+        arrayVictoriasPilotoTextView= new TextView[]{victoriasPiloto1TextView,
+                victoriasPiloto2TextView,victoriasPiloto3TextView};
 
-        chart = findViewById(R.id.barchart);
+        chart = findViewById(R.id.barchartNacionalidadPiloto);
         chart.getAxisLeft().setTextColor(Color.WHITE); // left y-axis
         chart.getAxisLeft().setTextSize(15);
         chart.getXAxis().setTextColor(Color.WHITE);
@@ -122,7 +134,25 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
         spin = (Spinner) findViewById(R.id.spinner);
         spin.setOnItemSelectedListener(this);
 
+        //radarchart*****
+        radarchartVictoriasPorMoto = (RadarChart) findViewById(R.id.radarchartVictoriasPorMoto);
+        radarchartVictoriasPorMoto.getXAxis().setTextColor(Color.WHITE);
+        radarchartVictoriasPorMoto.getXAxis().setTextSize(14);
+        //*********radarchart
 
+        //barchart********
+        chart = findViewById(R.id.barchartNacionalidadPiloto);
+        chart.getAxisLeft().setTextColor(Color.WHITE); // left y-axis
+        chart.getAxisLeft().setTextSize(15);
+        chart.getXAxis().setTextColor(Color.WHITE);
+        chart.getXAxis().setTextSize(15);
+        chart.getLegend().setTextColor(Color.WHITE);
+        chart.getLegend().setTextSize(15);
+        chart.animateY(1500);
+        chart.getAxisRight().setDrawLabels(false);
+        chart.setDescription("");
+        chart.getLegend().setTextSize(15);
+        //**********barchart
 
 
 
@@ -138,38 +168,167 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
         Log.d("print18",arg0.getSelectedItem().toString());
         if (top3Victorias!=null) {
             try {
-
-                chart.setDescription("");
-                BarDataSet dataSet;
-                List<BarEntry> entries = new ArrayList<>();
-
-                ArrayList<String> labels = new ArrayList<String>();
-                Log.d("print20","JSON recuperado");
                 for (int i = 0; i < top3Victorias.length(); i++) {
-
                     JSONObject jsonObject;
                     jsonObject = top3Victorias.getJSONObject(i);
                     Iterator<String> keys = jsonObject.keys();
-
-
                     while( keys.hasNext() ) {
                         String key = keys.next();
                         Log.d("print55",key);
                         if(filtro.equals(key)){
                             JSONArray datos = jsonObject.getJSONArray(key);
-                            nombrePiloto1TextView.setText(datos.getJSONObject(0).getString("piloto"));
-                            victoriasPiloto1TextView.setText(datos.getJSONObject(0).getString("victorias"));
-                            nombrePiloto2TextView.setText(datos.getJSONObject(1).getString("piloto"));
-                            victoriasPiloto2TextView.setText(datos.getJSONObject(1).getString("victorias"));
-                            nombrePiloto3TextView.setText(datos.getJSONObject(2).getString("piloto"));
-                            victoriasPiloto3TextView.setText(datos.getJSONObject(2).getString("victorias"));
 
+                            for (int i2 = 0; i2 < datos.length(); i2++) {
+                                arrayNombrePilotoTextView[i2].setText(datos.getJSONObject(i2).getString("piloto"));
+                                arrayVictoriasPilotoTextView[i2].setText(datos.getJSONObject(i2).getString("victorias"));
+                                final int count=i2;
+                                arrayNombrePilotoTextView[i2].setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View viewIn) {
+                                        try {
+                                            Log.d("print80","entramos dentro del listener del nombre del piloto");
+                                            Intent intentMainActivityNombrewPilotoPosicion= new Intent(mContext, MainActivityPilotoDisplay.class);
+                                            intentMainActivityNombrewPilotoPosicion.putExtra("nombrePiloto",arrayNombrePilotoTextView[count].getText().toString());
+                                            mContext.startActivity(intentMainActivityNombrewPilotoPosicion);
+                                            arrayNombrePilotoTextView[count].setTextColor(Color.RED);
+                                        } catch (Exception except) {
+                                            Log.e("Error","OHa ocurrido un error"+except.getMessage());
+                                        }
+                                    }
+                                });
 
-                            Log.d("print57",datos.toString());
+                            }
                         }
                     }
-
                 }
+
+                for (int i = 0; i < nacionalidadPilotos.length(); i++) {
+                    JSONObject jsonObject;
+                    jsonObject = nacionalidadPilotos.getJSONObject(i);
+                    Iterator<String> keys = jsonObject.keys();
+                    while( keys.hasNext() ) {
+                        String key = keys.next();
+                        Log.d("print55",key);
+                        if(filtro.equals(key)){
+                            JSONArray datos = jsonObject.getJSONArray(key);
+                            List<BarEntry> entries = new ArrayList<>();
+                            ArrayList<String> labels = new ArrayList<String>();
+                            for (int i2 = 0; i2 < datos.length(); i2++) {
+                                labels.add(datos.getJSONObject(i2).getString("pais"));
+                                entries.add(new BarEntry(datos.getJSONObject(i2).getInt("total"), i2));
+                            }
+                            BarDataSet dataSet = new BarDataSet(entries, filtro);
+                            dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+                            dataBarchar = new BarData(labels, dataSet);
+                            dataBarchar.setValueTextSize(0);
+                            dataBarchar.setValueTextColor(Color.WHITE);
+                            chart.setData(dataBarchar);
+                            chart.setVisibleXRangeMaximum(6);
+                            chart.invalidate(); // refresh
+                            chart.animateY(1500);
+
+                            chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                @Override
+                                public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                    // display msg when value selected
+                                    if (e == null)
+                                        return;
+                                    dataBarchar.setValueTextSize(12);
+                                    Toast.makeText(MainActivityDashboardUltimaTemporadaDisplay.this,
+                                            "En la categoría  "+filtro+" participan "+(int)e.getVal()+" pilotos con la nacionalidad "+ dataBarchar.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onNothingSelected() {
+                                    dataBarchar.setValueTextSize(0);
+                                }
+                            });
+                            chart.setOnTouchListener(new View.OnTouchListener() {
+
+                                public boolean onTouch(View view, MotionEvent event) {
+
+                                    if (view.getId() == R.id.barchart) {
+                                        view.getParent().requestDisallowInterceptTouchEvent(true);
+                                        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                                            case MotionEvent.ACTION_UP:
+                                                view.getParent().requestDisallowInterceptTouchEvent(false);
+                                                break;
+                                        }
+                                    }
+                                    return false;
+                                }
+                            });
+
+                        }
+
+                    }
+                }
+
+                for (int i = 0; i < top3VictoriasMarca.length(); i++) {
+                    JSONObject jsonObject;
+                    jsonObject = top3VictoriasMarca.getJSONObject(i);
+                    Iterator<String> keys = jsonObject.keys();
+                    while( keys.hasNext() ) {
+                        String key = keys.next();
+                        Log.d("print55",key);
+                        if(filtro.equals(key)){
+                            JSONArray datos = jsonObject.getJSONArray(key);
+                            //RadarchartVictoriasPorMoto****************
+                            final HashMap<String,Integer>victoriasPorCategoria=new HashMap<>();
+                            ArrayList<Entry> entriesRadarchartVictoriasPorMoto = new ArrayList<Entry>();
+                            ArrayList<String> labelsRadarchartVictoriasPorMoto = new ArrayList<String>();
+                            for (int i2 = 0; i2 < datos.length(); i2++) {
+                                labelsRadarchartVictoriasPorMoto.add(datos.getJSONObject(i2).getString("moto"));
+                                entriesRadarchartVictoriasPorMoto.add(new Entry(datos.getJSONObject(i2).getInt("victorias"), i2));
+
+                                // crear el grafico radial
+                                RadarDataSet dataSetRadarchartVictoriasPorMoto = new RadarDataSet(entriesRadarchartVictoriasPorMoto, "");
+
+                                dataSetRadarchartVictoriasPorMoto.setVisible(true);
+                                dataSetRadarchartVictoriasPorMoto.setHighlightCircleFillColor(Color.GREEN);
+                                dataSetRadarchartVictoriasPorMoto.setValueTextColor(Color.RED);
+                                dataSetRadarchartVictoriasPorMoto.setDrawFilled(true);
+                                //  añadir x e y al grafico radial
+                                final RadarData dataRadarchartVictoriasPorMoto = new RadarData(labelsRadarchartVictoriasPorMoto, dataSetRadarchartVictoriasPorMoto);
+
+                                dataRadarchartVictoriasPorMoto.setValueTextSize(0);
+                                dataRadarchartVictoriasPorMoto.setValueTextColor(Color.WHITE);
+                                // añadir legenda al grafico
+                                Legend l = radarchartVictoriasPorMoto.getLegend();
+                                l.setEnabled(false);
+                                radarchartVictoriasPorMoto.getYAxis().setEnabled(false);
+                                radarchartVictoriasPorMoto.setDescription("");
+                                radarchartVictoriasPorMoto.setWebColor(Color.YELLOW);
+                                radarchartVictoriasPorMoto.setWebColorInner(Color.BLUE);
+                                radarchartVictoriasPorMoto.setData(dataRadarchartVictoriasPorMoto);
+                                radarchartVictoriasPorMoto.highlightValues(null);
+                                // refrescar el grafico
+                                radarchartVictoriasPorMoto.invalidate();
+                                // animacion del grafico
+                                radarchartVictoriasPorMoto.animateY(1500);
+                                radarchartVictoriasPorMoto.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+
+                                @Override
+                                public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+                                    // seleccionar mensaje que se muestra al clicar
+                                    if (e == null)
+                                        return;
+                                    dataRadarchartVictoriasPorMoto.setValueTextSize(13);
+                                    Toast.makeText(MainActivityDashboardUltimaTemporadaDisplay.this,
+                                            (int)e.getVal()+ " victorias con la moto "+dataRadarchartVictoriasPorMoto.getXVals().get(e.getXIndex()), Toast.LENGTH_SHORT).show();
+                                }
+                                @Override
+                                public void onNothingSelected() {
+                                    dataRadarchartVictoriasPorMoto.setValueTextSize(0);
+                                }
+                                });
+                                //*************************piechartVictoriasPorCategoria
+                            }
+                        }
+                    }
+                }
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -303,20 +462,18 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                             top3VictoriasMarca = datosUltimaTemporada.getJSONObject(3).getJSONArray("top3_victorias_marca");
                             nacionalidadPilotos = datosUltimaTemporada.getJSONObject(4).getJSONArray("nacionalidad_pilotos");
 
-                            for (int i = 0; i < top3Victorias.length(); i++) {
 
+                            //poblamos el selector con las cateorias
+                            for (int i = 0; i < top3Victorias.length(); i++) {
                                 JSONObject jsonObject = top3Victorias.getJSONObject(i);
                                 Iterator<String> keys = jsonObject.keys();
-
                                 while( keys.hasNext() ) {
                                     String key = keys.next();
                                     filtros.put(key, new String[]{key, "Categoria"});
-
                                     Log.d("print53",top3Victorias.toString());
                                 }
-
-
                             }
+
                             Log.d("print48",top3Victorias.toString());
                             Log.d("print49",top3VictoriasMarca.toString());
                             Log.d("print50",nacionalidadPilotos.toString());

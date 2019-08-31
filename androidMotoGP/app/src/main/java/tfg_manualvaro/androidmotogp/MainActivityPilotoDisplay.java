@@ -151,7 +151,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                         Integer numeroPodios=datosTemporadaPiloto.getInt("num_podios")-numeroVictorias;
                         entries.add(new BarEntry(new float[]{numeroPodios,numeroVictorias},i));
                         dataSet = new BarDataSet(entries, filtro);
-                        int[] colores= new int[]{Color.RED,Color.GREEN};
+                        int[] colores= new int[]{Color.rgb(153,0,153),Color.rgb(255,153,51)};
                         dataSet.setColors(colores);
                         dataSet.setLabel("");
                         dataSet.setStackLabels(new String[]{"Posiciones 2ª o 3ª","Número Victorias"});
@@ -272,9 +272,6 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                             Picasso.with(mContext).load(imageUri).resize(300, 300).into(imagenPiloto);
 
                             ImageView entry = (ImageView) findViewById(R.id.infoPiloto);
-
-
-
 
                             Log.d("print18","metodo pilotofech");
                             temporadasPilotoJSONArray= pilotoJSON.getJSONArray("datos_anuales");
@@ -600,7 +597,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 dataSetPiechartVictoriasPorMoto.setSelectionShift(10);
                                 dataSetPiechartVictoriasPorMoto.setVisible(true);
 
-                                dataSetPiechartVictoriasPorMoto.setColors(ColorTemplate.PASTEL_COLORS);
+                                dataSetPiechartVictoriasPorMoto.setColors(ColorTemplate.COLORFUL_COLORS);
 
                                 //  create pie data object and set xValues and yValues and set it to the pieChart
                                 final PieData dataPiechartVictoriasPorMoto = new PieData(labelsPiechartVictoriasPorMoto, dataSetPiechartVictoriasPorMoto);

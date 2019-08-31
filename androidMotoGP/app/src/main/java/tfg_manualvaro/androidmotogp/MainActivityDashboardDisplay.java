@@ -584,7 +584,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                             radarchartVictoriasPorMoto.getXAxis().setTextColor(Color.WHITE);
                             radarchartVictoriasPorMoto.getXAxis().setTextSize(14);
 
-                            // create pieDataSet
+                            // crear el grafico radial
 
                             RadarDataSet dataSetRadarchartVictoriasPorMoto = new RadarDataSet(entriesRadarchartVictoriasPorMoto, "");
 
@@ -592,33 +592,29 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
                             dataSetRadarchartVictoriasPorMoto.setHighlightCircleFillColor(Color.GREEN);
                             dataSetRadarchartVictoriasPorMoto.setValueTextColor(Color.RED);
                             dataSetRadarchartVictoriasPorMoto.setDrawFilled(true);
-                            //  create pie data object and set xValues and yValues and set it to the pieChart
+                            //  añadir x e y al grafico radial
                             final RadarData dataRadarchartVictoriasPorMoto = new RadarData(labelsRadarchartVictoriasPorMoto, dataSetRadarchartVictoriasPorMoto);
 
                             dataRadarchartVictoriasPorMoto.setValueTextSize(0);
                             dataRadarchartVictoriasPorMoto.setValueTextColor(Color.WHITE);
-                            // Legends to show on bottom of the graph
-
-
+                            // añadir legenda al grafico
                             Legend l = radarchartVictoriasPorMoto.getLegend();
-                            //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
                             l.setEnabled(false);
                             radarchartVictoriasPorMoto.getYAxis().setEnabled(false);
                             radarchartVictoriasPorMoto.setDescription("");
                             radarchartVictoriasPorMoto.setWebColor(Color.YELLOW);
                             radarchartVictoriasPorMoto.setWebColorInner(Color.BLUE);
                             radarchartVictoriasPorMoto.setData(dataRadarchartVictoriasPorMoto);
-                            // undo all highlights
                             radarchartVictoriasPorMoto.highlightValues(null);
-                            // refresh/update pie chart
+                            // refrescar el grafico
                             radarchartVictoriasPorMoto.invalidate();
-                            // animate piechartVictoriasPorCategoria
+                            // animacion del grafico
                             radarchartVictoriasPorMoto.animateY(1500);
                             radarchartVictoriasPorMoto.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 
                                 @Override
                                 public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-                                    // display msg when value selected
+                                    // seleccionar mensaje que se muestra al clicar
                                     if (e == null)
                                         return;
                                     dataRadarchartVictoriasPorMoto.setValueTextSize(13);
