@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity{
                         try {
                             System.out.println(KEY_DATA);
                             List<Temporada> temporadasList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i<temporadasJSONArray.length();i++){
                                 Temporada temporada = new Temporada();
                                 JSONObject temporadaJSON = temporadasJSONArray.getJSONObject(i);
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivity.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }
@@ -201,14 +200,12 @@ public class MainActivity extends AppCompatActivity{
                         try {
                             System.out.println(KEY_DATA);
                             List<Temporada> temporadasList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i<temporadasJSONArray.length();i++){
                                 Temporada temporada = new Temporada();
                                 JSONObject temporadaJSON = temporadasJSONArray.getJSONObject(i);
                                 temporada.setTemporada(temporadaJSON.getInt(KEY_TEMPORADA));
                                 temporadasList.add(temporada);
                             }
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new TemporadaAdapter(temporadasList,getApplicationContext());
                             listView.setAdapter(adapter);
 
@@ -218,7 +215,7 @@ public class MainActivity extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivity.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

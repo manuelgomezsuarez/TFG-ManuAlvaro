@@ -130,7 +130,6 @@ public class MainActivityCarrera extends AppCompatActivity{
                         try {
                             System.out.println(KEY_DATA);
                             List<Carrera> carrerasList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i<carrerasJSONArray.length();i++){
                                 Carrera carrera = new Carrera();
                                 JSONObject carreraJSON = carrerasJSONArray.getJSONObject(i);
@@ -147,7 +146,7 @@ public class MainActivityCarrera extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityCarrera.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

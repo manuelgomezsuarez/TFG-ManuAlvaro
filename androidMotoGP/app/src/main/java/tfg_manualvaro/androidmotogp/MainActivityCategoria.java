@@ -157,14 +157,12 @@ public class MainActivityCategoria extends AppCompatActivity{
                         try {
                             System.out.println(KEY_DATA);
                             List<Categoria> categoriasList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i<categoriasJSONArray.length();i++){
                                 Categoria categoria = new Categoria();
                                 JSONObject categoriaJSON = categoriasJSONArray.getJSONObject(i);
                                 categoria.setCategoria(categoriaJSON.getString(KEY_CATEGORIA));
                                 categoriasList.add(categoria);
                             }
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new CategoriaAdapter(categoriasList,getApplicationContext());
                             listView.setAdapter(adapter);
 
@@ -174,7 +172,7 @@ public class MainActivityCategoria extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityCategoria.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

@@ -156,7 +156,6 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                             System.out.println(KEY_DATA);
                             DocumentacionModelo documentacion = new DocumentacionModelo();
                             List<Url> urlList= new ArrayList<Url>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i < urlsJSONArray.length(); i++) {
                                 DocumentacionModelo pos = new DocumentacionModelo();
                                 JSONObject posicionJSON = urlsJSONArray.getJSONObject(i);
@@ -177,7 +176,6 @@ public class MainActivityDocumentacion extends AppCompatActivity {
                             documentacion.setFecha(fechaMainActivitySelector);
                             documentacion.setLugar(lugarMainActivitySelector);
                             documentacion.setTitulo(tituloMainActivitySelector);
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new DocumentacionAdapter(documentacion, getApplicationContext());
                             LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
@@ -188,7 +186,7 @@ public class MainActivityDocumentacion extends AppCompatActivity {
 
                     } else {
                         Toast.makeText(MainActivityDocumentacion.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

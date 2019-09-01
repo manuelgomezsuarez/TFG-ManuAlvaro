@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -97,6 +98,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
 
     private Temporada temporada;
     private String tituloCarrera;
+    private LinearLayout contenidoPaginaLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +109,8 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
         mContext = this;
 
 
+        contenidoPaginaLinearLayout=(LinearLayout) findViewById(R.id.layerContenidoPagina);
+        contenidoPaginaLinearLayout.setVisibility(View.INVISIBLE);
         nombrePiloto1TextView = (TextView) findViewById(R.id.nombrePiloto1);
         nombrePiloto2TextView = (TextView) findViewById(R.id.nombrePiloto2);
         nombrePiloto3TextView = (TextView) findViewById(R.id.nombrePiloto3);
@@ -438,25 +442,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                             final TextView textNombreCarreraTextView = (TextView) findViewById(R.id.textoNombreCarrera);
                             textNombreCarreraTextView.setText(tituloCarrera);
 
-                            textNombreCarreraTextView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View viewIn) {
-                                    try {
-                                        Carrera carrera = new Carrera();
-                                        carrera.setCarrera(tituloCarrera);
 
-                                        Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
-                                        intentMainActivityCarrera.putExtra("Temporada",temporada);
-                                        intentMainActivityCarrera.putExtra("CategoriaString","MotoE");
-                                        intentMainActivityCarrera.putExtra("tituloString",carrera.getTitulo());
-                                        mContext.startActivity(intentMainActivityCarrera);
-                                        //assign the textview forecolor
-                                        textNombreCarreraTextView.setTextColor(Color.RED);
-                                    } catch (Exception except) {
-                                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
-                                    }
-                                }
-                            });
 
                             TextView textoFechaCarreraTextView = (TextView) findViewById(R.id.textoFechaCarrera);
                             textoFechaCarreraTextView.setText(fechaCarrera);
@@ -477,9 +463,25 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                                 }
                             }
 
-                            Log.d("print48",top3Victorias.toString());
-                            Log.d("print49",top3VictoriasMarca.toString());
-                            Log.d("print50",nacionalidadPilotos.toString());
+                            textNombreCarreraTextView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View viewIn) {
+                                    try {
+                                        Carrera carrera = new Carrera();
+                                        carrera.setCarrera(tituloCarrera);
+
+                                        Intent intentMainActivityCarrera = new Intent(mContext, MainActivityCarreraDisplay.class);
+                                        intentMainActivityCarrera.putExtra("Temporada",temporada);
+                                        intentMainActivityCarrera.putExtra("CategoriaString",filtro);
+                                        intentMainActivityCarrera.putExtra("tituloString",carrera.getTitulo());
+                                        mContext.startActivity(intentMainActivityCarrera);
+                                        //assign the textview forecolor
+                                        textNombreCarreraTextView.setTextColor(Color.RED);
+                                    } catch (Exception except) {
+                                        Log.e("Error","OHa ocurrido un error"+except.getMessage());
+                                    }
+                                }
+                            });
 
 
                             //nombre spinner,nombreJSON, descripcion grafica
@@ -490,6 +492,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
                             aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             //Setting the ArrayAdapter data on the Spinner
                             spin.setAdapter(aa);
+                            contenidoPaginaLinearLayout.setVisibility(View.VISIBLE);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -497,7 +500,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
 
                     } else {
                         Toast.makeText(MainActivityDashboardUltimaTemporadaDisplay.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

@@ -637,7 +637,7 @@ public class MainActivityDashboardDisplay extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityDashboardDisplay.this,
-                                "Some error occurred while loading data",
+                                "Ha ocurrido un error mientras se cargaban los datos",
                                 Toast.LENGTH_LONG).show();
 
                     }

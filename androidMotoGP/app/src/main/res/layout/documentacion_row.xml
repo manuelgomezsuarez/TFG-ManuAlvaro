@@ -19,7 +19,7 @@
         android:gravity="left"
         android:paddingLeft="15dp"
         android:text="paisID"
-        android:textColor="#e5e5e5"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="16dp"/>
         />
 

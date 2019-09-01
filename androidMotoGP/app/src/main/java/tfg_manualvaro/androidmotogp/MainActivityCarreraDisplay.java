@@ -143,8 +143,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             System.out.println(KEY_DATA);
                             CarreraModelo carrera=new CarreraModelo();
                             List<PosicionCarrera> posicionesList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
-                            for (int i = 0; i<posicionesCarreraJSONArray.length();i++){
+                             for (int i = 0; i<posicionesCarreraJSONArray.length();i++){
                                 PosicionCarrera pos = new PosicionCarrera();
                                 JSONObject posicionJSON = posicionesCarreraJSONArray.getJSONObject(i);
                                 pos.setMoto(posicionJSON.getString("moto"));
@@ -186,7 +185,6 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
                             carrera.setPosiciones(posicionesList);
                             carrera.setCategoria(categoriaMainActivitySelector);
                             carrera.setTemporada(carrera.getTemporada());
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCarreraAdapter(carrera,getApplicationContext());
                             LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
@@ -198,7 +196,7 @@ public class MainActivityCarreraDisplay extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityCarreraDisplay.this,
-                                "Some error occurred while loading data",
+                                "No se han podido encontrar datos para esta carrera",
                                 Toast.LENGTH_LONG).show();
 
                     }

@@ -17,6 +17,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layerContenidoPagina"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alwaysDrawnWithCache="false"
@@ -177,6 +178,15 @@
 
                 </LinearLayout>
 
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="180dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/botonselector" />
+
 
             </LinearLayout>
 
@@ -197,14 +207,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="220dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:layout_marginBottom="5dp" />
-
             <TextView
                 android:id="@+id/victoriasPiloto4"
                 android:layout_width="match_parent"
@@ -215,6 +217,8 @@
                 android:textColor="#e5e5e5"
                 android:textSize="20dp"
                 android:textStyle="bold" />
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

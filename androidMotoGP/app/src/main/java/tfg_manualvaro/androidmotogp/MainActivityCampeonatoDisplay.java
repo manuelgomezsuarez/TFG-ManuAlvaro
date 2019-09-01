@@ -140,7 +140,6 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                             System.out.println(KEY_DATA);
                             CampeonatoModelo campeonato=new CampeonatoModelo();
                             List<PosicionCampeonato> posicionesList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
                             for (int i = 0; i<posicionesCampeonatoJSONArray.length();i++){
                                 PosicionCampeonato pos = new PosicionCampeonato();
                                 JSONObject posicionJSON = posicionesCampeonatoJSONArray.getJSONObject(i);
@@ -155,7 +154,6 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
                             campeonato.setPosiciones(posicionesList);
                             campeonato.setCategoria(categoriaMainActivitySelector);
                             campeonato.setTemporada(temporadaMainActivitySelector.getTemporada());
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PosicionCampeonatoAdapter(campeonato,getApplicationContext());
                             LayoutDeCarga.setVisibility(View.VISIBLE);
                             listView.setAdapter(adapter);
@@ -167,7 +165,7 @@ public class MainActivityCampeonatoDisplay extends AppCompatActivity{
 
                     } else {
                         Toast.makeText(MainActivityCampeonatoDisplay.this,
-                                "Some error occurred while loading data",
+                                "No se han podido encontrar datos para este campeonato",
                                 Toast.LENGTH_LONG).show();
 
                     }

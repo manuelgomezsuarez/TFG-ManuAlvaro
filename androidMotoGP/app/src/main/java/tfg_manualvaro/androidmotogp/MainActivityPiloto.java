@@ -120,14 +120,13 @@ public class MainActivityPiloto extends AppCompatActivity{
                         try {
                             System.out.println(KEY_DATA);
                             List<Piloto> pilotosList = new ArrayList<>();
-                            //Populate the EmployeeDetails list from response
+
                             for (int i = 0; i<pilotosJSONArray.length();i++){
                                 Piloto piloto = new Piloto();
                                 JSONObject pilotoJSON = pilotosJSONArray.getJSONObject(i);
                                 piloto.setNombre(pilotoJSON.getString(KEY_PILOTO));
                                 pilotosList.add(piloto);
                             }
-                            //Create an adapter with the EmployeeDetails List and set it to the LstView
                             adapter = new PilotoAdapter(pilotosList,getApplicationContext());
                             listView.setAdapter(adapter);
 
