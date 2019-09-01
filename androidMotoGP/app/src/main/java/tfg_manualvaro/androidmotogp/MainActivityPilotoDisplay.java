@@ -447,7 +447,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorPodios = new PieData(labelsPiechartVictoriasPorPodios, dataSetPiechartVictoriasPorPodios);
 
                                 dataPiechartVictoriasPorPodios.setValueTextSize(0);
-                                dataPiechartVictoriasPorPodios.setValueTextColor(Color.RED);
+                                dataPiechartVictoriasPorPodios.setValueTextColor(Color.WHITE);
 
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorPodios = piechartVictoriasPorPodios.getLegend();
@@ -477,7 +477,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                             return;
                                         dataPiechartVictoriasPorPodios.setValueTextSize(17);
                                         Toast.makeText(MainActivityPilotoDisplay.this,
-                                                (int)e.getVal()+ " victorias quedando en la "+dataPiechartVictoriasPorPodios.getXVals().get(e.getXIndex())+ "posición", Toast.LENGTH_SHORT).show();
+                                                (int)e.getVal()+ " veces en la "+dataPiechartVictoriasPorPodios.getXVals().get(e.getXIndex())+ "posición", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
@@ -521,7 +521,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorCategoria = new PieData(labelsPiechartVictoriasPorCategoria, dataSetPiechartVictoriasPorCategoria);
 
                                 dataPiechartVictoriasPorCategoria.setValueTextSize(0);
-                                dataPiechartVictoriasPorCategoria.setValueTextColor(Color.RED);
+                                dataPiechartVictoriasPorCategoria.setValueTextColor(Color.WHITE);
                                 // asignamos valores a la leyenda
                                 Legend l = piechartVictoriasPorCategoria.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
@@ -594,7 +594,7 @@ public class MainActivityPilotoDisplay extends AppCompatActivity implements
                                 final PieData dataPiechartVictoriasPorMoto = new PieData(labelsPiechartVictoriasPorMoto, dataSetPiechartVictoriasPorMoto);
 
                                 dataPiechartVictoriasPorMoto.setValueTextSize(0);
-                                dataPiechartVictoriasPorMoto.setValueTextColor(Color.RED);
+                                dataPiechartVictoriasPorMoto.setValueTextColor(Color.WHITE);
                                 // Legends to show on bottom of the graph
                                 Legend leyendaPiechartVictoriasPorMoto = piechartVictoriasPorMoto.getLegend();
                                 //l.setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);

@@ -403,7 +403,8 @@
                     android:layout_height="200dp"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
-                    android:layout_weight="0.5" />
+                    android:layout_weight="0.5"
+                    android:tooltipText="test"/>
             </LinearLayout>
 
         </LinearLayout>

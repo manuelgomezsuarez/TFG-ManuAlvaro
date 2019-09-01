@@ -290,7 +290,7 @@ public class MainActivityDashboardUltimaTemporadaDisplay extends AppCompatActivi
 
                                 dataSetRadarchartVictoriasPorMoto.setVisible(true);
                                 dataSetRadarchartVictoriasPorMoto.setHighlightCircleFillColor(Color.GREEN);
-                                dataSetRadarchartVictoriasPorMoto.setValueTextColor(Color.RED);
+                                dataSetRadarchartVictoriasPorMoto.setValueTextColor(Color.WHITE);
                                 dataSetRadarchartVictoriasPorMoto.setDrawFilled(true);
                                 //  añadir x e y al grafico radial
                                 final RadarData dataRadarchartVictoriasPorMoto = new RadarData(labelsRadarchartVictoriasPorMoto, dataSetRadarchartVictoriasPorMoto);

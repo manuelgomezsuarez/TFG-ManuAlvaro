@@ -35,7 +35,7 @@ public class MainActivityCategoria extends AppCompatActivity{
     private static String entrada;
 
 
-    private String url = "https://motogp-api.herokuapp.com/campeonato/";
+    private String url = "https://motogp-api.herokuapp.com/carrera/";
     private Map<String,String> urlParams= new HashMap<>();
     private String url2 = "https://motogp-api.herokuapp.com/dashboard/";
     private Map<String,String> urlParams2= new HashMap<>();
@@ -113,6 +113,9 @@ public class MainActivityCategoria extends AppCompatActivity{
             Log.d("print10",temporadaMainActivity.getTemporada().toString());
             urlParams.put("format","json");
             urlParams.put("temporada",temporadaMainActivity.getTemporada().toString());
+            if (tituloUltima!= null) {
+                urlParams.put("titulo", tituloUltima);
+            }
             urlParams.put("distinct","categoria");
             urlParams.put("page",pagination.toString());
 
